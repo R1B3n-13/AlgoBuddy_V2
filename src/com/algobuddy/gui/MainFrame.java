@@ -105,6 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
         introPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
         introPanel.setkEndColor(new java.awt.Color(18, 5, 32));
         introPanel.setkStartColor(new java.awt.Color(10, 10, 10));
+        introPanel.setName(""); // NOI18N
         introPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         introLogoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -127,21 +128,22 @@ public class MainFrame extends javax.swing.JFrame {
 
         introGifLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         introGifLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/introGifLabel.gif"))); // NOI18N
+        introGifLabel.setName(""); // NOI18N
 
         javax.swing.GroupLayout introPanelLayout = new javax.swing.GroupLayout(introPanel);
         introPanel.setLayout(introPanelLayout);
         introPanelLayout.setHorizontalGroup(
             introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, introPanelLayout.createSequentialGroup()
+                .addContainerGap(236, Short.MAX_VALUE)
+                .addComponent(introTextLabel)
+                .addGap(217, 217, 217))
             .addGroup(introPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(introLogoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(introGifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, introPanelLayout.createSequentialGroup()
-                .addContainerGap(236, Short.MAX_VALUE)
-                .addComponent(introTextLabel)
-                .addGap(217, 217, 217))
         );
         introPanelLayout.setVerticalGroup(
             introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
