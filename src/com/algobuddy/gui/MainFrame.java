@@ -1,7 +1,11 @@
 package com.algobuddy.gui;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -10,12 +14,16 @@ import java.awt.event.MouseEvent;
 public class MainFrame extends javax.swing.JFrame {
 
     private int prevX, prevY;
+    Action enterAction;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        enterAction = new EnterAction();
+        introPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
+        introPanel.getActionMap().put("enter", enterAction);
     }
 
     /**
@@ -35,10 +43,10 @@ public class MainFrame extends javax.swing.JFrame {
         introLogoLabel = new javax.swing.JLabel();
         introTextLabel = new javax.swing.JLabel();
         introGifLabel = new javax.swing.JLabel();
+        indexPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         titleBar.setBackground(new java.awt.Color(13, 8, 18));
@@ -159,6 +167,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.add(introPanel, "card2");
 
+        javax.swing.GroupLayout indexPanelLayout = new javax.swing.GroupLayout(indexPanel);
+        indexPanel.setLayout(indexPanelLayout);
+        indexPanelLayout.setHorizontalGroup(
+            indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        indexPanelLayout.setVerticalGroup(
+            indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 575, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(indexPanel, "card3");
+
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -184,40 +205,40 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_titleBarMouseDragged
 
-    private void introTextLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_introTextLabelMouseEntered
-        introTextLabel.setForeground(new Color(158, 164, 173));
-    }//GEN-LAST:event_introTextLabelMouseEntered
-
-    private void introTextLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_introTextLabelMouseExited
-        introTextLabel.setForeground(new Color(172, 179, 186));
-    }//GEN-LAST:event_introTextLabelMouseExited
-
-    private void closeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseEntered
-        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/closeLabelHover.png")));
-    }//GEN-LAST:event_closeLabelMouseEntered
-
-    private void closeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseExited
-        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/closeLabel.png")));
-    }//GEN-LAST:event_closeLabelMouseExited
-
-    private void minimizeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseEntered
-        minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/minimizeLabelHover.png")));
-    }//GEN-LAST:event_minimizeLabelMouseEntered
-
     private void minimizeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseExited
         minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/minimizeLabel.png")));
     }//GEN-LAST:event_minimizeLabelMouseExited
 
-    private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
-        if (evt.getButton() == MouseEvent.BUTTON1)
-            System.exit(0);
-    }//GEN-LAST:event_closeLabelMouseClicked
+    private void minimizeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseEntered
+        minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/minimizeLabelHover.png")));
+    }//GEN-LAST:event_minimizeLabelMouseEntered
 
     private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
             setExtendedState(ICONIFIED);
         }
     }//GEN-LAST:event_minimizeLabelMouseClicked
+
+    private void closeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseExited
+        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/closeLabel.png")));
+    }//GEN-LAST:event_closeLabelMouseExited
+
+    private void closeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseEntered
+        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/closeLabelHover.png")));
+    }//GEN-LAST:event_closeLabelMouseEntered
+
+    private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1)
+        System.exit(0);
+    }//GEN-LAST:event_closeLabelMouseClicked
+
+    private void introTextLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_introTextLabelMouseExited
+        introTextLabel.setForeground(new Color(172, 179, 186));
+    }//GEN-LAST:event_introTextLabelMouseExited
+
+    private void introTextLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_introTextLabelMouseEntered
+        introTextLabel.setForeground(new Color(158, 164, 173));
+    }//GEN-LAST:event_introTextLabelMouseEntered
 
     /**
      * @param args the command line arguments
@@ -253,9 +274,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    class EnterAction extends AbstractAction{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mainPanel.removeAll();
+            mainPanel.add(indexPanel);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeLabel;
+    private javax.swing.JPanel indexPanel;
     private javax.swing.JLabel introGifLabel;
     private javax.swing.JLabel introLogoLabel;
     private keeptoo.KGradientPanel introPanel;
