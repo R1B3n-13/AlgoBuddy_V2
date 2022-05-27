@@ -1,6 +1,8 @@
 package com.algobuddy.gui;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.AbstractAction;
@@ -24,6 +26,8 @@ public class MainFrame extends javax.swing.JFrame {
         enterAction = new EnterAction();
         introPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
         introPanel.getActionMap().put("enter", enterAction);
+        indexPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
+        indexPanel.getActionMap().put("enter", enterAction);
     }
 
     /**
@@ -38,12 +42,17 @@ public class MainFrame extends javax.swing.JFrame {
         titleBar = new javax.swing.JPanel();
         closeLabel = new javax.swing.JLabel();
         minimizeLabel = new javax.swing.JLabel();
+        backLabel = new javax.swing.JLabel();
         mainPanel = new com.algobuddy.gui.JSlidingPanel();
         introPanel = new keeptoo.KGradientPanel();
         introLogoLabel = new javax.swing.JLabel();
         introTextLabel = new javax.swing.JLabel();
         introGifLabel = new javax.swing.JLabel();
         indexPanel = new keeptoo.KGradientPanel();
+        subIndexPanel1 = new javax.swing.JPanel();
+        subIndexPanel2 = new javax.swing.JPanel();
+        subIndexPanel3 = new javax.swing.JPanel();
+        indexLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -91,20 +100,37 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        backLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        backLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/backLabel.png"))); // NOI18N
+        backLabel.setVisible(false);
+        backLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backLabelMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout titleBarLayout = new javax.swing.GroupLayout(titleBar);
         titleBar.setLayout(titleBarLayout);
         titleBarLayout.setHorizontalGroup(
             titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titleBarLayout.createSequentialGroup()
-                .addGap(0, 764, Short.MAX_VALUE)
+                .addComponent(backLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 738, Short.MAX_VALUE)
                 .addComponent(minimizeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         titleBarLayout.setVerticalGroup(
             titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(closeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(closeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
             .addComponent(minimizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(backLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(titleBar, java.awt.BorderLayout.PAGE_START);
@@ -114,7 +140,7 @@ public class MainFrame extends javax.swing.JFrame {
         introPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
         introPanel.setkEndColor(new java.awt.Color(18, 5, 32));
         introPanel.setkStartColor(new java.awt.Color(10, 10, 15));
-        introPanel.setName(""); // NOI18N
+        introPanel.setName("introPanel"); // NOI18N
         introPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         introLogoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -166,24 +192,93 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(221, Short.MAX_VALUE))
         );
 
-        mainPanel.add(introPanel, "card2");
+        mainPanel.add(introPanel, "introPanel");
 
         indexPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
         indexPanel.setkEndColor(new java.awt.Color(32, 5, 18));
         indexPanel.setkStartColor(new java.awt.Color(15, 10, 10));
+        indexPanel.setName("indexPanel"); // NOI18N
+        indexPanel.setRequestFocusEnabled(false);
+
+        subIndexPanel1.setBackground(new java.awt.Color(255, 255, 255, 20));
+        subIndexPanel1.setPreferredSize(new java.awt.Dimension(246, 100));
+
+        javax.swing.GroupLayout subIndexPanel1Layout = new javax.swing.GroupLayout(subIndexPanel1);
+        subIndexPanel1.setLayout(subIndexPanel1Layout);
+        subIndexPanel1Layout.setHorizontalGroup(
+            subIndexPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        subIndexPanel1Layout.setVerticalGroup(
+            subIndexPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        subIndexPanel2.setBackground(new java.awt.Color(255, 255, 255, 20));
+
+        javax.swing.GroupLayout subIndexPanel2Layout = new javax.swing.GroupLayout(subIndexPanel2);
+        subIndexPanel2.setLayout(subIndexPanel2Layout);
+        subIndexPanel2Layout.setHorizontalGroup(
+            subIndexPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 246, Short.MAX_VALUE)
+        );
+        subIndexPanel2Layout.setVerticalGroup(
+            subIndexPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        subIndexPanel3.setBackground(new java.awt.Color(255, 255, 255, 20));
+        subIndexPanel3.setPreferredSize(new java.awt.Dimension(246, 100));
+
+        javax.swing.GroupLayout subIndexPanel3Layout = new javax.swing.GroupLayout(subIndexPanel3);
+        subIndexPanel3.setLayout(subIndexPanel3Layout);
+        subIndexPanel3Layout.setHorizontalGroup(
+            subIndexPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        subIndexPanel3Layout.setVerticalGroup(
+            subIndexPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        indexLabel.setFont(new java.awt.Font("Georgia", 0, 48)); // NOI18N
+        indexLabel.setForeground(new java.awt.Color(172, 179, 186));
+        indexLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        indexLabel.setText("INDEX");
 
         javax.swing.GroupLayout indexPanelLayout = new javax.swing.GroupLayout(indexPanel);
         indexPanel.setLayout(indexPanelLayout);
         indexPanelLayout.setHorizontalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 798, Short.MAX_VALUE)
+            .addGroup(indexPanelLayout.createSequentialGroup()
+                .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(indexPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(indexLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(indexPanelLayout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(subIndexPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(subIndexPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(subIndexPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 270, Short.MAX_VALUE)))
+                .addGap(6, 6, 6))
         );
         indexPanelLayout.setVerticalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(indexPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(indexLabel)
+                .addGap(41, 41, 41)
+                .addComponent(subIndexPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(subIndexPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(subIndexPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
-        mainPanel.add(indexPanel, "card3");
+        mainPanel.add(indexPanel, "indexPanel");
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -245,6 +340,24 @@ public class MainFrame extends javax.swing.JFrame {
         introTextLabel.setForeground(new Color(158, 164, 173));
     }//GEN-LAST:event_introTextLabelMouseEntered
 
+    private void backLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseEntered
+        backLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/backHoverLabel.png")));
+    }//GEN-LAST:event_backLabelMouseEntered
+
+    private void backLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseExited
+        backLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/backLabel.png")));
+    }//GEN-LAST:event_backLabelMouseExited
+
+    private void backLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseClicked
+        if (getCurrentComponentName(mainPanel).equals("indexPanel")) {
+            mainPanel.nextSlidingPanel(8, introPanel, JSlidingPanel.Direction.Right);
+            titleBar.setBackground(new Color(13, 8, 18));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
+            backLabel.setVisible(false);
+            mainPanel.refresh();
+        }
+    }//GEN-LAST:event_backLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -284,15 +397,33 @@ public class MainFrame extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainPanel.nextSlidingPanel(8, indexPanel, JSlidingPanel.Direction.Down);
-            titleBar.setBackground(new Color(18, 8, 13));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
-            mainPanel.refresh();
+            if (getCurrentComponentName(mainPanel).equals("introPanel")) {
+                mainPanel.nextSlidingPanel(8, indexPanel, JSlidingPanel.Direction.Down);
+                titleBar.setBackground(new Color(18, 8, 13));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
+                backLabel.setVisible(true);
+                mainPanel.refresh();
+            }
         }
     }
 
+    public String getCurrentComponentName(Container parent) {
+        String compName = null;
+        Component comp = null;
+        int n = parent.getComponentCount();
+        for (int i = 0; i < n; i++) {
+            comp = parent.getComponent(i);
+            if (comp.isVisible()) {
+                compName = comp.getName();
+            }
+        }
+        return compName;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backLabel;
     private javax.swing.JLabel closeLabel;
+    private javax.swing.JLabel indexLabel;
     private keeptoo.KGradientPanel indexPanel;
     private javax.swing.JLabel introGifLabel;
     private javax.swing.JLabel introLogoLabel;
@@ -300,6 +431,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel introTextLabel;
     private com.algobuddy.gui.JSlidingPanel mainPanel;
     private javax.swing.JLabel minimizeLabel;
+    private javax.swing.JPanel subIndexPanel1;
+    private javax.swing.JPanel subIndexPanel2;
+    private javax.swing.JPanel subIndexPanel3;
     private javax.swing.JPanel titleBar;
     // End of variables declaration//GEN-END:variables
 }

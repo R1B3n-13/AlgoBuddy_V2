@@ -31,7 +31,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
         Component currentComp = getCurrentComponent(this);
         hiddenPanel.setVisible(true);
         JSlidingPanelListener listener = new JSlidingPanelListener(panelSpeed, currentComp, hiddenPanel, direction);
-        Timer t = new Timer(40, listener);
+        Timer t = new Timer(10, listener);
         listener.timer = t;
         t.start();
         refresh();
@@ -93,10 +93,10 @@ public class JSlidingPanel extends javax.swing.JPanel {
 
             repaint();
             step++;
-
+            
             if (step == steps) {
                 timer.stop();
-                visiblePanel.setVisible(false);
+                visiblePanel.setVisible(false); 
             }
         }
     }
