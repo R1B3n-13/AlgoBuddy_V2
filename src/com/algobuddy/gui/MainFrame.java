@@ -350,7 +350,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void backLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseClicked
         if (getCurrentComponentName(mainPanel).equals("indexPanel")) {
-            mainPanel.nextSlidingPanel(8, introPanel, JSlidingPanel.Direction.Right);
+            mainPanel.nextSlidingPanel(9, introPanel, JSlidingPanel.Direction.Right);
             titleBar.setBackground(new Color(13, 8, 18));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
             backLabel.setVisible(false);
@@ -398,7 +398,7 @@ public class MainFrame extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (getCurrentComponentName(mainPanel).equals("introPanel")) {
-                mainPanel.nextSlidingPanel(8, indexPanel, JSlidingPanel.Direction.Down);
+                mainPanel.nextSlidingPanel(9, indexPanel, JSlidingPanel.Direction.Down);
                 titleBar.setBackground(new Color(18, 8, 13));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
                 backLabel.setVisible(true);
