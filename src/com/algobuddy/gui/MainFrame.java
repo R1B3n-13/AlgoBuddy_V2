@@ -14,7 +14,7 @@ import javax.swing.KeyStroke;
 public class MainFrame extends javax.swing.JFrame {
 
     private int prevX, prevY;
-    Action enterAction;
+    private Action enterAction;
 
     /**
      * Creates new form MainFrame
@@ -43,7 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
         introLogoLabel = new javax.swing.JLabel();
         introTextLabel = new javax.swing.JLabel();
         introGifLabel = new javax.swing.JLabel();
-        indexPanel = new javax.swing.JPanel();
+        indexPanel = new keeptoo.KGradientPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -113,7 +113,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         introPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
         introPanel.setkEndColor(new java.awt.Color(18, 5, 32));
-        introPanel.setkStartColor(new java.awt.Color(10, 10, 10));
+        introPanel.setkStartColor(new java.awt.Color(10, 10, 15));
         introPanel.setName(""); // NOI18N
         introPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -168,17 +168,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.add(introPanel, "card2");
 
-        indexPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        indexPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
+        indexPanel.setkEndColor(new java.awt.Color(32, 5, 18));
+        indexPanel.setkStartColor(new java.awt.Color(15, 10, 10));
 
         javax.swing.GroupLayout indexPanelLayout = new javax.swing.GroupLayout(indexPanel);
         indexPanel.setLayout(indexPanelLayout);
         indexPanelLayout.setHorizontalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 798, Short.MAX_VALUE)
         );
         indexPanelLayout.setVerticalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
         );
 
         mainPanel.add(indexPanel, "card3");
@@ -283,13 +285,15 @@ public class MainFrame extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             mainPanel.nextSlidingPanel(8, indexPanel, JSlidingPanel.Direction.Down);
+            titleBar.setBackground(new Color(18, 8, 13));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
             mainPanel.refresh();
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeLabel;
-    private javax.swing.JPanel indexPanel;
+    private keeptoo.KGradientPanel indexPanel;
     private javax.swing.JLabel introGifLabel;
     private javax.swing.JLabel introLogoLabel;
     private keeptoo.KGradientPanel introPanel;
