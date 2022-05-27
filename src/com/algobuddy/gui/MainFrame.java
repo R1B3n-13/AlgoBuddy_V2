@@ -282,7 +282,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainPanel.nextSlidingPanel(8, indexPanel, JSlidingPanel.Direction.Left);
+            mainPanel.nextSlidingPanel(8, indexPanel, JSlidingPanel.Direction.Down);
             mainPanel.refresh();
         }
     }

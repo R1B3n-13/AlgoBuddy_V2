@@ -16,7 +16,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
     public enum Direction {
         Left,
         Right,
-        up,
+        Up,
         Down
     };
 
@@ -81,7 +81,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
                     hiddenPanel.setLocation(bounds.x + shift - bounds.width, bounds.y);
                     break;
 
-                case up:
+                case Up:
                     visiblePanel.setLocation(bounds.x, bounds.y - shiftUp);
                     hiddenPanel.setLocation(bounds.x, bounds.y - shiftUp + bounds.height);
                     break;
