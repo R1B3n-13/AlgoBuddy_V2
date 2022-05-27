@@ -9,7 +9,7 @@ import javax.swing.KeyStroke;
 
 /**
  *
- * @author nebir
+ * @author nebir, nazrul
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -38,7 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
         titleBar = new javax.swing.JPanel();
         closeLabel = new javax.swing.JLabel();
         minimizeLabel = new javax.swing.JLabel();
-        mainPanel = new javax.swing.JPanel();
+        mainPanel = new com.algobuddy.gui.JSlidingPanel();
         introPanel = new keeptoo.KGradientPanel();
         introLogoLabel = new javax.swing.JLabel();
         introTextLabel = new javax.swing.JLabel();
@@ -143,16 +143,16 @@ public class MainFrame extends javax.swing.JFrame {
         introPanel.setLayout(introPanelLayout);
         introPanelLayout.setHorizontalGroup(
             introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, introPanelLayout.createSequentialGroup()
-                .addContainerGap(236, Short.MAX_VALUE)
-                .addComponent(introTextLabel)
-                .addGap(217, 217, 217))
             .addGroup(introPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(introLogoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(introGifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(introGifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, introPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(introTextLabel)
+                .addGap(224, 224, 224))
         );
         introPanelLayout.setVerticalGroup(
             introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,10 +163,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(introTextLabel)
                 .addGap(18, 18, 18)
                 .addComponent(introGifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         mainPanel.add(introPanel, "card2");
+
+        indexPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         javax.swing.GroupLayout indexPanelLayout = new javax.swing.GroupLayout(indexPanel);
         indexPanel.setLayout(indexPanelLayout);
@@ -176,7 +178,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         indexPanelLayout.setVerticalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
         mainPanel.add(indexPanel, "card3");
@@ -230,7 +232,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1)
-        System.exit(0);
+            System.exit(0);
     }//GEN-LAST:event_closeLabelMouseClicked
 
     private void introTextLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_introTextLabelMouseExited
@@ -275,17 +277,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
-    class EnterAction extends AbstractAction{
+
+    class EnterAction extends AbstractAction {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainPanel.removeAll();
-            mainPanel.add(indexPanel);
-            mainPanel.repaint();
-            mainPanel.revalidate();
+            mainPanel.nextSlidingPanel(8, indexPanel, JSlidingPanel.Direction.Left);
+            mainPanel.refresh();
         }
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -295,7 +294,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel introLogoLabel;
     private keeptoo.KGradientPanel introPanel;
     private javax.swing.JLabel introTextLabel;
-    private javax.swing.JPanel mainPanel;
+    private com.algobuddy.gui.JSlidingPanel mainPanel;
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JPanel titleBar;
     // End of variables declaration//GEN-END:variables
