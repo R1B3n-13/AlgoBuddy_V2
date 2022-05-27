@@ -104,6 +104,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
             step++;
 
             if (step == steps) {
+                hiddenPanel.setLocation(0, 0);
                 timer.stop();
                 visiblePanel.setVisible(false);
             }
