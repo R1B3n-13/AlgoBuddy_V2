@@ -2,9 +2,14 @@ package com.algobuddy.gui;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
@@ -20,25 +25,37 @@ public class JSlidingPanel extends javax.swing.JPanel {
         Down
     };
 
+    private final JPanel glassPane;
+
     /**
      * Creates new form JSlidingPanel
      */
     public JSlidingPanel() {
         initComponents();
+        glassPane = new JPanel();
+        glassPane.setOpaque(false);
+        glassPane.addMouseListener(new MouseAdapter() {
+        });
+        glassPane.addMouseMotionListener(new MouseMotionAdapter() {
+        });
+        glassPane.addKeyListener(new KeyAdapter() {
+        });
     }
 
     void nextSlidingPanel(int panelSpeed, Component hiddenPanel, Direction direction) {
         Component currentComp = getCurrentComponent(this);
-        if (direction == Direction.Right) {
-            hiddenPanel.setLocation(-hiddenPanel.getWidth(), 0);
-        } else if (direction == Direction.Left) {
-            hiddenPanel.setLocation(getWidth(), 0);
-        } else if (direction == Direction.Up) {
-            hiddenPanel.setLocation(-hiddenPanel.getHeight(), 0);
-        } else {
-            hiddenPanel.setLocation(getHeight(), 0);
+        switch (direction) {
+            case Right ->
+                hiddenPanel.setLocation(-hiddenPanel.getWidth(), 0);
+            case Left ->
+                hiddenPanel.setLocation(getWidth(), 0);
+            case Up ->
+                hiddenPanel.setLocation(-hiddenPanel.getHeight(), 0);
+            default ->
+                hiddenPanel.setLocation(getHeight(), 0);
         }
         hiddenPanel.setVisible(true);
+        disableUserInput();
         JSlidingPanelListener listener = new JSlidingPanelListener(panelSpeed, currentComp, hiddenPanel, direction);
         Timer t = new Timer(0, listener);
         listener.timer = t;
@@ -63,7 +80,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
         Component visiblePanel;
         Component hiddenPanel;
         int steps;
-        int step = 0;
+        int step;
         Timer timer;
         Direction direction;
 
@@ -72,6 +89,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
             this.visiblePanel = visiblePanel;
             this.hiddenPanel = hiddenPanel;
             this.direction = direction;
+            step = 0;
         }
 
         @Override
@@ -81,23 +99,23 @@ public class JSlidingPanel extends javax.swing.JPanel {
             int shift = bounds.width / steps;
             int shiftUp = bounds.height / steps;
             switch (direction) {
-                case Left:
+                case Left -> {
                     visiblePanel.setLocation(bounds.x - shift, bounds.y);
                     hiddenPanel.setLocation(bounds.x - shift + bounds.width, bounds.y);
-                    break;
-                case Right:
+                }
+                case Right -> {
                     visiblePanel.setLocation(bounds.x + shift, bounds.y);
                     hiddenPanel.setLocation(bounds.x + shift - bounds.width, bounds.y);
-                    break;
+                }
 
-                case Up:
+                case Up -> {
                     visiblePanel.setLocation(bounds.x, bounds.y - shiftUp);
                     hiddenPanel.setLocation(bounds.x, bounds.y - shiftUp + bounds.height);
-                    break;
-                case Down:
+                }
+                case Down -> {
                     visiblePanel.setLocation(bounds.x, bounds.y + shiftUp);
                     hiddenPanel.setLocation(bounds.x, bounds.y + shiftUp - bounds.height);
-                    break;
+                }
             }
 
             repaint();
@@ -107,6 +125,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
                 hiddenPanel.setLocation(0, 0);
                 timer.stop();
                 visiblePanel.setVisible(false);
+                enableUserInput();
             }
         }
     }
@@ -114,6 +133,17 @@ public class JSlidingPanel extends javax.swing.JPanel {
     public void refresh() {
         revalidate();
         repaint();
+    }
+
+    private void enableUserInput() {
+        MainFrame.getMainFrame().getGlassPane().setVisible(false);
+        MainFrame.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }
+
+    private void disableUserInput() {
+        MainFrame.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        MainFrame.getMainFrame().setGlassPane(glassPane);
+        glassPane.setVisible(true);
     }
 
     /**
@@ -126,17 +156,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         setPreferredSize(new java.awt.Dimension(800, 600));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setLayout(new java.awt.CardLayout());
     }// </editor-fold>//GEN-END:initComponents
 
 

@@ -17,6 +17,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private int prevX, prevY;
     private Action enterAction;
+    private static MainFrame mainFrame;
 
     /**
      * Creates new form MainFrame
@@ -350,11 +351,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void backLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseClicked
         if (getCurrentComponentName(mainPanel).equals("indexPanel")) {
-            mainPanel.nextSlidingPanel(9, introPanel, JSlidingPanel.Direction.Right);
+            mainPanel.nextSlidingPanel(10, introPanel, JSlidingPanel.Direction.Right);
             titleBar.setBackground(new Color(13, 8, 18));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
             backLabel.setVisible(false);
-            mainPanel.refresh();
         }
     }//GEN-LAST:event_backLabelMouseClicked
 
@@ -388,7 +388,8 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                mainFrame = new MainFrame();
+                mainFrame.setVisible(true);
             }
         });
     }
@@ -398,16 +399,15 @@ public class MainFrame extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (getCurrentComponentName(mainPanel).equals("introPanel")) {
-                mainPanel.nextSlidingPanel(9, indexPanel, JSlidingPanel.Direction.Down);
+                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPanel.Direction.Down);
                 titleBar.setBackground(new Color(18, 8, 13));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
                 backLabel.setVisible(true);
-                mainPanel.refresh();
             }
         }
     }
 
-    public String getCurrentComponentName(Container parent) {
+    String getCurrentComponentName(Container parent) {
         String compName = null;
         Component comp = null;
         int n = parent.getComponentCount();
@@ -418,6 +418,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
         return compName;
+    }
+
+    static MainFrame getMainFrame() {
+        return mainFrame;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
