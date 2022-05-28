@@ -199,7 +199,7 @@ public class MainFrame extends javax.swing.JFrame {
         indexPanel.setkEndColor(new java.awt.Color(32, 5, 18));
         indexPanel.setkStartColor(new java.awt.Color(15, 10, 10));
         indexPanel.setName("indexPanel"); // NOI18N
-        indexPanel.setRequestFocusEnabled(false);
+        indexPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         subIndexPanel1.setBackground(new java.awt.Color(255, 255, 255, 20));
         subIndexPanel1.setPreferredSize(new java.awt.Dimension(246, 100));
@@ -350,11 +350,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backLabelMouseExited
 
     private void backLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseClicked
-        if (getCurrentComponentName(mainPanel).equals("indexPanel")) {
-            mainPanel.nextSlidingPanel(10, introPanel, JSlidingPanel.Direction.Right);
-            titleBar.setBackground(new Color(13, 8, 18));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
-            backLabel.setVisible(false);
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            if (getCurrentComponentName(mainPanel).equals("indexPanel")) {
+                mainPanel.nextSlidingPanel(10, introPanel, JSlidingPanel.Direction.Right);
+                titleBar.setBackground(new Color(13, 8, 18));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
+                backLabel.setVisible(false);
+            }
         }
     }//GEN-LAST:event_backLabelMouseClicked
 
