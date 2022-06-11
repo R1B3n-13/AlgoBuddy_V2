@@ -29,6 +29,8 @@ public class MainFrame extends javax.swing.JFrame {
         introPanel.getActionMap().put("enter", enterAction);
         indexPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
         indexPanel.getActionMap().put("enter", enterAction);
+        graphIndexPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
+        graphIndexPanel.getActionMap().put("enter", enterAction);
     }
 
     /**
@@ -54,6 +56,8 @@ public class MainFrame extends javax.swing.JFrame {
         goToGraphButton = new javax.swing.JButton();
         goToSortButton = new javax.swing.JButton();
         goToRecursionButton = new javax.swing.JButton();
+        graphIndexPanel = new keeptoo.KGradientPanel();
+        graphIndexLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -216,6 +220,11 @@ public class MainFrame extends javax.swing.JFrame {
         goToGraphButton.setMaximumSize(new java.awt.Dimension(222, 72));
         goToGraphButton.setMinimumSize(new java.awt.Dimension(222, 72));
         goToGraphButton.setPreferredSize(new java.awt.Dimension(222, 72));
+        goToGraphButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToGraphButtonMouseClicked(evt);
+            }
+        });
 
         goToSortButton.setBackground(new java.awt.Color(18, 8, 13));
         goToSortButton.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
@@ -271,6 +280,35 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         mainPanel.add(indexPanel, "indexPanel");
+
+        graphIndexPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 13, 18)));
+        graphIndexPanel.setkEndColor(new java.awt.Color(5, 18, 32));
+        graphIndexPanel.setkStartColor(new java.awt.Color(10, 10, 15));
+        graphIndexPanel.setName("graphIndexPanel"); // NOI18N
+
+        graphIndexLabel.setFont(new java.awt.Font("Georgia", 0, 36)); // NOI18N
+        graphIndexLabel.setForeground(new java.awt.Color(157, 162, 173));
+        graphIndexLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        graphIndexLabel.setText("GRAPH ALGORITHMS");
+
+        javax.swing.GroupLayout graphIndexPanelLayout = new javax.swing.GroupLayout(graphIndexPanel);
+        graphIndexPanel.setLayout(graphIndexPanelLayout);
+        graphIndexPanelLayout.setHorizontalGroup(
+            graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(graphIndexPanelLayout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(graphIndexLabel)
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+        graphIndexPanelLayout.setVerticalGroup(
+            graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(graphIndexPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(graphIndexLabel)
+                .addContainerGap(515, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(graphIndexPanel, "graphIndexPanel");
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -348,8 +386,21 @@ public class MainFrame extends javax.swing.JFrame {
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
                 backLabel.setVisible(false);
             }
+            if (getCurrentComponentName(mainPanel).equals("graphIndexPanel")) {
+                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPanel.Direction.Right);
+                titleBar.setBackground(new Color(18, 8, 13));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
+            }
         }
     }//GEN-LAST:event_backLabelMouseClicked
+
+    private void goToGraphButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToGraphButtonMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPanel.Direction.Left);
+            titleBar.setBackground(new Color(8, 13, 18));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 13, 18)));
+        }
+    }//GEN-LAST:event_goToGraphButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -423,6 +474,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton goToGraphButton;
     private javax.swing.JButton goToRecursionButton;
     private javax.swing.JButton goToSortButton;
+    private javax.swing.JLabel graphIndexLabel;
+    private keeptoo.KGradientPanel graphIndexPanel;
     private javax.swing.JLabel indexLabel;
     private keeptoo.KGradientPanel indexPanel;
     private javax.swing.JLabel introGifLabel;
