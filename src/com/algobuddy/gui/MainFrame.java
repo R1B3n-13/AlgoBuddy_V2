@@ -421,7 +421,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_introTextLabelMouseEntered
 
     private void backLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseEntered
-        backLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/backHoverLabel.png")));
+        backLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/backLabelHover.png")));
     }//GEN-LAST:event_backLabelMouseEntered
 
     private void backLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseExited
