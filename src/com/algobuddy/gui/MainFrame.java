@@ -58,6 +58,9 @@ public class MainFrame extends javax.swing.JFrame {
         goToRecursionButton = new javax.swing.JButton();
         graphIndexPanel = new keeptoo.KGradientPanel();
         graphIndexLabel = new javax.swing.JLabel();
+        goToBfsButton = new javax.swing.JButton();
+        goToDfsButton = new javax.swing.JButton();
+        goToDijkstraButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -173,22 +176,26 @@ public class MainFrame extends javax.swing.JFrame {
         introPanelLayout.setHorizontalGroup(
             introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(introPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(introLogoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(introGifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE))
+                    .addGroup(introPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(introGifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE))
+                    .addGroup(introPanelLayout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addComponent(introTextLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, introPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(introTextLabel)
-                .addGap(224, 224, 224))
+            .addGroup(introPanelLayout.createSequentialGroup()
+                .addGap(358, 358, 358)
+                .addComponent(introLogoLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         introPanelLayout.setVerticalGroup(
             introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(introPanelLayout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(154, 154, 154)
                 .addComponent(introLogoLabel)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addComponent(introTextLabel)
                 .addGap(18, 18, 18)
                 .addComponent(introGifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,9 +224,9 @@ public class MainFrame extends javax.swing.JFrame {
         goToGraphButton.setBorderPainted(false);
         goToGraphButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToGraphButton.setIconTextGap(10);
-        goToGraphButton.setMaximumSize(new java.awt.Dimension(222, 72));
-        goToGraphButton.setMinimumSize(new java.awt.Dimension(222, 72));
-        goToGraphButton.setPreferredSize(new java.awt.Dimension(222, 72));
+        goToGraphButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToGraphButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToGraphButton.setPreferredSize(new java.awt.Dimension(244, 72));
         goToGraphButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goToGraphButtonMouseClicked(evt);
@@ -235,9 +242,9 @@ public class MainFrame extends javax.swing.JFrame {
         goToSortButton.setBorderPainted(false);
         goToSortButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToSortButton.setIconTextGap(8);
-        goToSortButton.setMaximumSize(new java.awt.Dimension(222, 72));
-        goToSortButton.setMinimumSize(new java.awt.Dimension(222, 72));
-        goToSortButton.setPreferredSize(new java.awt.Dimension(222, 72));
+        goToSortButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToSortButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToSortButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
         goToRecursionButton.setBackground(new java.awt.Color(18, 8, 13));
         goToRecursionButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -248,9 +255,9 @@ public class MainFrame extends javax.swing.JFrame {
         goToRecursionButton.setBorderPainted(false);
         goToRecursionButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToRecursionButton.setIconTextGap(10);
-        goToRecursionButton.setMaximumSize(new java.awt.Dimension(222, 72));
-        goToRecursionButton.setMinimumSize(new java.awt.Dimension(222, 72));
-        goToRecursionButton.setPreferredSize(new java.awt.Dimension(222, 72));
+        goToRecursionButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToRecursionButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToRecursionButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
         javax.swing.GroupLayout indexPanelLayout = new javax.swing.GroupLayout(indexPanel);
         indexPanel.setLayout(indexPanelLayout);
@@ -259,9 +266,9 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(indexPanelLayout.createSequentialGroup()
                 .addContainerGap(277, Short.MAX_VALUE)
                 .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(goToGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                    .addComponent(goToRecursionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(goToSortButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(goToGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goToRecursionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goToSortButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(indexLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(277, Short.MAX_VALUE))
         );
@@ -271,11 +278,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(indexLabel)
                 .addGap(49, 49, 49)
-                .addComponent(goToGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goToGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(goToRecursionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goToRecursionButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(goToSortButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goToSortButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(184, Short.MAX_VALUE))
         );
 
@@ -291,13 +298,50 @@ public class MainFrame extends javax.swing.JFrame {
         graphIndexLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         graphIndexLabel.setText("GRAPH ALGORITHMS");
 
+        goToBfsButton.setBackground(new java.awt.Color(8, 13, 18));
+        goToBfsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToBfsButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToBfsButton.setText("Breadth First Search");
+        goToBfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToBfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToBfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
+
+        goToDfsButton.setBackground(new java.awt.Color(8, 13, 18));
+        goToDfsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToDfsButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToDfsButton.setText("Dijkstra");
+        goToDfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToDfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToDfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
+
+        goToDijkstraButton.setBackground(new java.awt.Color(8, 13, 18));
+        goToDijkstraButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToDijkstraButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToDijkstraButton.setText("Depth First Search");
+        goToDijkstraButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToDijkstraButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToDijkstraButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToDijkstraButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goToDijkstraButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout graphIndexPanelLayout = new javax.swing.GroupLayout(graphIndexPanel);
         graphIndexPanel.setLayout(graphIndexPanelLayout);
         graphIndexPanelLayout.setHorizontalGroup(
             graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(graphIndexPanelLayout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(graphIndexLabel)
+                .addGroup(graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(graphIndexPanelLayout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(graphIndexLabel))
+                    .addGroup(graphIndexPanelLayout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addGroup(graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(211, Short.MAX_VALUE))
         );
         graphIndexPanelLayout.setVerticalGroup(
@@ -305,7 +349,13 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(graphIndexPanelLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(graphIndexLabel)
-                .addContainerGap(515, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
@@ -402,6 +452,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_goToGraphButtonMouseClicked
 
+    private void goToDijkstraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToDijkstraButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goToDijkstraButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -471,6 +525,9 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backLabel;
     private javax.swing.JLabel closeLabel;
+    private javax.swing.JButton goToBfsButton;
+    private javax.swing.JButton goToDfsButton;
+    private javax.swing.JButton goToDijkstraButton;
     private javax.swing.JButton goToGraphButton;
     private javax.swing.JButton goToRecursionButton;
     private javax.swing.JButton goToSortButton;
