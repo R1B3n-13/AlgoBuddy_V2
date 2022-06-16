@@ -26,7 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         enterAction = new EnterAction();
         introPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
-        introPanel.getActionMap().put("enter", enterAction);     
+        introPanel.getActionMap().put("enter", enterAction);
     }
 
     /**
@@ -479,7 +479,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
-    class EnterAction extends AbstractAction {
+    private class EnterAction extends AbstractAction {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -492,7 +492,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    String getCurrentComponentName(Container parent) {
+    private String getCurrentComponentName(Container parent) {
         String compName = null;
         Component comp = null;
         int n = parent.getComponentCount();

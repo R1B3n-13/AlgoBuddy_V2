@@ -63,7 +63,7 @@ public class JSlidingPane extends javax.swing.JPanel {
         revalidate();
     }
 
-    public Component getCurrentComponent(Container parent) {
+    private Component getCurrentComponent(Container parent) {
         Component comp = null;
         int n = parent.getComponentCount();
         for (int i = 0; i < n; i++) {
@@ -75,7 +75,7 @@ public class JSlidingPane extends javax.swing.JPanel {
         return comp;
     }
 
-    public class JSlidingPanelListener implements ActionListener {
+    private class JSlidingPanelListener implements ActionListener {
 
         Component visiblePanel;
         Component hiddenPanel;
@@ -84,13 +84,13 @@ public class JSlidingPane extends javax.swing.JPanel {
         Timer timer;
         Direction direction;
 
-        public JSlidingPanelListener(int steps, Component visiblePanel, Component hiddenPanel, Direction direction) {
+        private JSlidingPanelListener(int steps, Component visiblePanel, Component hiddenPanel, Direction direction) {
             this.steps = steps;
             this.visiblePanel = visiblePanel;
             this.hiddenPanel = hiddenPanel;
             this.direction = direction;
             step = 0;
-      
+
             add(hiddenPanel);
             hiddenPanel.setVisible(true);
         }
