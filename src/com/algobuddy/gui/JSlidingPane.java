@@ -16,7 +16,7 @@ import javax.swing.Timer;
  *
  * @author nebir, nazrul
  */
-public class JSlidingPanel extends javax.swing.JPanel {
+public class JSlidingPane extends javax.swing.JPanel {
 
     public enum Direction {
         Left,
@@ -30,7 +30,7 @@ public class JSlidingPanel extends javax.swing.JPanel {
     /**
      * Creates new form JSlidingPanel
      */
-    public JSlidingPanel() {
+    public JSlidingPane() {
         initComponents();
         glassPane = new JPanel();
         glassPane.setOpaque(false);

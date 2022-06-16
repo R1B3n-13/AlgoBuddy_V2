@@ -42,7 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
         closeLabel = new javax.swing.JLabel();
         minimizeLabel = new javax.swing.JLabel();
         backLabel = new javax.swing.JLabel();
-        mainPanel = new com.algobuddy.gui.JSlidingPanel();
+        mainPanel = new com.algobuddy.gui.JSlidingPane();
         introPanel = new keeptoo.KGradientPanel();
         introLogoLabel = new javax.swing.JLabel();
         introTextLabel = new javax.swing.JLabel();
@@ -422,13 +422,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void backLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
             if (getCurrentComponentName(mainPanel).equals("indexPanel")) {
-                mainPanel.nextSlidingPanel(10, introPanel, JSlidingPanel.Direction.Right);
+                mainPanel.nextSlidingPanel(10, introPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(13, 8, 18));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
                 backLabel.setVisible(false);
             }
             if (getCurrentComponentName(mainPanel).equals("graphIndexPanel")) {
-                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPanel.Direction.Right);
+                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(18, 8, 13));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
             }
@@ -437,7 +437,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void goToGraphButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToGraphButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPanel.Direction.Left);
+            mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPane.Direction.Left);
             titleBar.setBackground(new Color(8, 13, 18));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 13, 18)));
         }
@@ -484,7 +484,7 @@ public class MainFrame extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (getCurrentComponentName(mainPanel).equals("introPanel")) {
-                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPanel.Direction.Down);
+                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPane.Direction.Down);
                 titleBar.setBackground(new Color(18, 8, 13));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
                 backLabel.setVisible(true);
@@ -526,7 +526,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel introLogoLabel;
     private keeptoo.KGradientPanel introPanel;
     private javax.swing.JLabel introTextLabel;
-    private com.algobuddy.gui.JSlidingPanel mainPanel;
+    private com.algobuddy.gui.JSlidingPane mainPanel;
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JPanel titleBar;
     // End of variables declaration//GEN-END:variables
