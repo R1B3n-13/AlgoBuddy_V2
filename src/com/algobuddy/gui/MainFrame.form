@@ -441,9 +441,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="goToDijkstraButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="goToDfsButton" min="-2" max="-2" attributes="0"/>
                                   <Component id="goToBfsButton" min="-2" max="-2" attributes="0"/>
-                                  <Component id="goToDfsButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="goToDijkstraButton" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -459,9 +459,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="goToBfsButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="goToDijkstraButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="goToDfsButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="goToDijkstraButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="269" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -503,7 +503,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="goToDfsButton">
+            <Component class="javax.swing.JButton" name="goToDijkstraButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="12" green="d" red="8" type="rgb"/>
@@ -526,7 +526,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="goToDijkstraButton">
+            <Component class="javax.swing.JButton" name="goToDfsButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="12" green="d" red="8" type="rgb"/>
@@ -548,9 +548,6 @@
                   <Dimension value="[244, 72]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goToDijkstraButtonActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

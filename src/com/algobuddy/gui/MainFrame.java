@@ -26,11 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         enterAction = new EnterAction();
         introPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
-        introPanel.getActionMap().put("enter", enterAction);
-        indexPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
-        indexPanel.getActionMap().put("enter", enterAction);
-        graphIndexPanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enter");
-        graphIndexPanel.getActionMap().put("enter", enterAction);
+        introPanel.getActionMap().put("enter", enterAction);     
     }
 
     /**
@@ -59,8 +55,8 @@ public class MainFrame extends javax.swing.JFrame {
         graphIndexPanel = new keeptoo.KGradientPanel();
         graphIndexLabel = new javax.swing.JLabel();
         goToBfsButton = new javax.swing.JButton();
-        goToDfsButton = new javax.swing.JButton();
         goToDijkstraButton = new javax.swing.JButton();
+        goToDfsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -306,26 +302,21 @@ public class MainFrame extends javax.swing.JFrame {
         goToBfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToBfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
-        goToDfsButton.setBackground(new java.awt.Color(8, 13, 18));
-        goToDfsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
-        goToDfsButton.setForeground(new java.awt.Color(172, 179, 186));
-        goToDfsButton.setText("Dijkstra");
-        goToDfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
-        goToDfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
-        goToDfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
-
         goToDijkstraButton.setBackground(new java.awt.Color(8, 13, 18));
         goToDijkstraButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         goToDijkstraButton.setForeground(new java.awt.Color(172, 179, 186));
-        goToDijkstraButton.setText("Depth First Search");
+        goToDijkstraButton.setText("Dijkstra");
         goToDijkstraButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToDijkstraButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToDijkstraButton.setPreferredSize(new java.awt.Dimension(244, 72));
-        goToDijkstraButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToDijkstraButtonActionPerformed(evt);
-            }
-        });
+
+        goToDfsButton.setBackground(new java.awt.Color(8, 13, 18));
+        goToDfsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToDfsButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToDfsButton.setText("Depth First Search");
+        goToDfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToDfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToDfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
         javax.swing.GroupLayout graphIndexPanelLayout = new javax.swing.GroupLayout(graphIndexPanel);
         graphIndexPanel.setLayout(graphIndexPanelLayout);
@@ -339,9 +330,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(graphIndexPanelLayout.createSequentialGroup()
                         .addGap(277, 277, 277)
                         .addGroup(graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(211, Short.MAX_VALUE))
         );
         graphIndexPanelLayout.setVerticalGroup(
@@ -352,9 +343,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(269, Short.MAX_VALUE))
         );
 
@@ -451,10 +442,6 @@ public class MainFrame extends javax.swing.JFrame {
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 13, 18)));
         }
     }//GEN-LAST:event_goToGraphButtonMouseClicked
-
-    private void goToDijkstraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToDijkstraButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_goToDijkstraButtonActionPerformed
 
     /**
      * @param args the command line arguments
