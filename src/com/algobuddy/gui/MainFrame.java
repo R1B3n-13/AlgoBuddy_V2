@@ -195,7 +195,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(introTextLabel)
                 .addGap(18, 18, 18)
                 .addComponent(introGifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         mainPanel.add(introPanel, "introPanel");
@@ -288,6 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
         graphIndexPanel.setkEndColor(new java.awt.Color(5, 18, 32));
         graphIndexPanel.setkStartColor(new java.awt.Color(10, 10, 15));
         graphIndexPanel.setName("graphIndexPanel"); // NOI18N
+        graphIndexPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         graphIndexLabel.setFont(new java.awt.Font("Georgia", 0, 36)); // NOI18N
         graphIndexLabel.setForeground(new java.awt.Color(157, 162, 173));
