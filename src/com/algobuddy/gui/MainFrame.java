@@ -5,16 +5,24 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 /**
  *
@@ -564,11 +572,62 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         JScrollPane jScrollPane = new JScrollPane(jEditorPane);
-        jScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-        jScrollPane.getViewport().setBorder(null);
         jScrollPane.setViewportBorder(null);
         jScrollPane.setBorder(null);
         jScrollPane.setPreferredSize(new Dimension(800, 595));
+        jScrollPane.getVerticalScrollBar().setBackground(new Color(118, 118, 118));
+        jScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(78, 78, 78);
+            }
+
+            @Override
+            protected Dimension getMaximumThumbSize() {
+                return new Dimension(0, 40);
+            }
+
+            @Override
+            protected JButton createIncreaseButton(int i) {
+                return new ScrollBarButton();
+            }
+
+            @Override
+            protected JButton createDecreaseButton(int i) {
+                return new ScrollBarButton();
+            }
+
+            @Override
+            protected void paintTrack(Graphics grphcs, JComponent jc, Rectangle rctngl) {
+                Graphics2D g2 = (Graphics2D) grphcs;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                int width = rctngl.width / 3;
+                int x = rctngl.x + ((rctngl.width - width) / 2);
+                g2.setColor(new Color(178, 178, 178));
+                g2.fillRect(x, rctngl.y, width, rctngl.height - 10);
+            }
+
+            @Override
+            protected void paintThumb(Graphics grphcs, JComponent jc, Rectangle rctngl) {
+                Graphics2D g2 = (Graphics2D) grphcs;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                int x = rctngl.x + 2;
+                int y = rctngl.y;
+                g2.setColor(new Color(78, 78, 78));
+                g2.fillRect(x, y, 11, 30);
+            }
+
+            private class ScrollBarButton extends JButton {
+
+                public ScrollBarButton() {
+                    setBorder(BorderFactory.createEmptyBorder(7, 0, 0, 0));
+                }
+
+                @Override
+                public void paint(Graphics grphcs) {
+                }
+            }
+        });
 
         panel.add(jScrollPane);
     }
