@@ -1,0 +1,393 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<title>Breadth First Search</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:"Open Sans";}
+@font-face
+	{font-family:Corbel;
+	panose-1:2 11 5 3 2 2 4 2 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Corbel",sans-serif;}
+h2
+	{mso-style-link:"Heading 2 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:18.0pt;
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:#005DBA;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:#6C606A;
+	text-decoration:underline;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+pre
+	{mso-style-link:"HTML Preformatted Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:.5in;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Corbel",sans-serif;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-link:"Heading 2";
+	font-family:"Times New Roman",serif;
+	font-weight:bold;}
+span.HTMLPreformattedChar
+	{mso-style-name:"HTML Preformatted Char";
+	mso-style-link:"HTML Preformatted";
+	font-family:"Courier New";}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Corbel",sans-serif;}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Corbel",sans-serif;}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:.5in;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Corbel",sans-serif;}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Corbel",sans-serif;}
+p.msopapdefault, li.msopapdefault, div.msopapdefault
+	{mso-style-name:msopapdefault;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:105%;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;}
+.MsoChpDefault
+	{font-size:10.0pt;
+	font-family:"Corbel",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body bgcolor="#767676" lang=EN-US link="#005DBA" vlink="#6C606A">
+
+<div class=WordSection1>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><b><span
+style='font-size:18.0pt;font-family:"Open Sans";color:#52F8B0'>Breadth First
+Search (BFS)</span></b></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>There are many
+ways to traverse graphs. BFS is the most commonly used approach.</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>BFS is a
+traversing algorithm where you should start traversing from a selected node
+(source or starting node) and traverse the graph layer by layer thus exploring
+the neighbor nodes (nodes which are directly connected to source node). You
+must then move towards the next-level neighbor nodes.</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>As the name BFS
+suggests, you are required to traverse the graph breadthwise as follows:</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='color:white;text-align:justify;line-height:normal'><span
+     style='font-size:10.5pt;font-family:"Open Sans"'>First move horizontally and
+     visit all the nodes of the current layer</span></li>
+ <li class=MsoNormal style='color:white;text-align:justify;line-height:normal'><span
+     style='font-size:10.5pt;font-family:"Open Sans"'>Move to the next layer</span></li>
+</ol>
+
+<p class=MsoNormal style='text-align:justify;line-height:normal'><i><span
+style='font-size:10.5pt;font-family:"Open Sans";color:#FFD966'>Consider the
+following diagram:</span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'><img width=623
+height=369 src="bfs_files/image001.jpg"></span></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>The distance between
+the nodes in layer 1 is comparatively lesser than the distance between the
+nodes in layer 2. Therefore, in BFS, you must traverse all the nodes in layer 1
+before you move to the nodes in layer 2.</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><b><span
+style='font-family:"Open Sans";color:#5DC7F8'>Traversing Child Nodes:</span></b></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>A graph can
+contain cycles, which may bring you to the same node again while traversing the
+graph. To avoid processing of same node again, use a Boolean array which marks
+the node after it is processed.</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><i><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>The algorithm
+works as follows:</span></i></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='color:white;margin-top:11.25pt;margin-bottom:11.25pt;
+     text-align:justify;line-height:normal'><span style='font-size:10.5pt;
+     font-family:"Open Sans"'>Start by putting any one of the graph's vertices at
+     the back of a queue.</span></li>
+ <li class=MsoNormal style='color:white;margin-top:11.25pt;margin-bottom:11.25pt;
+     text-align:justify;line-height:normal'><span style='font-size:10.5pt;
+     font-family:"Open Sans"'>Take the front item of the queue; remove and mark
+     it as visited.</span></li>
+ <li class=MsoNormal style='color:white;margin-top:11.25pt;margin-bottom:11.25pt;
+     text-align:justify;line-height:normal'><span style='font-size:10.5pt;
+     font-family:"Open Sans"'>Consider all the adjacent nodes of that vertex and
+     add the ones which aren't marked as visited to the back of the queue.</span></li>
+ <li class=MsoNormal style='color:white;margin-top:11.25pt;margin-bottom:11.25pt;
+     text-align:justify;line-height:normal'><span style='font-size:10.5pt;
+     font-family:"Open Sans"'>Keep repeating steps 2 and 3 until the queue is empty.</span></li>
+</ol>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><b><span
+style='font-family:"Open Sans";color:#5DC7F8'>BFS Pseudocode:</span></b></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans"'><img width=643 height=150
+src="bfs_files/image002.png"></span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><b><span
+style='font-family:"Open Sans";color:#5DC7F8'>Illustration:&nbsp;</span></b></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;line-height:normal'><i><span style='font-size:10.5pt;
+font-family:"Open Sans";color:#FFD966'>Consider the following graph having 8 nodes
+named as A, B, C, D, E, F, G and H as shown:</span></i></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'><img width=420
+height=298 src="bfs_files/image003.png"></span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>Initially, the
+queue will be empty. Let us start traversing the graph from node A. Once we
+visit node A, we mark it as visited and also place it inside the queue as
+shown:</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'><img width=417
+height=320 src="bfs_files/image004.png"></span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>The next step is
+to traverse its adjacent nodes i.e., B and C and place them inside the queue.
+When we place the adjacent node of A in the queue, we will remove A from the
+queue and display it in the output array as shown:</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'><img width=633
+height=294 src="bfs_files/image005.png"></span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>Next, we don’t
+have any more adjacent nodes for A. therefore, we will remove node B from the
+queue and place its adjacent nodes into the queue. Similarly, we will traverse
+the nodes of C and put them into the queue. </span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'><img width=630
+height=277 src="bfs_files/image006.png"></span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>The next adjacent
+node is node H. thus, we will traverse that as well and place it in the queue.
+Once all the nodes have been visited, we will start removing them from the
+queue and putting them into the output array.</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'><img width=623
+height=282 src="bfs_files/image007.png"></span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>Thus, slowly the
+queue starts decreasing in size and the output array will be populated as
+shown:</span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='margin-top:11.25pt;margin-right:0in;
+margin-bottom:11.25pt;margin-left:0in;text-align:center;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'><img width=623
+height=262 src="bfs_files/image008.png"></span></p>
+
+<p class=MsoNormal style='margin-top:11.25pt;margin-right:0in;margin-bottom:
+11.25pt;margin-left:0in;text-align:justify;line-height:normal'><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='margin-left:.5in;text-align:center;
+line-height:normal'><span style='font-size:10.5pt;font-family:"Open Sans";
+color:white'><img width=358 height=272 src="bfs_files/image009.png"></span></p>
+
+<p class=MsoNormal align=center style='margin-left:.5in;text-align:center;
+line-height:normal'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify;line-height:normal'><b><span
+style='font-family:"Open Sans";color:#5DC7F8'>Time Complexity:</span></b><b><span
+style='font-size:10.5pt;font-family:"Open Sans";color:#5DC7F8'> </span></b><span
+style='font-size:10.5pt;font-family:"Open Sans";color:white'>The&nbsp;time
+complexity&nbsp;can be expressed as&nbsp;<b><span style='display:none'> </span>O(|V|
++ |E|), </b>since every vertex and every edge will be explored in the worst
+case. Here, |V|&nbsp;<span style='display:none'> </span>is the number of
+vertices and&nbsp;<span style='display:none'> </span>|E|&nbsp;is the number of
+edges in the graph.</span></p>
+
+<p class=MsoNormal style='text-align:justify;line-height:normal'>&nbsp;</p>
+
+<p class=MsoNormal align=center style='text-align:center;line-height:normal'><b><i><span
+style='font-family:"Open Sans";color:#5DC7F8'>Sources:</span></i></b></p>
+
+<p class=MsoListParagraph align=center style='margin-left:.75in;text-align:
+center'><span style='font-size:10.5pt;line-height:105%;font-family:"Open Sans"'><a
+href="https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/tutorial/"><span
+style='color:#52F8B0'>Breadth First Search Tutorials &amp; Notes | Algorithms |
+HackerEarth</span></a></span></p>
+
+<p class=MsoListParagraph align=center style='margin-left:.75in;text-align:
+center'><span style='font-size:10.5pt;line-height:105%;font-family:"Open Sans"'><a
+href="https://www.programiz.com/dsa/graph-bfs"><span style='color:#52F8B0'>BFS
+Graph Algorithm(With code in C, C++, Java and Python) (programiz.com)</span></a></span></p>
+
+<p class=MsoListParagraph align=center style='margin-left:.75in;text-align:
+center'><span style='font-size:10.5pt;line-height:105%;font-family:"Open Sans"'><a
+href="https://techvidvan.com/tutorials/breadth-first-search/"><span
+style='color:#52F8B0'>Breadth First Search in Data Structure - TechVidvan</span></a></span></p>
+
+</div>
+
+</body>
+
+</html>

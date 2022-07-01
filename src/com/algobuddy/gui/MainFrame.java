@@ -3,10 +3,17 @@ package com.algobuddy.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JEditorPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
 /**
@@ -57,6 +64,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToBfsButton = new javax.swing.JButton();
         goToDijkstraButton = new javax.swing.JButton();
         goToDfsButton = new javax.swing.JButton();
+        bfsOverviewPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -302,6 +310,11 @@ public class MainFrame extends javax.swing.JFrame {
         goToBfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToBfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToBfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToBfsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToBfsButtonMouseClicked(evt);
+            }
+        });
 
         goToDijkstraButton.setBackground(new java.awt.Color(8, 13, 18));
         goToDijkstraButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -351,6 +364,22 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
+
+        bfsOverviewPanel.setBackground(new java.awt.Color(118, 118, 118));
+        bfsOverviewPanel.setName("bfsOverviewPanel"); // NOI18N
+
+        javax.swing.GroupLayout bfsOverviewPanelLayout = new javax.swing.GroupLayout(bfsOverviewPanel);
+        bfsOverviewPanel.setLayout(bfsOverviewPanelLayout);
+        bfsOverviewPanelLayout.setHorizontalGroup(
+            bfsOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        bfsOverviewPanelLayout.setVerticalGroup(
+            bfsOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(bfsOverviewPanel, "bfsOverviewPanel");
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -425,13 +454,18 @@ public class MainFrame extends javax.swing.JFrame {
             if (getCurrentComponentName(mainPanel).equals("indexPanel")) {
                 mainPanel.nextSlidingPanel(10, introPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(13, 8, 18));
-                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(13, 8, 18)));
                 backLabel.setVisible(false);
             }
             if (getCurrentComponentName(mainPanel).equals("graphIndexPanel")) {
                 mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(18, 8, 13));
-                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(18, 8, 13)));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(18, 8, 13)));
+            }
+            if (getCurrentComponentName(mainPanel).equals("bfsOverviewPanel")) {
+                mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPane.Direction.Right);
+                titleBar.setBackground(new Color(8, 13, 18));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
             }
         }
     }//GEN-LAST:event_backLabelMouseClicked
@@ -440,9 +474,18 @@ public class MainFrame extends javax.swing.JFrame {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPane.Direction.Left);
             titleBar.setBackground(new Color(8, 13, 18));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 13, 18)));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
         }
     }//GEN-LAST:event_goToGraphButtonMouseClicked
+
+    private void goToBfsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToBfsButtonMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            openHtml(bfsOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+            mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Left);
+            titleBar.setBackground(new Color(78, 78, 78));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(78, 78, 78)));
+        }
+    }//GEN-LAST:event_goToBfsButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -506,12 +549,37 @@ public class MainFrame extends javax.swing.JFrame {
         return compName;
     }
 
+    private void openHtml(final JPanel panel, String filePath) {
+        panel.setLayout(new FlowLayout());
+
+        JEditorPane jEditorPane = new JEditorPane();
+        jEditorPane.setEditable(false);
+        jEditorPane.setBackground(new Color(118, 118, 118));
+
+        try {
+            jEditorPane.setPage(new File(filePath).toURI().toURL());
+        } catch (IOException e) {
+            jEditorPane.setContentType("text/html");
+            jEditorPane.setText("<html>Page not found.</html>");
+        }
+
+        JScrollPane jScrollPane = new JScrollPane(jEditorPane);
+        jScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        jScrollPane.getViewport().setBorder(null);
+        jScrollPane.setViewportBorder(null);
+        jScrollPane.setBorder(null);
+        jScrollPane.setPreferredSize(new Dimension(800, 595));
+
+        panel.add(jScrollPane);
+    }
+
     static MainFrame getMainFrame() {
         return mainFrame;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backLabel;
+    private javax.swing.JPanel bfsOverviewPanel;
     private javax.swing.JLabel closeLabel;
     private javax.swing.JButton goToBfsButton;
     private javax.swing.JButton goToDfsButton;
