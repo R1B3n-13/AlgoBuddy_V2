@@ -1,5 +1,6 @@
 package com.algobuddy.gui;
 
+import com.algobuddy.graphalgos.BFS;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -62,6 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         closeLabel = new javax.swing.JLabel();
         minimizeLabel = new javax.swing.JLabel();
         backLabel = new javax.swing.JLabel();
+        nextLabel = new javax.swing.JLabel();
         mainPanel = new com.algobuddy.gui.JSlidingPane();
         introPanel = new keeptoo.KGradientPanel();
         introLogoLabel = new javax.swing.JLabel();
@@ -78,9 +80,9 @@ public class MainFrame extends javax.swing.JFrame {
         goToDijkstraButton = new javax.swing.JButton();
         goToDfsButton = new javax.swing.JButton();
         bfsOverviewPanel = new javax.swing.JPanel();
+        bfsSimulationPanel = new com.algobuddy.gui.GraphPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
 
@@ -140,13 +142,29 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        nextLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/nextLabel.png"))); // NOI18N
+        nextLabel.setVisible(false);
+        nextLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nextLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nextLabelMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout titleBarLayout = new javax.swing.GroupLayout(titleBar);
         titleBar.setLayout(titleBarLayout);
         titleBarLayout.setHorizontalGroup(
             titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titleBarLayout.createSequentialGroup()
                 .addComponent(backLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 738, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nextLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 720, Short.MAX_VALUE)
                 .addComponent(minimizeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,6 +174,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addComponent(closeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
             .addComponent(minimizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(backLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(nextLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(titleBar, java.awt.BorderLayout.PAGE_START);
@@ -394,6 +413,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.add(bfsOverviewPanel, "bfsOverviewPanel");
 
+        bfsSimulationPanel.setName("bfsSimulationPanel"); // NOI18N
+        mainPanel.add(bfsSimulationPanel, "bfsSimulationPanel");
+
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -420,11 +442,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_titleBarMouseDragged
 
     private void minimizeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseExited
-        minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/minimizeLabel.png")));
+        minimizeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\minimizeLabel.png"));
     }//GEN-LAST:event_minimizeLabelMouseExited
 
     private void minimizeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseEntered
-        minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/minimizeLabelHover.png")));
+        minimizeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\minimizeLabelHover.png"));
     }//GEN-LAST:event_minimizeLabelMouseEntered
 
     private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
@@ -434,11 +456,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeLabelMouseClicked
 
     private void closeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseExited
-        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/closeLabel.png")));
+        closeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\closeLabel.png"));
     }//GEN-LAST:event_closeLabelMouseExited
 
     private void closeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseEntered
-        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/closeLabelHover.png")));
+        closeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\closeLabelHover.png"));
     }//GEN-LAST:event_closeLabelMouseEntered
 
     private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
@@ -455,11 +477,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_introTextLabelMouseEntered
 
     private void backLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseEntered
-        backLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/backLabelHover.png")));
+        backLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\backLabelHover.png"));
     }//GEN-LAST:event_backLabelMouseEntered
 
     private void backLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseExited
-        backLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/backLabel.png")));
+        backLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\backLabel.png"));
     }//GEN-LAST:event_backLabelMouseExited
 
     private void backLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseClicked
@@ -479,6 +501,14 @@ public class MainFrame extends javax.swing.JFrame {
                 mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(8, 13, 18));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
+                nextLabel.setVisible(false);
+            }
+            if (getCurrentComponentName(mainPanel).equals("bfsSimulationPanel")) {
+                mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Right);
+                titleBar.setBackground(new Color(78, 78, 78));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(78, 78, 78)));
+                nextLabel.setVisible(true);
+                bfsSimulationPanel.reset();
             }
         }
     }//GEN-LAST:event_backLabelMouseClicked
@@ -497,8 +527,28 @@ public class MainFrame extends javax.swing.JFrame {
             mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Left);
             titleBar.setBackground(new Color(78, 78, 78));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(78, 78, 78)));
+            nextLabel.setVisible(true);
         }
     }//GEN-LAST:event_goToBfsButtonMouseClicked
+
+    private void nextLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseEntered
+        nextLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\nextLabelHover.png"));
+    }//GEN-LAST:event_nextLabelMouseEntered
+
+    private void nextLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseExited
+        nextLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\nextLabel.png"));
+    }//GEN-LAST:event_nextLabelMouseExited
+
+    private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
+        if (getCurrentComponentName(mainPanel).equals("bfsOverviewPanel")) {
+            mainPanel.nextSlidingPanel(10, bfsSimulationPanel, JSlidingPane.Direction.Left);
+            bfsSimulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
+            GraphBoard.setCurrentAlgo("BFS");
+            titleBar.setBackground(new Color(8, 13, 18));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
+            nextLabel.setVisible(false);
+        }
+    }//GEN-LAST:event_nextLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -653,9 +703,14 @@ public class MainFrame extends javax.swing.JFrame {
         return mainFrame;
     }
 
+    static JSlidingPane getMainPanel() {
+        return mainPanel;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backLabel;
     private javax.swing.JPanel bfsOverviewPanel;
+    private com.algobuddy.gui.GraphPanel bfsSimulationPanel;
     private javax.swing.JLabel closeLabel;
     private javax.swing.JButton goToBfsButton;
     private javax.swing.JButton goToDfsButton;
@@ -671,8 +726,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel introLogoLabel;
     private keeptoo.KGradientPanel introPanel;
     private javax.swing.JLabel introTextLabel;
-    private com.algobuddy.gui.JSlidingPane mainPanel;
+    private static com.algobuddy.gui.JSlidingPane mainPanel;
     private javax.swing.JLabel minimizeLabel;
+    private javax.swing.JLabel nextLabel;
     private javax.swing.JPanel titleBar;
     // End of variables declaration//GEN-END:variables
 }

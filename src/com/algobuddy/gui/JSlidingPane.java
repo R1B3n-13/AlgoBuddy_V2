@@ -1,14 +1,19 @@
 package com.algobuddy.gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import static java.awt.Frame.NORMAL;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -75,6 +80,19 @@ public class JSlidingPane extends javax.swing.JPanel {
         return comp;
     }
 
+    private String getCurrentComponentName(Container parent) {
+        String compName = null;
+        Component comp = null;
+        int n = parent.getComponentCount();
+        for (int i = 0; i < n; i++) {
+            comp = parent.getComponent(i);
+            if (comp.isVisible()) {
+                compName = comp.getName();
+            }
+        }
+        return compName;
+    }
+
     private class JSlidingPanelListener implements ActionListener {
 
         Component visiblePanel;
@@ -128,8 +146,12 @@ public class JSlidingPane extends javax.swing.JPanel {
                 timer.stop();
                 visiblePanel.setVisible(false);
                 remove(visiblePanel);
+                if (getCurrentComponentName(MainFrame.getMainPanel()).equals("bfsSimulationPanel")) {
+                    MainFrame.getMainFrame().setExtendedState(MAXIMIZED_BOTH);
+                } else {
+                    MainFrame.getMainFrame().setExtendedState(NORMAL);
+                }
                 enableUserInput();
-
             }
         }
     }
