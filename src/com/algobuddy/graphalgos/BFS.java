@@ -69,7 +69,7 @@ public class BFS extends GraphBoard {
         for (i = coefficient; i < 33; i++) {
             g2d.setColor(new Color(230, 230, 230));
             g2d.setFont(new Font("Casteller", Font.BOLD, 18));
-            g2d.drawString(String.valueOf((char) (i + 58)), i * ((getWidth() - 700) / 26) + getWidth() / 120 , getHeight() - 96);
+            g2d.drawString(String.valueOf((char) (i + 58)), i * ((getWidth() - 700) / 26) + getWidth() / 150 , getHeight() - 96);
 
             g2d.setColor(Color.DARK_GRAY);
             g2d.setStroke(new BasicStroke(2));
@@ -91,35 +91,35 @@ public class BFS extends GraphBoard {
                     g2d.setColor(Color.DARK_GRAY);
                     g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
                     if (i - coefficient < nodes.size()) {
-                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     } else {
-                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     }
                 } else if (getSource() == null) {
                     g2d.setColor(Color.DARK_GRAY);
                     g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
                     if (i - coefficient < nodes.size()) {
-                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     } else {
-                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     }
 
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 19);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
                 }
 
                 if (getSource() != null && i != coefficient) {
                     g2d.setColor(Color.DARK_GRAY);
                     g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 19);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
                 }
             }
         }
 
         g2d.setColor(new Color(230, 230, 230));
         g2d.setFont(new Font("Casteller", Font.BOLD, 18));
-        g2d.drawString("Visited:", 2 * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+        g2d.drawString("Visited:", 2 * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
 
-        g2d.drawString("Queue:", 2 * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 19);
+        g2d.drawString("Queue:", 2 * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
 
         if (getSource() != null) {
             g2d.setColor(new Color(218, 226, 237));
@@ -133,11 +133,11 @@ public class BFS extends GraphBoard {
                 g2d.setColor(Color.RED);
                 g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (getSource().getNodeNum() + 65)),
-                        coefficient * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 19);
+                        coefficient * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
 
                 g2d.setColor(Color.RED);
                 g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
-                g2d.drawString("1", (getSource().getNodeNum() + coefficient) * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                g2d.drawString("1", (getSource().getNodeNum() + coefficient) * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
             }
         }
 
@@ -154,16 +154,16 @@ public class BFS extends GraphBoard {
                     if (vis[i - coefficient]) {
                         g2d.setColor(Color.RED);
                         g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
-                        g2d.drawString("1", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                        g2d.drawString("1", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     } else {
                         g2d.setColor(Color.DARK_GRAY);
                         g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
-                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     }
                 } else {
                     g2d.setColor(Color.DARK_GRAY);
                     g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 64);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                 }
             }
 
@@ -171,12 +171,12 @@ public class BFS extends GraphBoard {
             g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
             i = coefficient;
             for (Node n : q) {
-                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 19);
+                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
                 i++;
             }
             g2d.setColor(Color.DARK_GRAY);
             while (i < 33) {
-                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 19);
+                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
                 i++;
             }
 
@@ -213,7 +213,7 @@ public class BFS extends GraphBoard {
                 g2d.setColor(new Color(251, 234, 181));
                 g2d.setFont(new Font("Modern No. 20", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (runningNode.getNodeNum() + 65)),
-                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth()/120, getHeight() - 19);
+                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
             }
         }
     }

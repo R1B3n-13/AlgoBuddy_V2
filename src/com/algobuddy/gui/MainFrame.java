@@ -544,8 +544,8 @@ public class MainFrame extends javax.swing.JFrame {
             mainPanel.nextSlidingPanel(10, bfsSimulationPanel, JSlidingPane.Direction.Left);
             bfsSimulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
             GraphBoard.setCurrentAlgo("BFS");
-            titleBar.setBackground(new Color(8, 13, 18));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
+            titleBar.setBackground(new Color(78, 78, 78));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(111, 111, 111)));
             nextLabel.setVisible(false);
         }
     }//GEN-LAST:event_nextLabelMouseClicked
