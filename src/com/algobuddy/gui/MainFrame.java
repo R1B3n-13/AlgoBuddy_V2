@@ -574,7 +574,7 @@ public class MainFrame extends javax.swing.JFrame {
         JScrollPane jScrollPane = new JScrollPane(jEditorPane);
         jScrollPane.setViewportBorder(null);
         jScrollPane.setBorder(null);
-        jScrollPane.setPreferredSize(new Dimension(800, 595));
+        jScrollPane.setPreferredSize(new Dimension(780, 595));
         jScrollPane.getVerticalScrollBar().setBackground(new Color(118, 118, 118));
         jScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
