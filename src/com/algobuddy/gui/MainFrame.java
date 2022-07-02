@@ -27,7 +27,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 /**
@@ -575,9 +574,7 @@ public class MainFrame extends javax.swing.JFrame {
                 if (Desktop.isDesktopSupported()) {
                     try {
                         Desktop.getDesktop().browse(e.getURL().toURI());
-                    } catch (URISyntaxException ex) {
-                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
+                    } catch (URISyntaxException | IOException ex) {
                         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
