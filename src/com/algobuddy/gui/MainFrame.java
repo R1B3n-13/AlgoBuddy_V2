@@ -36,7 +36,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private int prevX, prevY;
+    private int prevX, prevY, extendedState = NORMAL;
     private Action enterAction;
     private static MainFrame mainFrame;
 
@@ -85,6 +85,11 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowDeiconified(java.awt.event.WindowEvent evt) {
+                formWindowDeiconified(evt);
+            }
+        });
 
         titleBar.setBackground(new java.awt.Color(13, 8, 18));
         titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(13, 8, 18)));
@@ -397,7 +402,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
 
-        bfsOverviewPanel.setBackground(new java.awt.Color(118, 118, 118));
+        bfsOverviewPanel.setBackground(new java.awt.Color(57, 55, 55));
         bfsOverviewPanel.setName("bfsOverviewPanel"); // NOI18N
 
         javax.swing.GroupLayout bfsOverviewPanelLayout = new javax.swing.GroupLayout(bfsOverviewPanel);
@@ -451,6 +456,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
+            extendedState = getExtendedState();
             setExtendedState(ICONIFIED);
         }
     }//GEN-LAST:event_minimizeLabelMouseClicked
@@ -505,8 +511,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
             if (getCurrentComponentName(mainPanel).equals("bfsSimulationPanel")) {
                 mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Right);
-                titleBar.setBackground(new Color(78, 78, 78));
-                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(78, 78, 78)));
+                titleBar.setBackground(new Color(57, 55, 55));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
                 nextLabel.setVisible(true);
                 bfsSimulationPanel.reset();
             }
@@ -525,8 +531,8 @@ public class MainFrame extends javax.swing.JFrame {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             openHtml(bfsOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
             mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Left);
-            titleBar.setBackground(new Color(78, 78, 78));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(78, 78, 78)));
+            titleBar.setBackground(new Color(57, 55, 55));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
             nextLabel.setVisible(true);
         }
     }//GEN-LAST:event_goToBfsButtonMouseClicked
@@ -549,6 +555,10 @@ public class MainFrame extends javax.swing.JFrame {
             nextLabel.setVisible(false);
         }
     }//GEN-LAST:event_nextLabelMouseClicked
+
+    private void formWindowDeiconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeiconified
+        setExtendedState(extendedState);
+    }//GEN-LAST:event_formWindowDeiconified
 
     /**
      * @param args the command line arguments
@@ -617,7 +627,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         JEditorPane jEditorPane = new JEditorPane();
         jEditorPane.setEditable(false);
-        jEditorPane.setBackground(new Color(118, 118, 118));
+        jEditorPane.setBackground(new Color(57, 55, 55));
 
         jEditorPane.addHyperlinkListener((HyperlinkEvent e) -> {
             if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
@@ -642,11 +652,11 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane.setViewportBorder(null);
         jScrollPane.setBorder(null);
         jScrollPane.setPreferredSize(new Dimension(780, 595));
-        jScrollPane.getVerticalScrollBar().setBackground(new Color(118, 118, 118));
+        jScrollPane.getVerticalScrollBar().setBackground(new Color(57, 55, 55));
         jScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
-                this.thumbColor = new Color(78, 78, 78);
+                this.thumbColor = new Color(18, 19, 18);
             }
 
             @Override
@@ -680,7 +690,7 @@ public class MainFrame extends javax.swing.JFrame {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 int x = rctngl.x + 2;
                 int y = rctngl.y;
-                g2.setColor(new Color(78, 78, 78));
+                g2.setColor(new Color(18, 19, 18));
                 g2.fillRect(x, y, 11, 30);
             }
 

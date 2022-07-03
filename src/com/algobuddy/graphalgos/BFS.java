@@ -207,7 +207,7 @@ public class BFS extends GraphBoard {
             }
             if (!completed) {
                 g2d.setStroke(new BasicStroke(3));
-                g2d.setColor(new Color(155, 88, 155));
+                g2d.setColor(new Color(150, 42, 68));
                 g2d.drawOval(runningNode.getLocation().x - Node.getRadius(), runningNode.getLocation().y - Node.getRadius(),
                         2 * Node.getRadius(), 2 * Node.getRadius());
                 g2d.setColor(new Color(251, 234, 181));
