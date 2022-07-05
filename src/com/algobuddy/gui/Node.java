@@ -29,14 +29,14 @@ public class Node {
         if (p.x > GraphBoard.getPaintingBoundary().width - 300) {
             p.x = GraphBoard.getPaintingBoundary().width - 300;
         }
-        if (p.x < 25 + radius) {
-            p.x = 25 + radius;
+        if (p.x < 26 + radius) {
+            p.x = 26 + radius;
         }
         if (p.y > GraphBoard.getPaintingBoundary().height - 150) {
             p.y = GraphBoard.getPaintingBoundary().height - 150;
         }
-        if (p.y < 25 + radius) {
-            p.y = 25 + radius;
+        if (p.y < 26 + radius) {
+            p.y = 26 + radius;
         }
         this.p = p;
         boundary.setBounds(p.x - radius, p.y - radius, 2 * radius, 2 * radius);
@@ -55,7 +55,7 @@ public class Node {
         g2d.setFont(new Font("Casteller", Font.BOLD, 18));
         g2d.drawString(String.valueOf((char) ch), boundary.x + radius - 5, boundary.y + radius + 5);
         if (selected && !GraphBoard.isPlaying()) {
-            g2d.setColor(new Color(5, 5, 5));
+            g2d.setColor(new Color(145, 170, 199));
             g2d.setStroke(new BasicStroke());
             g2d.drawRect(boundary.x - 1, boundary.y - 1, boundary.width + 1, boundary.height + 1);
         }
@@ -157,14 +157,14 @@ public class Node {
                 if (n.p.x > GraphBoard.getPaintingBoundary().width - 300) {
                     n.p.x = GraphBoard.getPaintingBoundary().width - 300;
                 }
-                if (n.p.x < 25 + radius) {
-                    n.p.x = 25 + radius;
+                if (n.p.x < 26 + radius) {
+                    n.p.x = 26 + radius;
                 }
                 if (n.p.y > GraphBoard.getPaintingBoundary().height - 150) {
                     n.p.y = GraphBoard.getPaintingBoundary().height - 150;
                 }
-                if (n.p.y < 25 + radius) {
-                    n.p.y = 25 + radius;
+                if (n.p.y < 26 + radius) {
+                    n.p.y = 26 + radius;
                 }
                 Point p = n.getLocation();
                 int r = Node.getRadius();

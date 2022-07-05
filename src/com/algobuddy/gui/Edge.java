@@ -26,12 +26,12 @@ public class Edge {
     public void draw(Graphics2D g2d, boolean directed) {
         Point p1 = n1.getLocation();
         Point p2 = n2.getLocation();
-        g2d.setColor(Color.darkGray);
+        g2d.setColor(new Color(47, 182, 171));
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setStroke(new BasicStroke((float) 2.5));
         if (directed) {
-            new DrawArrow(g2d, p1, p2, Color.darkGray, new BasicStroke((float) 2.5), new BasicStroke(), 25);
+            new DrawArrow(g2d, p1, p2, new Color(47, 182, 171), new BasicStroke((float) 2.5), new BasicStroke(), 25);
         } else {
             g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
         }

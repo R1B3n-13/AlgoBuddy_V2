@@ -45,36 +45,35 @@ public class GraphPanel extends javax.swing.JPanel {
         speedSlider = new javax.swing.JSlider();
         directedStateRadioButton = new javax.swing.JRadioButton();
 
-        setBackground(new java.awt.Color(0, 204, 204));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setLayout(new java.awt.BorderLayout());
 
-        graphWestPanel.setBackground(new java.awt.Color(210, 210, 210));
+        graphWestPanel.setBackground(new java.awt.Color(0, 14, 26));
         graphWestPanel.setPreferredSize(new java.awt.Dimension(180, 612));
         graphWestPanel.setLayout(null);
 
-        addEdgesRadioButton.setBackground(new java.awt.Color(204, 204, 255));
-        addEdgesRadioButton.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
-        addEdgesRadioButton.setForeground(new java.awt.Color(0, 102, 102));
+        addEdgesRadioButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        addEdgesRadioButton.setForeground(new java.awt.Color(177, 191, 222));
         addEdgesRadioButton.setText("ADD EDGES");
         addEdgesRadioButton.setBorder(null);
         addEdgesRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addEdgesRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         addEdgesRadioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOff.png"))); // NOI18N
-        addEdgesRadioButton.setIconTextGap(8);
+        addEdgesRadioButton.setIconTextGap(6);
         addEdgesRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addEdgesRadioButtonActionPerformed(evt);
             }
         });
         graphWestPanel.add(addEdgesRadioButton);
-        addEdgesRadioButton.setBounds(40, 30, 115, 24);
+        addEdgesRadioButton.setBounds(40, 30, 102, 24);
 
-        disconnectNodesButton.setBackground(new java.awt.Color(0, 102, 102));
-        disconnectNodesButton.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
-        disconnectNodesButton.setForeground(new java.awt.Color(255, 255, 153));
+        disconnectNodesButton.setBackground(new java.awt.Color(0, 14, 26));
+        disconnectNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        disconnectNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         disconnectNodesButton.setText("DISCONNECT");
+        disconnectNodesButton.setPreferredSize(new java.awt.Dimension(123, 21));
         disconnectNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 disconnectNodesButtonMouseClicked(evt);
@@ -83,9 +82,9 @@ public class GraphPanel extends javax.swing.JPanel {
         graphWestPanel.add(disconnectNodesButton);
         disconnectNodesButton.setBounds(40, 130, 123, 21);
 
-        deleteNodesButton.setBackground(new java.awt.Color(0, 102, 102));
-        deleteNodesButton.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
-        deleteNodesButton.setForeground(new java.awt.Color(255, 255, 153));
+        deleteNodesButton.setBackground(new java.awt.Color(0, 14, 26));
+        deleteNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        deleteNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         deleteNodesButton.setText("DELETE");
         deleteNodesButton.setPreferredSize(new java.awt.Dimension(123, 21));
         deleteNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,9 +95,9 @@ public class GraphPanel extends javax.swing.JPanel {
         graphWestPanel.add(deleteNodesButton);
         deleteNodesButton.setBounds(40, 170, 123, 21);
 
-        clearAllButton.setBackground(new java.awt.Color(0, 102, 102));
-        clearAllButton.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
-        clearAllButton.setForeground(new java.awt.Color(255, 255, 153));
+        clearAllButton.setBackground(new java.awt.Color(0, 14, 26));
+        clearAllButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        clearAllButton.setForeground(new java.awt.Color(177, 191, 222));
         clearAllButton.setText("CLEAR");
         clearAllButton.setPreferredSize(new java.awt.Dimension(123, 21));
         clearAllButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,11 +126,10 @@ public class GraphPanel extends javax.swing.JPanel {
             }
         });
         graphWestPanel.add(resetLabel);
-        resetLabel.setBounds(110, 255, 16, 16);
+        resetLabel.setBounds(110, 250, 24, 24);
 
-        addNodesRadioButton.setBackground(new java.awt.Color(204, 204, 255));
-        addNodesRadioButton.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
-        addNodesRadioButton.setForeground(new java.awt.Color(0, 102, 102));
+        addNodesRadioButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        addNodesRadioButton.setForeground(new java.awt.Color(177, 191, 222));
         addNodesRadioButton.setText("ADD NODES");
         addNodesRadioButton.setBorder(null);
         addNodesRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -144,9 +142,9 @@ public class GraphPanel extends javax.swing.JPanel {
             }
         });
         graphWestPanel.add(addNodesRadioButton);
-        addNodesRadioButton.setBounds(40, 60, 115, 24);
+        addNodesRadioButton.setBounds(40, 60, 102, 24);
 
-        graphHidePanel2.setBackground(new java.awt.Color(111, 111, 111));
+        graphHidePanel2.setBackground(new java.awt.Color(0, 22, 40));
         graphHidePanel2.setPreferredSize(new java.awt.Dimension(0, 800));
 
         javax.swing.GroupLayout graphHidePanel2Layout = new javax.swing.GroupLayout(graphHidePanel2);
@@ -163,7 +161,7 @@ public class GraphPanel extends javax.swing.JPanel {
         graphWestPanel.add(graphHidePanel2);
         graphHidePanel2.setBounds(0, 322, 180, 720);
 
-        graphHidePanel1.setBackground(new java.awt.Color(110, 110, 110));
+        graphHidePanel1.setBackground(new java.awt.Color(0, 22, 40));
         graphHidePanel1.setPreferredSize(new java.awt.Dimension(0, 24));
 
         javax.swing.GroupLayout graphHidePanel1Layout = new javax.swing.GroupLayout(graphHidePanel1);
@@ -180,7 +178,7 @@ public class GraphPanel extends javax.swing.JPanel {
         graphWestPanel.add(graphHidePanel1);
         graphHidePanel1.setBounds(0, 0, 180, 24);
 
-        graphHidePanel3.setBackground(new java.awt.Color(110, 110, 110));
+        graphHidePanel3.setBackground(new java.awt.Color(0, 22, 40));
 
         javax.swing.GroupLayout graphHidePanel3Layout = new javax.swing.GroupLayout(graphHidePanel3);
         graphHidePanel3.setLayout(graphHidePanel3Layout);
@@ -209,22 +207,21 @@ public class GraphPanel extends javax.swing.JPanel {
         graphWestPanel.add(speedSlider);
         speedSlider.setBounds(40, 290, 120, 20);
 
-        directedStateRadioButton.setBackground(new java.awt.Color(204, 204, 255));
-        directedStateRadioButton.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
-        directedStateRadioButton.setForeground(new java.awt.Color(0, 102, 102));
+        directedStateRadioButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        directedStateRadioButton.setForeground(new java.awt.Color(177, 191, 222));
         directedStateRadioButton.setText("DIRECTED");
         directedStateRadioButton.setBorder(null);
         directedStateRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         directedStateRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         directedStateRadioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOff.png"))); // NOI18N
-        directedStateRadioButton.setIconTextGap(18);
+        directedStateRadioButton.setIconTextGap(13);
         directedStateRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 directedStateRadioButtonActionPerformed(evt);
             }
         });
         graphWestPanel.add(directedStateRadioButton);
-        directedStateRadioButton.setBounds(40, 90, 115, 24);
+        directedStateRadioButton.setBounds(40, 90, 101, 24);
 
         add(graphWestPanel, java.awt.BorderLayout.LINE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -299,7 +296,9 @@ public class GraphPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_directedStateRadioButtonActionPerformed
 
     private void resetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetLabelMouseClicked
-        resetLabelAction();
+        if (GraphBoard.isPlaying()) {
+            resetLabelAction();
+        }
     }//GEN-LAST:event_resetLabelMouseClicked
 
     private void speedSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSliderStateChanged

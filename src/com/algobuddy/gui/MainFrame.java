@@ -508,12 +508,14 @@ public class MainFrame extends javax.swing.JFrame {
                 titleBar.setBackground(new Color(8, 13, 18));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
                 nextLabel.setVisible(false);
+                bfsOverviewPanel.removeAll();
             }
-            if (getCurrentComponentName(mainPanel).equals("bfsSimulationPanel")) {
+            if (getCurrentComponentName(mainPanel).equals("bfsSimulationPanel")) {               
                 mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(57, 55, 55));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
                 nextLabel.setVisible(true);
+                openHtml(bfsOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
                 bfsSimulationPanel.reset();
             }
         }
@@ -550,9 +552,10 @@ public class MainFrame extends javax.swing.JFrame {
             mainPanel.nextSlidingPanel(10, bfsSimulationPanel, JSlidingPane.Direction.Left);
             bfsSimulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
             GraphBoard.setCurrentAlgo("BFS");
-            titleBar.setBackground(new Color(78, 78, 78));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(111, 111, 111)));
+            titleBar.setBackground(new Color(0, 14, 26));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
             nextLabel.setVisible(false);
+            bfsOverviewPanel.removeAll();
         }
     }//GEN-LAST:event_nextLabelMouseClicked
 
