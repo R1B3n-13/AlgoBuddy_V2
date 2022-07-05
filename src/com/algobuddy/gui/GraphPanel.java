@@ -58,6 +58,7 @@ public class GraphPanel extends javax.swing.JPanel {
         addEdgesRadioButton.setText("ADD EDGES");
         addEdgesRadioButton.setBorder(null);
         addEdgesRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addEdgesRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         addEdgesRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         addEdgesRadioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOff.png"))); // NOI18N
         addEdgesRadioButton.setIconTextGap(6);
@@ -67,46 +68,49 @@ public class GraphPanel extends javax.swing.JPanel {
             }
         });
         graphWestPanel.add(addEdgesRadioButton);
-        addEdgesRadioButton.setBounds(40, 30, 102, 24);
+        addEdgesRadioButton.setBounds(40, 30, 120, 24);
 
         disconnectNodesButton.setBackground(new java.awt.Color(0, 14, 26));
         disconnectNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         disconnectNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         disconnectNodesButton.setText("DISCONNECT");
-        disconnectNodesButton.setPreferredSize(new java.awt.Dimension(123, 21));
+        disconnectNodesButton.setBorderPainted(false);
+        disconnectNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
         disconnectNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 disconnectNodesButtonMouseClicked(evt);
             }
         });
         graphWestPanel.add(disconnectNodesButton);
-        disconnectNodesButton.setBounds(40, 130, 123, 21);
+        disconnectNodesButton.setBounds(41, 130, 120, 21);
 
         deleteNodesButton.setBackground(new java.awt.Color(0, 14, 26));
         deleteNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         deleteNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         deleteNodesButton.setText("DELETE");
-        deleteNodesButton.setPreferredSize(new java.awt.Dimension(123, 21));
+        deleteNodesButton.setBorderPainted(false);
+        deleteNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
         deleteNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteNodesButtonMouseClicked(evt);
             }
         });
         graphWestPanel.add(deleteNodesButton);
-        deleteNodesButton.setBounds(40, 170, 123, 21);
+        deleteNodesButton.setBounds(41, 170, 120, 21);
 
         clearAllButton.setBackground(new java.awt.Color(0, 14, 26));
         clearAllButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         clearAllButton.setForeground(new java.awt.Color(177, 191, 222));
         clearAllButton.setText("CLEAR");
-        clearAllButton.setPreferredSize(new java.awt.Dimension(123, 21));
+        clearAllButton.setBorderPainted(false);
+        clearAllButton.setPreferredSize(new java.awt.Dimension(120, 21));
         clearAllButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearAllButtonMouseClicked(evt);
             }
         });
         graphWestPanel.add(clearAllButton);
-        clearAllButton.setBounds(40, 210, 123, 21);
+        clearAllButton.setBounds(41, 210, 120, 21);
 
         playLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
         playLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -133,6 +137,7 @@ public class GraphPanel extends javax.swing.JPanel {
         addNodesRadioButton.setText("ADD NODES");
         addNodesRadioButton.setBorder(null);
         addNodesRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addNodesRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         addNodesRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         addNodesRadioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOn.png"))); // NOI18N
         addNodesRadioButton.setIconTextGap(6);
@@ -142,7 +147,7 @@ public class GraphPanel extends javax.swing.JPanel {
             }
         });
         graphWestPanel.add(addNodesRadioButton);
-        addNodesRadioButton.setBounds(40, 60, 102, 24);
+        addNodesRadioButton.setBounds(40, 60, 120, 24);
 
         graphHidePanel2.setBackground(new java.awt.Color(0, 22, 40));
         graphHidePanel2.setPreferredSize(new java.awt.Dimension(0, 800));
@@ -212,16 +217,18 @@ public class GraphPanel extends javax.swing.JPanel {
         directedStateRadioButton.setText("DIRECTED");
         directedStateRadioButton.setBorder(null);
         directedStateRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        directedStateRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         directedStateRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         directedStateRadioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOff.png"))); // NOI18N
         directedStateRadioButton.setIconTextGap(13);
+        directedStateRadioButton.setPreferredSize(new java.awt.Dimension(102, 24));
         directedStateRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 directedStateRadioButtonActionPerformed(evt);
             }
         });
         graphWestPanel.add(directedStateRadioButton);
-        directedStateRadioButton.setBounds(40, 90, 101, 24);
+        directedStateRadioButton.setBounds(40, 90, 120, 24);
 
         add(graphWestPanel, java.awt.BorderLayout.LINE_START);
     }// </editor-fold>//GEN-END:initComponents

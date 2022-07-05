@@ -18,8 +18,8 @@ public class Node {
 
     private Point p;
     private static final int radius = 23;
-    private final Color nodeColor = new Color(153, 255, 153);
-    private final Color fontColor = new Color(255, 0, 0);
+    private final Color nodeColor = new Color(108, 180, 64);
+    private final Color fontColor = new Color(0, 22, 40);
     private boolean selected = false;
     private Rectangle boundary = new Rectangle();
     protected static LinkedHashSet<Node> selectedNodes = new LinkedHashSet<Node>();

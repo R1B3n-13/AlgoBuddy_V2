@@ -71,7 +71,6 @@ public class BFS extends GraphBoard {
             g2d.setFont(new Font("Consolas", Font.BOLD, 18));
             g2d.drawString(String.valueOf((char) (i + 58)), i * ((getWidth() - 700) / 26) + getWidth() / 150 , getHeight() - 96);
 
-            g2d.setColor(Color.DARK_GRAY);
             g2d.setStroke(new BasicStroke(2));
 
             if ((i & 1) > 0) {
@@ -85,7 +84,7 @@ public class BFS extends GraphBoard {
 
             if (!isPlaying()) {
                 if (getSource() != null && i != getSource().getNodeNum() + coefficient) {
-                    g2d.setColor(Color.DARK_GRAY);
+                    g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                     if (i - coefficient < nodes.size()) {
                         g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
@@ -93,7 +92,7 @@ public class BFS extends GraphBoard {
                         g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     }
                 } else if (getSource() == null) {
-                    g2d.setColor(Color.DARK_GRAY);
+                    g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                     if (i - coefficient < nodes.size()) {
                         g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
@@ -105,7 +104,7 @@ public class BFS extends GraphBoard {
                 }
 
                 if (getSource() != null && i != coefficient) {
-                    g2d.setColor(Color.DARK_GRAY);
+                    g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                     g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
                 }
@@ -119,10 +118,10 @@ public class BFS extends GraphBoard {
         g2d.drawString("Queue:", 2 * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
 
         if (getSource() != null) {
-            g2d.setColor(new Color(245, 248, 74));
+            g2d.setColor(new Color(231, 204, 158));
             g2d.fillOval(getSource().getLocation().x - Node.getRadius(), getSource().getLocation().y - Node.getRadius(),
                     2 * Node.getRadius(), 2 * Node.getRadius());
-            g2d.setColor(Color.RED);
+            g2d.setColor(new Color(0, 22, 40));
             g2d.setFont(new Font("Casteller", Font.BOLD, 18));
             g2d.drawString(String.valueOf((char) (getSource().getNodeNum() + 65)), getSource().getLocation().x - 5,
                     getSource().getLocation().y + 5);
@@ -153,12 +152,12 @@ public class BFS extends GraphBoard {
                         g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                         g2d.drawString("1", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     } else {
-                        g2d.setColor(Color.DARK_GRAY);
+                        g2d.setColor(new Color(0, 22, 40));
                         g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                         g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                     }
                 } else {
-                    g2d.setColor(Color.DARK_GRAY);
+                    g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                     g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
                 }
@@ -171,7 +170,7 @@ public class BFS extends GraphBoard {
                 g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
                 i++;
             }
-            g2d.setColor(Color.DARK_GRAY);
+            g2d.setColor(new Color(0, 22, 40));
             while (i < 33) {
                 g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
                 i++;
@@ -189,13 +188,13 @@ public class BFS extends GraphBoard {
                     new DrawLine(g2d, n1.getLocation(), n2.getLocation(), new Color(218, 226, 237), new BasicStroke(4));
                 }
 
-                g2d.setColor(new Color(245, 248, 74));
+                g2d.setColor(new Color(245, 204, 158));
                 g2d.fillOval(n1.getLocation().x - Node.getRadius(), n1.getLocation().y - Node.getRadius(),
                         2 * Node.getRadius(), 2 * Node.getRadius());
                 g2d.fillOval(n2.getLocation().x - Node.getRadius(), n2.getLocation().y - Node.getRadius(),
                         2 * Node.getRadius(), 2 * Node.getRadius());
 
-                g2d.setColor(Color.RED);
+                g2d.setColor(new Color(0, 22, 40));
                 g2d.setFont(new Font("Casteller", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (n1.getNodeNum() + 65)), n1.getLocation().x - 5,
                         n1.getLocation().y + 5);
