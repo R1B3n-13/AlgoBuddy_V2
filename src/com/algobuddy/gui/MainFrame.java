@@ -2,6 +2,7 @@ package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatNightOwlIJTheme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -604,7 +605,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Set the look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+            UIManager.setLookAndFeel(new FlatNightOwlIJTheme());
             UIManager.put( "Button.arc", 0 );
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
