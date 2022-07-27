@@ -1,14 +1,8 @@
 package com.algobuddy.gui;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -70,37 +64,6 @@ public class GraphBoard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        Color color1 = new Color(153, 153, 255);
-        Color color2 = new Color(102, 153, 255);
-        GradientPaint gp = new GradientPaint(0, 0, color1, getWidth(), getHeight(), color2);
-        g2d.setPaint(gp);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-
-        g2d.setColor(Color.WHITE);
-        g2d.setStroke(new BasicStroke(2));
-        g2d.drawRect(24, 24, getWidth() - 300, getHeight() - 150);
-
-        int i = 'A';
-
-        for (Edge e : edges) {
-            e.draw(g2d, directed);
-        }
-        for (Node n : nodes) {
-            n.draw(g2d, i);
-            i++;
-        }
-        if (selecting) {
-            g2d.setColor(new Color(39, 41, 93, 80));
-            g2d.fillRect(mouseRect.x, mouseRect.y,
-                    mouseRect.width, mouseRect.height);
-        }
-    }
-
     private class MouseHandler extends MouseAdapter { // MouseAdapter implements both the MouseListener and MouseMotionListener
 
         @Override
@@ -115,7 +78,7 @@ public class GraphBoard extends javax.swing.JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             mousePt = e.getPoint();
-            if (!playing && mousePt.x > 24 && mousePt.x < paintingBoundary.width - 276
+            if (!playing && mousePt.x > 24 && mousePt.x < paintingBoundary.width - 326
                     && mousePt.y > 24 && mousePt.y < paintingBoundary.height - 126) {
                 if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                     Node.toggleSource(nodes, mousePt);
@@ -158,8 +121,8 @@ public class GraphBoard extends javax.swing.JPanel {
                             Math.min(mousePt.x, Math.max(e.getX(), 25)),
                             Math.min(mousePt.y, Math.max(e.getY(), 25)),
                             Math.min(mousePt.x, Math.max(e.getX(), 25))
-                            + Math.abs(mousePt.x - Math.max(e.getX(), 25)) > paintingBoundary.width - 276
-                            ? Math.abs(mousePt.x - paintingBoundary.width + 276)
+                            + Math.abs(mousePt.x - Math.max(e.getX(), 25)) > paintingBoundary.width - 326
+                            ? Math.abs(mousePt.x - paintingBoundary.width + 326)
                             : Math.abs(mousePt.x - Math.max(e.getX(), 25)),
                             Math.min(mousePt.y, Math.max(e.getY(), 25))
                             + Math.abs(mousePt.y - Math.max(e.getY(), 25)) > paintingBoundary.height - 126

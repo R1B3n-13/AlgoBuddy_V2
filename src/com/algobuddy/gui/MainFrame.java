@@ -1,7 +1,6 @@
 package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
-import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatNightOwlIJTheme;
 import java.awt.Color;
 import java.awt.Component;
@@ -77,7 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToGraphButton = new javax.swing.JButton();
         goToSortButton = new javax.swing.JButton();
         goToRecursionButton = new javax.swing.JButton();
-        goToSortButton1 = new javax.swing.JButton();
+        userManualButton = new javax.swing.JButton();
         graphIndexPanel = new keeptoo.KGradientPanel();
         graphIndexLabel = new javax.swing.JLabel();
         goToBfsButton = new javax.swing.JButton();
@@ -260,14 +259,14 @@ public class MainFrame extends javax.swing.JFrame {
         indexLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         indexLabel.setText("INDEX");
 
-        goToGraphButton.setBackground(new java.awt.Color(99, 89, 93, 50));
+        goToGraphButton.setBackground(new java.awt.Color(101, 89, 94, 50));
         goToGraphButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         goToGraphButton.setForeground(new java.awt.Color(172, 179, 186));
         goToGraphButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/graphLogo.png"))); // NOI18N
         goToGraphButton.setText("Graph Algorithms");
         goToGraphButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         goToGraphButton.setBorderPainted(false);
-        goToGraphButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        goToGraphButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToGraphButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         goToGraphButton.setIconTextGap(20);
         goToGraphButton.setMaximumSize(new java.awt.Dimension(244, 72));
@@ -279,48 +278,47 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        goToSortButton.setBackground(new java.awt.Color(99, 89, 93, 50));
+        goToSortButton.setBackground(new java.awt.Color(101, 89, 94, 50));
         goToSortButton.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
         goToSortButton.setForeground(new java.awt.Color(172, 179, 186));
         goToSortButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/recursionTreeLogo.png"))); // NOI18N
         goToSortButton.setText("Recursion Tree Builder");
         goToSortButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         goToSortButton.setBorderPainted(false);
-        goToSortButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        goToSortButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToSortButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         goToSortButton.setIconTextGap(14);
         goToSortButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToSortButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToSortButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
-        goToRecursionButton.setBackground(new java.awt.Color(99, 89, 93, 50));
+        goToRecursionButton.setBackground(new java.awt.Color(101, 89, 94, 50));
         goToRecursionButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         goToRecursionButton.setForeground(new java.awt.Color(172, 179, 186));
         goToRecursionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/sortLogo.png"))); // NOI18N
         goToRecursionButton.setText("Sorting Algorithms");
         goToRecursionButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         goToRecursionButton.setBorderPainted(false);
-        goToRecursionButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        goToRecursionButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToRecursionButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         goToRecursionButton.setIconTextGap(20);
         goToRecursionButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToRecursionButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToRecursionButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
-        goToSortButton1.setBackground(new java.awt.Color(99, 89, 93, 50));
-        goToSortButton1.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
-        goToSortButton1.setForeground(new java.awt.Color(172, 179, 186));
-        goToSortButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/manualLogo.png"))); // NOI18N
-        goToSortButton1.setText("User Manual");
-        goToSortButton1.setActionCommand("User Manual");
-        goToSortButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
-        goToSortButton1.setBorderPainted(false);
-        goToSortButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        goToSortButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        goToSortButton1.setIconTextGap(38);
-        goToSortButton1.setMaximumSize(new java.awt.Dimension(244, 72));
-        goToSortButton1.setMinimumSize(new java.awt.Dimension(244, 72));
-        goToSortButton1.setPreferredSize(new java.awt.Dimension(244, 72));
+        userManualButton.setBackground(new java.awt.Color(101, 89, 94, 50));
+        userManualButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        userManualButton.setForeground(new java.awt.Color(172, 179, 186));
+        userManualButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/manualLogo.png"))); // NOI18N
+        userManualButton.setText("User Manual");
+        userManualButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
+        userManualButton.setBorderPainted(false);
+        userManualButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        userManualButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        userManualButton.setIconTextGap(38);
+        userManualButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        userManualButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        userManualButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
         javax.swing.GroupLayout indexPanelLayout = new javax.swing.GroupLayout(indexPanel);
         indexPanel.setLayout(indexPanelLayout);
@@ -329,7 +327,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(indexPanelLayout.createSequentialGroup()
                 .addContainerGap(277, Short.MAX_VALUE)
                 .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(goToSortButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userManualButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(goToGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(goToRecursionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,17 +338,17 @@ public class MainFrame extends javax.swing.JFrame {
         indexPanelLayout.setVerticalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(indexPanelLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(40, 40, 40)
                 .addComponent(indexLabel)
-                .addGap(41, 41, 41)
+                .addGap(45, 45, 45)
                 .addComponent(goToGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToRecursionButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToSortButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(goToSortButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userManualButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         mainPanel.add(indexPanel, "indexPanel");
@@ -372,7 +370,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToBfsButton.setText("Breadth First Search");
         goToBfsButton.setBorder(null);
         goToBfsButton.setBorderPainted(false);
-        goToBfsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        goToBfsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToBfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToBfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToBfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
@@ -388,7 +386,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToDijkstraButton.setText("Dijkstra");
         goToDijkstraButton.setBorder(null);
         goToDijkstraButton.setBorderPainted(false);
-        goToDijkstraButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        goToDijkstraButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToDijkstraButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToDijkstraButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToDijkstraButton.setPreferredSize(new java.awt.Dimension(244, 72));
@@ -399,7 +397,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToDfsButton.setText("Depth First Search");
         goToDfsButton.setBorder(null);
         goToDfsButton.setBorderPainted(false);
-        goToDfsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        goToDfsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToDfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToDfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToDfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
@@ -753,7 +751,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton goToGraphButton;
     private javax.swing.JButton goToRecursionButton;
     private javax.swing.JButton goToSortButton;
-    private javax.swing.JButton goToSortButton1;
     private javax.swing.JLabel graphIndexLabel;
     private keeptoo.KGradientPanel graphIndexPanel;
     private javax.swing.JLabel indexLabel;
@@ -766,5 +763,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JLabel nextLabel;
     private javax.swing.JPanel titleBar;
+    private javax.swing.JButton userManualButton;
     // End of variables declaration//GEN-END:variables
 }

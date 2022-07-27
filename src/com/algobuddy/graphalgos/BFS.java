@@ -33,11 +33,12 @@ public class BFS extends GraphBoard {
     private Graph g;
     private Queue<Node> q;
     private boolean[] vis;
+    private boolean l1, l2, l3, l4, l5;
     private AlgoWorker<Void, Void> bfsWorker;
     private List<Pair<Node, Node>> processingNodes;
     private Node runningNode;
     private boolean completed = false;
-    private int coefficient = 7;
+    private int coefficient = 6;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -52,9 +53,9 @@ public class BFS extends GraphBoard {
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
-        g2d.setStroke(new BasicStroke((float) 1.5));        
+        g2d.setStroke(new BasicStroke((float) 1.5));
         g2d.setColor(new Color(118, 127, 131));
-        g2d.drawRect(24, 24, getWidth() - 300, getHeight() - 150);
+        g2d.drawRect(24, 24, getWidth() - 350, getHeight() - 150);
 
         int i = 'A';
 
@@ -66,10 +67,10 @@ public class BFS extends GraphBoard {
             i++;
         }
 
-        for (i = coefficient; i < 33; i++) {
+        for (i = coefficient; i < 32; i++) {
             g2d.setColor(new Color(161, 131, 199));
             g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-            g2d.drawString(String.valueOf((char) (i + 58)), i * ((getWidth() - 700) / 26) + getWidth() / 150 , getHeight() - 96);
+            g2d.drawString(String.valueOf((char) (i + 59)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 96);
 
             g2d.setStroke(new BasicStroke(2));
 
@@ -87,37 +88,38 @@ public class BFS extends GraphBoard {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                     if (i - coefficient < nodes.size()) {
-                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
                     } else {
-                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
                     }
                 } else if (getSource() == null) {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                     if (i - coefficient < nodes.size()) {
-                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
                     } else {
-                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
                     }
 
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 }
 
                 if (getSource() != null && i != coefficient) {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 }
             }
         }
 
         g2d.setColor(new Color(161, 131, 199));
         g2d.setFont(new Font("Consolas", Font.ITALIC, 18));
-        g2d.drawString("Visited:", 2 * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+        g2d.drawString("Visited:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
 
-        g2d.drawString("Queue:", 2 * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
+        g2d.drawString("Queue:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
 
         if (getSource() != null) {
+            l1 = false;
             g2d.setColor(new Color(231, 204, 158));
             g2d.fillOval(getSource().getLocation().x - Node.getRadius(), getSource().getLocation().y - Node.getRadius(),
                     2 * Node.getRadius(), 2 * Node.getRadius());
@@ -126,15 +128,19 @@ public class BFS extends GraphBoard {
             g2d.drawString(String.valueOf((char) (getSource().getNodeNum() + 65)), getSource().getLocation().x - 5,
                     getSource().getLocation().y + 5);
             if (!isPlaying()) {
+                l2 = true;
                 g2d.setColor(Color.RED);
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (getSource().getNodeNum() + 65)),
-                        coefficient * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
+                        coefficient * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
 
                 g2d.setColor(Color.RED);
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                g2d.drawString("1", (getSource().getNodeNum() + coefficient) * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                g2d.drawString("1", (getSource().getNodeNum() + coefficient) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
             }
+        } else {
+            l1 = true;
+            l2 = false;
         }
 
         if (isSelecting()) {
@@ -150,16 +156,16 @@ public class BFS extends GraphBoard {
                     if (vis[i - coefficient]) {
                         g2d.setColor(Color.RED);
                         g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                        g2d.drawString("1", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                        g2d.drawString("1", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
                     } else {
                         g2d.setColor(new Color(0, 22, 40));
                         g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
                     }
                 } else {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 64);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
                 }
             }
 
@@ -167,12 +173,12 @@ public class BFS extends GraphBoard {
             g2d.setFont(new Font("Consolas", Font.BOLD, 18));
             i = coefficient;
             for (Node n : q) {
-                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
+                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 i++;
             }
             g2d.setColor(new Color(0, 22, 40));
-            while (i < 33) {
-                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
+            while (i < 32) {
+                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 i++;
             }
 
@@ -209,8 +215,49 @@ public class BFS extends GraphBoard {
                 g2d.setColor(new Color(234, 123, 114));
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (runningNode.getNodeNum() + 65)),
-                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth()/150, getHeight() - 19);
+                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
             }
+        }
+        g2d.setColor(new Color(177, 191, 222));
+        g2d.setFont(new Font("Consolas", Font.BOLD, 30));
+        g2d.drawString("Algorithm", getWidth() - 240, getHeight() - 1000);
+        g2d.setColor(new Color(210, 52, 52));
+        g2d.setFont(new Font("Consolas", Font.ITALIC, 14));
+        if (l1) {
+            g2d.drawString("1. Create a queue Q", getWidth() - 318, getHeight() - 950);
+        }
+        if (l2) {
+            g2d.drawString("2. Mark the source as visited", getWidth() - 318, getHeight() - 920);
+            g2d.drawString("and put it into Q", getWidth() - 318, getHeight() - 900);
+        }
+        if (l3) {
+            g2d.drawString("3. While Q is non- empty", getWidth() - 318, getHeight() - 870);
+        }
+        if (l4) {
+            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 318, getHeight() - 840);
+        }
+        if (l5) {
+            g2d.drawString("      ii. Mark and enqueue", getWidth() - 318, getHeight() - 810);
+            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 318, getHeight() - 790);
+        }
+
+        g2d.setColor(new Color(161, 131, 199));
+        if (!l1) {
+            g2d.drawString("1. Create a queue Q", getWidth() - 318, getHeight() - 950);
+        }
+        if (!l2) {
+            g2d.drawString("2. Mark the source as visited", getWidth() - 318, getHeight() - 920);
+            g2d.drawString("and put it into Q", getWidth() - 318, getHeight() - 900);
+        }
+        if (!l3) {
+            g2d.drawString("3. While Q is non- empty", getWidth() - 318, getHeight() - 870);
+        }
+        if (!l4) {
+            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 318, getHeight() - 840);
+        }
+        if (!l5) {
+            g2d.drawString("      ii. Mark and enqueue", getWidth() - 318, getHeight() - 810);
+            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 318, getHeight() - 790);
         }
     }
 
@@ -248,6 +295,8 @@ public class BFS extends GraphBoard {
                     if (!isPaused()) {
                         Node u = q.poll();
                         runningNode = u;
+                        l4 = true;
+                        l1 = l2 = l3 = l5 = false;
                         repaint();
                         waitFor(getSpeed());
                         Iterator<Node> it = g.getAdj()[u.getNodeNum()].listIterator();
@@ -258,6 +307,8 @@ public class BFS extends GraphBoard {
                                     vis[v.getNodeNum()] = true;
                                     q.add(v);
                                     processingNodes.add(Pair.with(u, v));
+                                    l5 = true;
+                                    l1 = l2 = l3 = l4 = false;
                                     repaint();
                                     waitFor(getSpeed());
                                 }
@@ -276,6 +327,7 @@ public class BFS extends GraphBoard {
             public void done() {
                 super.done();
                 completed = true;
+                resetCode();
                 repaint();
                 GraphPanel.getPlayLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
             }
@@ -289,5 +341,9 @@ public class BFS extends GraphBoard {
 
     public boolean isCompleted() {
         return completed;
+    }
+
+    public void resetCode() {
+        l1 = l2 = l3 = l4 = l5 = false;
     }
 }

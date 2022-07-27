@@ -26,8 +26,8 @@ public class Node {
     private int nodeNumber;
 
     public Node(Point p) {
-        if (p.x > GraphBoard.getPaintingBoundary().width - 300) {
-            p.x = GraphBoard.getPaintingBoundary().width - 300;
+        if (p.x > GraphBoard.getPaintingBoundary().width - 350) {
+            p.x = GraphBoard.getPaintingBoundary().width - 350;
         }
         if (p.x < 26 + radius) {
             p.x = 26 + radius;
@@ -154,8 +154,8 @@ public class Node {
             if (n.isSelected()) {
                 n.p.x += d.x;
                 n.p.y += d.y;
-                if (n.p.x > GraphBoard.getPaintingBoundary().width - 300) {
-                    n.p.x = GraphBoard.getPaintingBoundary().width - 300;
+                if (n.p.x > GraphBoard.getPaintingBoundary().width - 350) {
+                    n.p.x = GraphBoard.getPaintingBoundary().width - 350;
                 }
                 if (n.p.x < 26 + radius) {
                     n.p.x = 26 + radius;

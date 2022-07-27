@@ -75,6 +75,7 @@ public class GraphPanel extends javax.swing.JPanel {
         disconnectNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         disconnectNodesButton.setText("DISCONNECT");
         disconnectNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        disconnectNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         disconnectNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
         disconnectNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -89,6 +90,7 @@ public class GraphPanel extends javax.swing.JPanel {
         deleteNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         deleteNodesButton.setText("DELETE");
         deleteNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        deleteNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
         deleteNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -103,6 +105,7 @@ public class GraphPanel extends javax.swing.JPanel {
         clearAllButton.setForeground(new java.awt.Color(177, 191, 222));
         clearAllButton.setText("CLEAR");
         clearAllButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        clearAllButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clearAllButton.setPreferredSize(new java.awt.Dimension(120, 21));
         clearAllButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -184,7 +187,7 @@ public class GraphPanel extends javax.swing.JPanel {
         speedSlider.setMaximum(3000);
         speedSlider.setMinimum(300);
         speedSlider.setValue(1650);
-        speedSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        speedSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         speedSlider.setPreferredSize(new java.awt.Dimension(120, 21));
         speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -311,7 +314,7 @@ public class GraphPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_resetLabelMouseClicked
 
     private void speedSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSliderStateChanged
-        int speed = speedSlider.getValue();
+        int speed = 3300 - speedSlider.getValue();
         GraphBoard.setSpeed(speed);
     }//GEN-LAST:event_speedSliderStateChanged
 
@@ -319,9 +322,7 @@ public class GraphPanel extends javax.swing.JPanel {
      * Resets the graph panel to its initial state
      */
     void reset() {
-        GraphBoard.setPlayingState(false);
-        playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-        resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+        resetLabelAction();
         clearAllAction();
         GraphBoard.setAddingNodes(true);
         GraphBoard.setAddingEdges(false);
@@ -333,6 +334,7 @@ public class GraphPanel extends javax.swing.JPanel {
         clearEdgesAction();
         GraphBoard.setCurrentAlgo("");
         Node.selectNone(GraphBoard.nodes);
+        repaint();
     }
 
     /**
@@ -372,6 +374,7 @@ public class GraphPanel extends javax.swing.JPanel {
             BFS bfs = (BFS) comp;
             bfs.getBfsWorker().cancel(true);
             GraphBoard.setPlayingState(false);
+            bfs.resetCode();
             GraphBoard.setSource(null);
             Node.selectNone(GraphBoard.nodes);
             resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
