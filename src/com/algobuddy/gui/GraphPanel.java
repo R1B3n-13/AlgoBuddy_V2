@@ -441,9 +441,9 @@ public class GraphPanel extends javax.swing.JPanel {
         if (!GraphBoard.isPlaying()) {
             if (Node.selectedNodes.size() != 2) {
                 JOptionPane.showMessageDialog(null,
-                        "Please select exactly two nodes. ",
-                        "WARNING!",
-                        JOptionPane.WARNING_MESSAGE);
+                        "Please select exactly two nodes.",
+                        "INFO",
+                        JOptionPane.INFORMATION_MESSAGE);
             } else {
                 Iterator<Node> it = Node.selectedNodes.iterator();
                 Node n1 = it.next();

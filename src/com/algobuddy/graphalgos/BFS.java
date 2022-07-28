@@ -268,9 +268,9 @@ public class BFS extends GraphBoard {
     public void start() {
         if (getSource() == null) {
             JOptionPane.showMessageDialog(null,
-                    "Please select a source",
-                    "WARNING!",
-                    JOptionPane.WARNING_MESSAGE);
+                    "No source node found!",
+                    "ERROR!",
+                    JOptionPane.ERROR_MESSAGE);
             setPlayingState(false);
             GraphPanel.getPlayLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
             GraphPanel.getResetLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
