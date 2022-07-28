@@ -234,11 +234,15 @@ public class BFS extends GraphBoard {
             g2d.drawString("3. While Q is non- empty", getWidth() - 315, getHeight() - 870);
         }
         if (l4) {
+            g2d.setColor(new Color(238, 247, 137));
             g2d.drawString("      i.  Remove the head u of Q", getWidth() - 315, getHeight() - 840);
+            g2d.setColor(new Color(210, 52, 52));
         }
         if (l5) {
+            g2d.setColor(new Color(238, 247, 137));
             g2d.drawString("      ii. Mark and enqueue", getWidth() - 315, getHeight() - 810);
             g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 318, getHeight() - 790);
+            g2d.setColor(new Color(210, 52, 52));
         }
 
         g2d.setColor(new Color(161, 131, 199));
@@ -295,8 +299,8 @@ public class BFS extends GraphBoard {
                     if (!isPaused()) {
                         Node u = q.poll();
                         runningNode = u;
-                        l4 = true;
-                        l1 = l2 = l3 = l5 = false;
+                        l4 = l3 = true;
+                        l1 = l2 = l5 = false;
                         repaint();
                         waitFor(getSpeed());
                         Iterator<Node> it = g.getAdj()[u.getNodeNum()].listIterator();
@@ -308,7 +312,7 @@ public class BFS extends GraphBoard {
                                     q.add(v);
                                     processingNodes.add(Pair.with(u, v));
                                     l5 = true;
-                                    l1 = l2 = l3 = l4 = false;
+                                    l1 = l2 = l4 = false;
                                     repaint();
                                     waitFor(getSpeed());
                                 }

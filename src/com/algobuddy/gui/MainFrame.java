@@ -82,6 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToBfsButton = new javax.swing.JButton();
         goToDijkstraButton = new javax.swing.JButton();
         goToDfsButton = new javax.swing.JButton();
+        goToMstButton = new javax.swing.JButton();
         bfsOverviewPanel = new javax.swing.JPanel();
         bfsSimulationPanel = new com.algobuddy.gui.GraphPanel();
 
@@ -402,6 +403,17 @@ public class MainFrame extends javax.swing.JFrame {
         goToDfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToDfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
+        goToMstButton.setBackground(new java.awt.Color(89, 94, 101, 50));
+        goToMstButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToMstButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToMstButton.setText("Minimum Spanning Tree");
+        goToMstButton.setBorder(null);
+        goToMstButton.setBorderPainted(false);
+        goToMstButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goToMstButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToMstButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToMstButton.setPreferredSize(new java.awt.Dimension(244, 72));
+
         javax.swing.GroupLayout graphIndexPanelLayout = new javax.swing.GroupLayout(graphIndexPanel);
         graphIndexPanel.setLayout(graphIndexPanelLayout);
         graphIndexPanelLayout.setHorizontalGroup(
@@ -416,7 +428,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goToMstButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(211, Short.MAX_VALUE))
         );
         graphIndexPanelLayout.setVerticalGroup(
@@ -430,7 +443,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToMstButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
@@ -747,6 +762,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton goToDfsButton;
     private javax.swing.JButton goToDijkstraButton;
     private javax.swing.JButton goToGraphButton;
+    private javax.swing.JButton goToMstButton;
     private javax.swing.JButton goToRecursionButton;
     private javax.swing.JButton goToSortButton;
     private javax.swing.JLabel graphIndexLabel;
