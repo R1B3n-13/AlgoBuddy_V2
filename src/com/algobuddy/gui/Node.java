@@ -17,33 +17,35 @@ import java.util.List;
 public class Node {
 
     private Point p;
-    private static final int radius = 23;
+    private static final int RADIUS = 23;
     private final Color nodeColor = new Color(108, 180, 64);
     private final Color fontColor = new Color(0, 22, 40);
     private boolean selected = false;
     private Rectangle boundary = new Rectangle();
-    protected static LinkedHashSet<Node> selectedNodes = new LinkedHashSet<Node>();
+    protected static LinkedHashSet<Node> selectedNodes = new LinkedHashSet<>();
     private int nodeNumber;
 
     public Node(Point p) {
         if (p.x > GraphBoard.getPaintingBoundary().width - 350) {
             p.x = GraphBoard.getPaintingBoundary().width - 350;
         }
-        if (p.x < 26 + radius) {
-            p.x = 26 + radius;
+        if (p.x < 26 + RADIUS) {
+            p.x = 26 + RADIUS;
         }
         if (p.y > GraphBoard.getPaintingBoundary().height - 150) {
             p.y = GraphBoard.getPaintingBoundary().height - 150;
         }
-        if (p.y < 26 + radius) {
-            p.y = 26 + radius;
+        if (p.y < 26 + RADIUS) {
+            p.y = 26 + RADIUS;
         }
         this.p = p;
-        boundary.setBounds(p.x - radius, p.y - radius, 2 * radius, 2 * radius);
+        boundary.setBounds(p.x - RADIUS, p.y - RADIUS, 2 * RADIUS, 2 * RADIUS);
     }
 
     /**
      * Draws the node
+     * @param g2d
+     * @param ch
      */
     public void draw(Graphics2D g2d, int ch) {
         nodeNumber = ch - 65;
@@ -53,7 +55,7 @@ public class Node {
         g2d.fillOval(boundary.x, boundary.y, boundary.width, boundary.height);
         g2d.setColor(this.fontColor);
         g2d.setFont(new Font("Casteller", Font.BOLD, 18));
-        g2d.drawString(String.valueOf((char) ch), boundary.x + radius - 5, boundary.y + radius + 5);
+        g2d.drawString(String.valueOf((char) ch), boundary.x + RADIUS - 5, boundary.y + RADIUS + 5);
         if (selected && !GraphBoard.isPlaying()) {
             g2d.setColor(new Color(145, 170, 199));
             g2d.setStroke(new BasicStroke());
@@ -62,28 +64,28 @@ public class Node {
     }
 
     /**
-     * Returns the node number
+     * @return the node number
      */
     public int getNodeNum() {
         return nodeNumber;
     }
 
     /**
-     * Returns the location of the node
+     * @return the location of the node
      */
     public Point getLocation() {
         return p;
     }
 
-    /**
-     * Returns the radius of the node
+    /** 
+     * @return the RADIUS of the node
      */
     public static int getRadius() {
-        return radius;
+        return RADIUS;
     }
 
     /**
-     * Returns true if the node is selected.
+     * @return true if the node is selected.
      */
     boolean isSelected() {
         return selected;
@@ -157,14 +159,14 @@ public class Node {
                 if (n.p.x > GraphBoard.getPaintingBoundary().width - 350) {
                     n.p.x = GraphBoard.getPaintingBoundary().width - 350;
                 }
-                if (n.p.x < 26 + radius) {
-                    n.p.x = 26 + radius;
+                if (n.p.x < 26 + RADIUS) {
+                    n.p.x = 26 + RADIUS;
                 }
                 if (n.p.y > GraphBoard.getPaintingBoundary().height - 150) {
                     n.p.y = GraphBoard.getPaintingBoundary().height - 150;
                 }
-                if (n.p.y < 26 + radius) {
-                    n.p.y = 26 + radius;
+                if (n.p.y < 26 + RADIUS) {
+                    n.p.y = 26 + RADIUS;
                 }
                 Point p = n.getLocation();
                 int r = Node.getRadius();

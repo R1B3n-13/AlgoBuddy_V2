@@ -17,11 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class GraphBoard extends javax.swing.JPanel {
 
-    protected static List<Node> nodes = new ArrayList<Node>();
-    protected static List<Edge> edges = new ArrayList<Edge>();
+    protected static List<Node> nodes = new ArrayList<>();
+    protected static List<Edge> edges = new ArrayList<>();
 
     private static Point mousePt = new Point();
-    private static final int highestSize = 26;
+    private static final int MAX = 26;
     private static boolean addingEdges = false;
     private static boolean addingNodes = true;
     private static boolean directed = false;
@@ -178,18 +178,18 @@ public class GraphBoard extends javax.swing.JPanel {
      */
     private void newNodeAction() {
         if (isAddingNodes() && !playing) {
-            if (nodes.size() >= getHighestSize()) {
-                JOptionPane.showMessageDialog(null,
-                        "Node limit reached!",
-                        "WARNING!",
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
+            if (nodes.size() < getMaxSize()) {
                 Node.selectNone(GraphBoard.nodes); // unselects every node when the 'New' button is pressed
                 Point p = mousePt.getLocation();
                 Node n = new Node(p);
                 n.setSelected(true); // selects the newly created node
                 nodes.add(n);
                 repaint();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Node limit reached!",
+                        "WARNING!",
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
     }
@@ -202,7 +202,7 @@ public class GraphBoard extends javax.swing.JPanel {
     }
 
     /**
-     * Returns the state of addingEdgesRadioButton
+     * @return the state of addingEdgesRadioButton
      */
     static boolean isAddingEdges() {
         return addingEdges;
@@ -216,7 +216,7 @@ public class GraphBoard extends javax.swing.JPanel {
     }
 
     /**
-     * Returns the state of addingNodesRadioButton
+     * @return the state of addingNodesRadioButton
      */
     static boolean isAddingNodes() {
         return addingNodes;
@@ -230,7 +230,7 @@ public class GraphBoard extends javax.swing.JPanel {
     }
 
     /**
-     * Sets the state of weightedStateRadioButton
+     * @return the state of weightedStateRadioButton
      */
     public static boolean isDirected() {
         return directed;
@@ -238,55 +238,56 @@ public class GraphBoard extends javax.swing.JPanel {
 
     /**
      * Sets the playing state of the algo
+     * @param b
      */
     public static void setPlayingState(boolean b) {
         playing = b;
     }
 
     /**
-     * Returns true if the play label has been set to play
+     * @return true if the play label has been set to play
      */
     public static boolean isPlaying() {
         return playing;
     }
 
     /**
-     * Sets the current algo name
+     * Sets the current algorithm name
      */
     static void setCurrentAlgo(String s) {
         currentAlgo = s;
     }
 
     /**
-     * Returns the current algo name
+     * @return the current algorithm name
      */
     static String getCurrentAlgo() {
         return currentAlgo;
     }
 
     /**
-     * Returns the highest numbers of node the panel can add
+     * @return the highest numbers of node the panel can add
      */
-    static int getHighestSize() {
-        return highestSize;
+    static int getMaxSize() {
+        return MAX;
     }
 
     /**
-     * Returns the mouse clicked point
+     * @return the mouse clicked point
      */
     static Point getMousePt() {
         return mousePt;
     }
 
     /**
-     * Returns the selection area
+     * @return the selection area
      */
     protected Rectangle getMouseRect() {
         return mouseRect;
     }
 
     /**
-     * Returns true if selecting mode is on
+     * @return true if selecting mode is on
      */
     protected boolean isSelecting() {
         return selecting;
@@ -300,7 +301,7 @@ public class GraphBoard extends javax.swing.JPanel {
     }
 
     /**
-     * Returns the algo simulator speed
+     * @return the algo simulator speed
      */
     protected int getSpeed() {
         return speed;
@@ -308,24 +309,26 @@ public class GraphBoard extends javax.swing.JPanel {
 
     /**
      * Pauses the simulation
+     * @param iMillis
      */
     protected void waitFor(int iMillis) {
         try {
             Thread.sleep(iMillis);
-        } catch (Exception ex) {
+        } catch (InterruptedException ex) {
             System.err.println(ex);
         }
     }
 
     /**
      * Sets the painting boundary
+     * @param dim
      */
     protected void setPaintingBoundary(Dimension dim) {
         paintingBoundary = dim;
     }
 
     /**
-     * Returns the painting boundary
+     * @return the painting boundary
      */
     static Dimension getPaintingBoundary() {
         return paintingBoundary;
@@ -339,7 +342,7 @@ public class GraphBoard extends javax.swing.JPanel {
     }
 
     /**
-     * Returns the source node
+     * @return the source node
      */
     protected static Node getSource() {
         return source;

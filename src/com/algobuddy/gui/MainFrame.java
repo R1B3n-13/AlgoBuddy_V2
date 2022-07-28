@@ -611,11 +611,9 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                mainFrame = new MainFrame();
-                mainFrame.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            mainFrame = new MainFrame();
+            mainFrame.setVisible(true);
         });
     }
 

@@ -5,6 +5,8 @@ import javax.swing.SwingWorker;
 /**
  *
  * @author nebir, nazrul
+ * @param <K>
+ * @param <V>
  */
 public abstract class AlgoWorker<K, V> extends SwingWorker<K, V> {
 

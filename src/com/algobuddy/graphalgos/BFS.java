@@ -222,42 +222,42 @@ public class BFS extends GraphBoard {
         g2d.setFont(new Font("Consolas", Font.BOLD, 30));
         g2d.drawString("Algorithm", getWidth() - 240, getHeight() - 1000);
         g2d.setColor(new Color(210, 52, 52));
-        g2d.setFont(new Font("Consolas", Font.ITALIC, 14));
+        g2d.setFont(new Font("Consolas", Font.ITALIC, 15));
         if (l1) {
-            g2d.drawString("1. Create a queue Q", getWidth() - 318, getHeight() - 950);
+            g2d.drawString("1. Create a queue Q", getWidth() - 315, getHeight() - 950);
         }
         if (l2) {
-            g2d.drawString("2. Mark the source as visited", getWidth() - 318, getHeight() - 920);
+            g2d.drawString("2. Mark the source as visited", getWidth() - 315, getHeight() - 920);
             g2d.drawString("and put it into Q", getWidth() - 318, getHeight() - 900);
         }
         if (l3) {
-            g2d.drawString("3. While Q is non- empty", getWidth() - 318, getHeight() - 870);
+            g2d.drawString("3. While Q is non- empty", getWidth() - 315, getHeight() - 870);
         }
         if (l4) {
-            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 318, getHeight() - 840);
+            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 315, getHeight() - 840);
         }
         if (l5) {
-            g2d.drawString("      ii. Mark and enqueue", getWidth() - 318, getHeight() - 810);
+            g2d.drawString("      ii. Mark and enqueue", getWidth() - 315, getHeight() - 810);
             g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 318, getHeight() - 790);
         }
 
         g2d.setColor(new Color(161, 131, 199));
         if (!l1) {
-            g2d.drawString("1. Create a queue Q", getWidth() - 318, getHeight() - 950);
+            g2d.drawString("1. Create a queue Q", getWidth() - 315, getHeight() - 950);
         }
         if (!l2) {
-            g2d.drawString("2. Mark the source as visited", getWidth() - 318, getHeight() - 920);
-            g2d.drawString("and put it into Q", getWidth() - 318, getHeight() - 900);
+            g2d.drawString("2. Mark the source as visited", getWidth() - 315, getHeight() - 920);
+            g2d.drawString("and put it into Q", getWidth() - 315, getHeight() - 900);
         }
         if (!l3) {
-            g2d.drawString("3. While Q is non- empty", getWidth() - 318, getHeight() - 870);
+            g2d.drawString("3. While Q is non- empty", getWidth() - 315, getHeight() - 870);
         }
         if (!l4) {
-            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 318, getHeight() - 840);
+            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 315, getHeight() - 840);
         }
         if (!l5) {
-            g2d.drawString("      ii. Mark and enqueue", getWidth() - 318, getHeight() - 810);
-            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 318, getHeight() - 790);
+            g2d.drawString("      ii. Mark and enqueue", getWidth() - 315, getHeight() - 810);
+            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 315, getHeight() - 790);
         }
     }
 
@@ -276,7 +276,7 @@ public class BFS extends GraphBoard {
         completed = false;
         g = new Graph(nodes.size());
         vis = new boolean[nodes.size()];
-        q = new LinkedList<Node>();
+        q = new LinkedList<>();
         processingNodes = new ArrayList<>();
         for (Edge x : edges) {
             g.addEdge(x.getNode1(), x.getNode2());

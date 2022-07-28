@@ -343,8 +343,7 @@ public class GraphPanel extends javax.swing.JPanel {
     private void playLabelAction() {
         BorderLayout layout = (BorderLayout) this.getLayout();
         Component comp = layout.getLayoutComponent(BorderLayout.CENTER);
-        if (comp instanceof BFS) {
-            BFS bfs = (BFS) comp;
+        if (comp instanceof BFS bfs) {
             if (GraphBoard.isPlaying()) {
                 if (bfs.getBfsWorker().isPaused()) {
                     bfs.getBfsWorker().resume();
@@ -370,8 +369,7 @@ public class GraphPanel extends javax.swing.JPanel {
     private void resetLabelAction() {
         BorderLayout layout = (BorderLayout) this.getLayout();
         Component comp = layout.getLayoutComponent(BorderLayout.CENTER);
-        if (comp instanceof BFS) {
-            BFS bfs = (BFS) comp;
+        if (comp instanceof BFS bfs) {
             bfs.getBfsWorker().cancel(true);
             GraphBoard.setPlayingState(false);
             bfs.resetCode();
@@ -472,14 +470,14 @@ public class GraphPanel extends javax.swing.JPanel {
     }
 
     /**
-     * Returns the reference of play label
+     * @return the reference of play label
      */
     public static javax.swing.JLabel getPlayLabel() {
         return playLabel;
     }
 
     /**
-     * Returns the reference of reset label
+     * @return the reference of reset label
      */
     public static javax.swing.JLabel getResetLabel() {
         return resetLabel;

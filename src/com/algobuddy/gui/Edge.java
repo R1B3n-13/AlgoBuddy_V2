@@ -22,6 +22,8 @@ public class Edge {
 
     /**
      * Draws edges
+     * @param g2d
+     * @param directed
      */
     public void draw(Graphics2D g2d, boolean directed) {
         Point p1 = n1.getLocation();
@@ -38,14 +40,14 @@ public class Edge {
     }
 
     /**
-     * Returns the first node
+     * @return the first node
      */
     public Node getNode1() {
         return n1;
     }
 
     /**
-     * Returns the second node
+     * @return the second node
      */
     public Node getNode2() {
         return n2;
