@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.javatuples.Pair;
 
 /**
  *
@@ -25,7 +26,7 @@ public class GraphBoard extends javax.swing.JPanel {
     private static boolean addingEdges = false;
     private static boolean addingNodes = true;
     private static boolean directed = false;
-    private static boolean playing = false;
+    private static boolean playing = false;;
     private static int speed = 1650;
     private static Dimension paintingBoundary;
     private static String currentAlgo = "";
@@ -238,6 +239,7 @@ public class GraphBoard extends javax.swing.JPanel {
 
     /**
      * Sets the playing state of the algo
+     *
      * @param b
      */
     public static void setPlayingState(boolean b) {
@@ -309,6 +311,7 @@ public class GraphBoard extends javax.swing.JPanel {
 
     /**
      * Pauses the simulation
+     *
      * @param iMillis
      */
     protected void waitFor(int iMillis) {
@@ -321,6 +324,7 @@ public class GraphBoard extends javax.swing.JPanel {
 
     /**
      * Sets the painting boundary
+     *
      * @param dim
      */
     protected void setPaintingBoundary(Dimension dim) {

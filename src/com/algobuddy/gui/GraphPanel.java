@@ -1,6 +1,7 @@
 package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
+import com.algobuddy.graphalgos.Dijkstra;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
@@ -33,17 +34,17 @@ public class GraphPanel extends javax.swing.JPanel {
 
         graphWestPanel = new javax.swing.JPanel();
         addEdgesRadioButton = new javax.swing.JRadioButton();
+        addNodesRadioButton = new javax.swing.JRadioButton();
+        directedStateRadioButton = new javax.swing.JRadioButton();
         disconnectNodesButton = new javax.swing.JButton();
         deleteNodesButton = new javax.swing.JButton();
         clearAllButton = new javax.swing.JButton();
-        addNodesRadioButton = new javax.swing.JRadioButton();
+        speedSlider = new javax.swing.JSlider();
+        playLabel = new javax.swing.JLabel();
+        resetLabel = new javax.swing.JLabel();
         graphHidePanel2 = new javax.swing.JPanel();
         graphHidePanel1 = new javax.swing.JPanel();
         graphHidePanel3 = new javax.swing.JPanel();
-        speedSlider = new javax.swing.JSlider();
-        directedStateRadioButton = new javax.swing.JRadioButton();
-        playLabel = new javax.swing.JLabel();
-        resetLabel = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -70,51 +71,6 @@ public class GraphPanel extends javax.swing.JPanel {
         graphWestPanel.add(addEdgesRadioButton);
         addEdgesRadioButton.setBounds(40, 30, 120, 24);
 
-        disconnectNodesButton.setBackground(new java.awt.Color(0, 22, 40));
-        disconnectNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        disconnectNodesButton.setForeground(new java.awt.Color(177, 191, 222));
-        disconnectNodesButton.setText("DISCONNECT");
-        disconnectNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
-        disconnectNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        disconnectNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
-        disconnectNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                disconnectNodesButtonMouseClicked(evt);
-            }
-        });
-        graphWestPanel.add(disconnectNodesButton);
-        disconnectNodesButton.setBounds(41, 130, 120, 21);
-
-        deleteNodesButton.setBackground(new java.awt.Color(0, 22, 40));
-        deleteNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        deleteNodesButton.setForeground(new java.awt.Color(177, 191, 222));
-        deleteNodesButton.setText("DELETE");
-        deleteNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
-        deleteNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
-        deleteNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deleteNodesButtonMouseClicked(evt);
-            }
-        });
-        graphWestPanel.add(deleteNodesButton);
-        deleteNodesButton.setBounds(41, 170, 120, 21);
-
-        clearAllButton.setBackground(new java.awt.Color(0, 22, 40));
-        clearAllButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        clearAllButton.setForeground(new java.awt.Color(177, 191, 222));
-        clearAllButton.setText("CLEAR");
-        clearAllButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
-        clearAllButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearAllButton.setPreferredSize(new java.awt.Dimension(120, 21));
-        clearAllButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearAllButtonMouseClicked(evt);
-            }
-        });
-        graphWestPanel.add(clearAllButton);
-        clearAllButton.setBounds(41, 210, 120, 21);
-
         addNodesRadioButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         addNodesRadioButton.setForeground(new java.awt.Color(177, 191, 222));
         addNodesRadioButton.setText("ADD NODES");
@@ -132,6 +88,104 @@ public class GraphPanel extends javax.swing.JPanel {
         graphWestPanel.add(addNodesRadioButton);
         addNodesRadioButton.setBounds(40, 60, 120, 24);
 
+        directedStateRadioButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        directedStateRadioButton.setForeground(new java.awt.Color(177, 191, 222));
+        directedStateRadioButton.setText("DIRECTED");
+        directedStateRadioButton.setBorder(null);
+        directedStateRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        directedStateRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        directedStateRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        directedStateRadioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOff.png"))); // NOI18N
+        directedStateRadioButton.setIconTextGap(13);
+        directedStateRadioButton.setPreferredSize(new java.awt.Dimension(102, 24));
+        directedStateRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                directedStateRadioButtonActionPerformed(evt);
+            }
+        });
+        graphWestPanel.add(directedStateRadioButton);
+        directedStateRadioButton.setBounds(40, 90, 120, 24);
+
+        disconnectNodesButton.setBackground(new java.awt.Color(0, 22, 40));
+        disconnectNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        disconnectNodesButton.setForeground(new java.awt.Color(177, 191, 222));
+        disconnectNodesButton.setText("DISCONNECT");
+        disconnectNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        disconnectNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        disconnectNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
+        disconnectNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                disconnectNodesButtonMouseClicked(evt);
+            }
+        });
+        graphWestPanel.add(disconnectNodesButton);
+        disconnectNodesButton.setBounds(40, 130, 120, 21);
+
+        deleteNodesButton.setBackground(new java.awt.Color(0, 22, 40));
+        deleteNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        deleteNodesButton.setForeground(new java.awt.Color(177, 191, 222));
+        deleteNodesButton.setText("DELETE");
+        deleteNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        deleteNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
+        deleteNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteNodesButtonMouseClicked(evt);
+            }
+        });
+        graphWestPanel.add(deleteNodesButton);
+        deleteNodesButton.setBounds(40, 160, 120, 21);
+
+        clearAllButton.setBackground(new java.awt.Color(0, 22, 40));
+        clearAllButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        clearAllButton.setForeground(new java.awt.Color(177, 191, 222));
+        clearAllButton.setText("CLEAR");
+        clearAllButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        clearAllButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clearAllButton.setPreferredSize(new java.awt.Dimension(120, 21));
+        clearAllButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearAllButtonMouseClicked(evt);
+            }
+        });
+        graphWestPanel.add(clearAllButton);
+        clearAllButton.setBounds(40, 190, 120, 21);
+
+        speedSlider.setBackground(new java.awt.Color(84, 84, 80));
+        speedSlider.setForeground(new java.awt.Color(177, 191, 222));
+        speedSlider.setMaximum(3000);
+        speedSlider.setMinimum(300);
+        speedSlider.setValue(1650);
+        speedSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        speedSlider.setPreferredSize(new java.awt.Dimension(120, 21));
+        speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                speedSliderStateChanged(evt);
+            }
+        });
+        graphWestPanel.add(speedSlider);
+        speedSlider.setBounds(30, 230, 138, 20);
+
+        playLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
+        playLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        playLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                playLabelMouseClicked(evt);
+            }
+        });
+        graphWestPanel.add(playLabel);
+        playLabel.setBounds(70, 260, 24, 24);
+
+        resetLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/resetDisabled.png"))); // NOI18N
+        resetLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        resetLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resetLabelMouseClicked(evt);
+            }
+        });
+        graphWestPanel.add(resetLabel);
+        resetLabel.setBounds(110, 260, 24, 24);
+
         graphHidePanel2.setBackground(new java.awt.Color(0, 22, 40));
         graphHidePanel2.setPreferredSize(new java.awt.Dimension(0, 800));
 
@@ -143,11 +197,11 @@ public class GraphPanel extends javax.swing.JPanel {
         );
         graphHidePanel2Layout.setVerticalGroup(
             graphHidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
 
         graphWestPanel.add(graphHidePanel2);
-        graphHidePanel2.setBounds(0, 322, 180, 720);
+        graphHidePanel2.setBounds(0, 292, 180, 800);
 
         graphHidePanel1.setBackground(new java.awt.Color(0, 22, 40));
         graphHidePanel1.setPreferredSize(new java.awt.Dimension(0, 24));
@@ -181,59 +235,6 @@ public class GraphPanel extends javax.swing.JPanel {
 
         graphWestPanel.add(graphHidePanel3);
         graphHidePanel3.setBounds(0, 16, 24, 330);
-
-        speedSlider.setBackground(new java.awt.Color(84, 84, 80));
-        speedSlider.setForeground(new java.awt.Color(177, 191, 222));
-        speedSlider.setMaximum(3000);
-        speedSlider.setMinimum(300);
-        speedSlider.setValue(1650);
-        speedSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        speedSlider.setPreferredSize(new java.awt.Dimension(120, 21));
-        speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                speedSliderStateChanged(evt);
-            }
-        });
-        graphWestPanel.add(speedSlider);
-        speedSlider.setBounds(33, 250, 138, 20);
-
-        directedStateRadioButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        directedStateRadioButton.setForeground(new java.awt.Color(177, 191, 222));
-        directedStateRadioButton.setText("DIRECTED");
-        directedStateRadioButton.setBorder(null);
-        directedStateRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        directedStateRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        directedStateRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        directedStateRadioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOff.png"))); // NOI18N
-        directedStateRadioButton.setIconTextGap(13);
-        directedStateRadioButton.setPreferredSize(new java.awt.Dimension(102, 24));
-        directedStateRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                directedStateRadioButtonActionPerformed(evt);
-            }
-        });
-        graphWestPanel.add(directedStateRadioButton);
-        directedStateRadioButton.setBounds(40, 90, 120, 24);
-
-        playLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
-        playLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        playLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                playLabelMouseClicked(evt);
-            }
-        });
-        graphWestPanel.add(playLabel);
-        playLabel.setBounds(70, 280, 24, 24);
-
-        resetLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/resetDisabled.png"))); // NOI18N
-        resetLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        resetLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                resetLabelMouseClicked(evt);
-            }
-        });
-        graphWestPanel.add(resetLabel);
-        resetLabel.setBounds(110, 280, 24, 24);
 
         add(graphWestPanel, java.awt.BorderLayout.LINE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -332,7 +333,6 @@ public class GraphPanel extends javax.swing.JPanel {
         directedStateRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
         speedSlider.setValue(1650);
         clearEdgesAction();
-        GraphBoard.setCurrentAlgo("");
         Node.selectNone(GraphBoard.nodes);
         repaint();
     }
@@ -361,6 +361,24 @@ public class GraphPanel extends javax.swing.JPanel {
                 bfs.start();
             }
         }
+        if (comp instanceof Dijkstra dijkstra) {
+            if (GraphBoard.isPlaying()) {
+                if (dijkstra.getDijkstraWorker().isPaused()) {
+                    dijkstra.getDijkstraWorker().resume();
+                    playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                } else {
+                    dijkstra.getDijkstraWorker().pause();
+                    if (!dijkstra.isCompleted()) {
+                        playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                    }
+                }
+            } else if (!GraphBoard.nodes.isEmpty()) {
+                GraphBoard.setPlayingState(true);
+                playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
+                dijkstra.start();
+            }
+        }
     }
 
     /**
@@ -370,9 +388,23 @@ public class GraphPanel extends javax.swing.JPanel {
         BorderLayout layout = (BorderLayout) this.getLayout();
         Component comp = layout.getLayoutComponent(BorderLayout.CENTER);
         if (comp instanceof BFS bfs) {
-            bfs.getBfsWorker().cancel(true);
+            if (GraphBoard.isPlaying()) {
+                bfs.getBfsWorker().cancel(true);
+            }
             GraphBoard.setPlayingState(false);
             bfs.resetCode();
+            GraphBoard.setSource(null);
+            Node.selectNone(GraphBoard.nodes);
+            resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            repaint();
+        }
+        if (comp instanceof Dijkstra dijkstra) {
+            if (GraphBoard.isPlaying()) {
+                dijkstra.getDijkstraWorker().cancel(true);
+            }
+            GraphBoard.setPlayingState(false);
+            dijkstra.resetCode();
             GraphBoard.setSource(null);
             Node.selectNone(GraphBoard.nodes);
             resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));

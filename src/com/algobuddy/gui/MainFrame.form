@@ -622,6 +622,9 @@
                   <Dimension value="[244, 72]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goToDijkstraButtonMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="goToDfsButton">
               <Properties>
@@ -685,12 +688,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="bfsOverviewPanel">
+        <Container class="javax.swing.JPanel" name="algoOverviewPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="37" green="37" red="39" type="rgb"/>
             </Property>
-            <Property name="name" type="java.lang.String" value="bfsOverviewPanel" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="algoOverviewPanel" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -711,9 +714,9 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Component class="com.algobuddy.gui.GraphPanel" name="bfsSimulationPanel">
+        <Component class="com.algobuddy.gui.GraphPanel" name="simulationPanel">
           <Properties>
-            <Property name="name" type="java.lang.String" value="bfsSimulationPanel" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="simulationPanel" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">

@@ -14,6 +14,7 @@ public class Edge {
 
     private Node n1;
     private Node n2;
+    private int w = 1;
 
     public Edge(Node n1, Node n2) {
         this.n1 = n1;
@@ -22,6 +23,7 @@ public class Edge {
 
     /**
      * Draws edges
+     *
      * @param g2d
      * @param directed
      */
@@ -51,5 +53,20 @@ public class Edge {
      */
     public Node getNode2() {
         return n2;
+    }
+
+    /**
+     * @return the weight
+     */
+    public int getWeight() {
+        return w;
+    }
+
+    /**
+     * sets the weight of the edge
+     * @param w 
+     */
+    void setWeight(int w) {
+        this.w = w;
     }
 }

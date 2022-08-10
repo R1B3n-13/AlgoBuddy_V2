@@ -17,7 +17,6 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.Queue;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -282,10 +281,10 @@ public class BFS extends GraphBoard {
         vis = new boolean[nodes.size()];
         q = new LinkedList<>();
         processingNodes = new ArrayList<>();
-        for (Edge x : edges) {
-            g.addEdge(x.getNode1(), x.getNode2());
+        for (Edge e : edges) {
+            g.addEdge(e.getNode1(), e.getNode2());
             if (!isDirected()) {
-                g.addEdge(x.getNode2(), x.getNode1());
+                g.addEdge(e.getNode2(), e.getNode1());
             }
         }
 
@@ -303,7 +302,7 @@ public class BFS extends GraphBoard {
                         l1 = l2 = l5 = false;
                         repaint();
                         waitFor(getSpeed());
-                        Iterator<Node> it = g.getAdj()[u.getNodeNum()].listIterator();
+                        var it = g.getAdj()[u.getNodeNum()].listIterator();
                         while (it.hasNext()) {
                             if (!isPaused()) {
                                 Node v = it.next();
@@ -332,8 +331,8 @@ public class BFS extends GraphBoard {
                 super.done();
                 completed = true;
                 resetCode();
-                repaint();
                 GraphPanel.getPlayLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                repaint();
             }
         };
         bfsWorker.execute();

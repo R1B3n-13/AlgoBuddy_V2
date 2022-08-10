@@ -1,7 +1,9 @@
 package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
+import com.algobuddy.graphalgos.Dijkstra;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatNightOwlIJTheme;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -83,8 +85,8 @@ public class MainFrame extends javax.swing.JFrame {
         goToDijkstraButton = new javax.swing.JButton();
         goToDfsButton = new javax.swing.JButton();
         goToMstButton = new javax.swing.JButton();
-        bfsOverviewPanel = new javax.swing.JPanel();
-        bfsSimulationPanel = new com.algobuddy.gui.GraphPanel();
+        algoOverviewPanel = new javax.swing.JPanel();
+        simulationPanel = new com.algobuddy.gui.GraphPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -391,6 +393,11 @@ public class MainFrame extends javax.swing.JFrame {
         goToDijkstraButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToDijkstraButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToDijkstraButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToDijkstraButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToDijkstraButtonMouseClicked(evt);
+            }
+        });
 
         goToDfsButton.setBackground(new java.awt.Color(89, 94, 101, 50));
         goToDfsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -450,24 +457,24 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
 
-        bfsOverviewPanel.setBackground(new java.awt.Color(57, 55, 55));
-        bfsOverviewPanel.setName("bfsOverviewPanel"); // NOI18N
+        algoOverviewPanel.setBackground(new java.awt.Color(57, 55, 55));
+        algoOverviewPanel.setName("algoOverviewPanel"); // NOI18N
 
-        javax.swing.GroupLayout bfsOverviewPanelLayout = new javax.swing.GroupLayout(bfsOverviewPanel);
-        bfsOverviewPanel.setLayout(bfsOverviewPanelLayout);
-        bfsOverviewPanelLayout.setHorizontalGroup(
-            bfsOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout algoOverviewPanelLayout = new javax.swing.GroupLayout(algoOverviewPanel);
+        algoOverviewPanel.setLayout(algoOverviewPanelLayout);
+        algoOverviewPanelLayout.setHorizontalGroup(
+            algoOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 800, Short.MAX_VALUE)
         );
-        bfsOverviewPanelLayout.setVerticalGroup(
-            bfsOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        algoOverviewPanelLayout.setVerticalGroup(
+            algoOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        mainPanel.add(bfsOverviewPanel, "bfsOverviewPanel");
+        mainPanel.add(algoOverviewPanel, "bfsOverviewPanel");
 
-        bfsSimulationPanel.setName("bfsSimulationPanel"); // NOI18N
-        mainPanel.add(bfsSimulationPanel, "bfsSimulationPanel");
+        simulationPanel.setName("simulationPanel"); // NOI18N
+        mainPanel.add(simulationPanel, "bfsSimulationPanel");
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -551,20 +558,35 @@ public class MainFrame extends javax.swing.JFrame {
                 titleBar.setBackground(new Color(18, 8, 13));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(18, 8, 13)));
             }
-            if (getCurrentComponentName(mainPanel).equals("bfsOverviewPanel")) {
+            if (getCurrentComponentName(mainPanel).equals("algoOverviewPanel")) {
                 mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(8, 13, 18));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
                 nextLabel.setVisible(false);
-                bfsOverviewPanel.removeAll();
+                algoOverviewPanel.removeAll();
+                GraphBoard.setCurrentAlgo(null);
             }
-            if (getCurrentComponentName(mainPanel).equals("bfsSimulationPanel")) {
-                mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Right);
-                titleBar.setBackground(new Color(57, 55, 55));
-                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
-                nextLabel.setVisible(true);
-                openHtml(bfsOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
-                bfsSimulationPanel.reset();
+            if (getCurrentComponentName(mainPanel).equals("simulationPanel")) {
+                if (GraphBoard.getCurrentAlgo() == "BFS") {
+                    mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
+                    titleBar.setBackground(new Color(57, 55, 55));
+                    titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
+                    nextLabel.setVisible(true);
+                    openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+                    simulationPanel.reset();
+                    BorderLayout layout = (BorderLayout) this.getLayout();
+                    simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+                }
+                if (GraphBoard.getCurrentAlgo() == "Dijkstra") {
+                    mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
+                    titleBar.setBackground(new Color(57, 55, 55));
+                    titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
+                    nextLabel.setVisible(true);
+                    openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+                    simulationPanel.reset();
+                    BorderLayout layout = (BorderLayout) this.getLayout();
+                    simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+                }
             }
         }
     }//GEN-LAST:event_backLabelMouseClicked
@@ -579,11 +601,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void goToBfsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToBfsButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            openHtml(bfsOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
-            mainPanel.nextSlidingPanel(10, bfsOverviewPanel, JSlidingPane.Direction.Left);
+            openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+            mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
             titleBar.setBackground(new Color(57, 55, 55));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
             nextLabel.setVisible(true);
+            GraphBoard.setCurrentAlgo("BFS");
         }
     }//GEN-LAST:event_goToBfsButtonMouseClicked
 
@@ -596,20 +619,40 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nextLabelMouseExited
 
     private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
-        if (getCurrentComponentName(mainPanel).equals("bfsOverviewPanel")) {
-            mainPanel.nextSlidingPanel(10, bfsSimulationPanel, JSlidingPane.Direction.Left);
-            bfsSimulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
-            GraphBoard.setCurrentAlgo("BFS");
-            titleBar.setBackground(new Color(0, 14, 26));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
-            nextLabel.setVisible(false);
-            bfsOverviewPanel.removeAll();
+        if (getCurrentComponentName(mainPanel).equals("algoOverviewPanel")) {
+            if (GraphBoard.getCurrentAlgo() == "BFS") {
+                mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+                simulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
+                titleBar.setBackground(new Color(0, 14, 26));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
+                nextLabel.setVisible(false);
+                algoOverviewPanel.removeAll();
+            }
+            if (GraphBoard.getCurrentAlgo() == "Dijkstra") {
+                mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+                simulationPanel.add(new Dijkstra(), java.awt.BorderLayout.CENTER);
+                titleBar.setBackground(new Color(0, 14, 26));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
+                nextLabel.setVisible(false);
+                algoOverviewPanel.removeAll();
+            }
         }
     }//GEN-LAST:event_nextLabelMouseClicked
 
     private void formWindowDeiconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeiconified
         setExtendedState(extendedState);
     }//GEN-LAST:event_formWindowDeiconified
+
+    private void goToDijkstraButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToDijkstraButtonMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+            mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
+            titleBar.setBackground(new Color(57, 55, 55));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
+            nextLabel.setVisible(true);
+            GraphBoard.setCurrentAlgo("Dijkstra");
+        }
+    }//GEN-LAST:event_goToDijkstraButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -619,7 +662,7 @@ public class MainFrame extends javax.swing.JFrame {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
             UIManager.setLookAndFeel(new FlatNightOwlIJTheme());
-            UIManager.put( "Button.arc", 0 );
+            UIManager.put("Button.arc", 0);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -754,9 +797,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel algoOverviewPanel;
     private javax.swing.JLabel backLabel;
-    private javax.swing.JPanel bfsOverviewPanel;
-    private com.algobuddy.gui.GraphPanel bfsSimulationPanel;
     private javax.swing.JLabel closeLabel;
     private javax.swing.JButton goToBfsButton;
     private javax.swing.JButton goToDfsButton;
@@ -776,6 +818,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static com.algobuddy.gui.JSlidingPane mainPanel;
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JLabel nextLabel;
+    private com.algobuddy.gui.GraphPanel simulationPanel;
     private javax.swing.JPanel titleBar;
     private javax.swing.JButton userManualButton;
     // End of variables declaration//GEN-END:variables

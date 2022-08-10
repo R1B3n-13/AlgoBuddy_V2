@@ -143,7 +143,7 @@ public class JSlidingPane extends javax.swing.JPanel {
                 timer.stop();
                 visiblePanel.setVisible(false);
                 remove(visiblePanel);
-                if (getCurrentComponentName(MainFrame.getMainPanel()).equals("bfsSimulationPanel")) {
+                if (getCurrentComponentName(MainFrame.getMainPanel()).equals("simulationPanel")) {
                     MainFrame.getMainFrame().setExtendedState(MAXIMIZED_BOTH);
                 } else {
                     MainFrame.getMainFrame().setExtendedState(NORMAL);

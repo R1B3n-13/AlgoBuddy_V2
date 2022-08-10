@@ -1,5 +1,6 @@
 package com.algobuddy.gui;
 
+import com.algobuddy.graphalgos.Dijkstra;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -44,6 +45,7 @@ public class Node {
 
     /**
      * Draws the node
+     *
      * @param g2d
      * @param ch
      */
@@ -77,7 +79,7 @@ public class Node {
         return p;
     }
 
-    /** 
+    /**
      * @return the RADIUS of the node
      */
     public static int getRadius() {
