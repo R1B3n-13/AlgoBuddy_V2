@@ -813,7 +813,7 @@
                           <Component id="function" min="-2" pref="32" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="memButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -955,7 +955,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="run1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="461" max="32767" attributes="0"/>
+                              <EmptySpace pref="388" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1091,7 +1091,7 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="119" pref="129" max="32767" attributes="0"/>
+                                      <EmptySpace min="119" pref="141" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1342,7 +1342,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="bc_run_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="417" max="32767" attributes="0"/>
+                              <EmptySpace pref="344" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1571,7 +1571,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lcs_run_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="270" max="32767" attributes="0"/>
+                              <EmptySpace pref="197" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

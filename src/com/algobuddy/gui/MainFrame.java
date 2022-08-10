@@ -1193,7 +1193,7 @@ public class MainFrame extends javax.swing.JFrame {
                     nextLabel.setVisible(true);
                     openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
                     simulationPanel.reset();
-                    BorderLayout layout = (BorderLayout) this.getLayout();
+                    BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
                     simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
                 }
                 if (GraphBoard.getCurrentAlgo() == "Dijkstra") {
@@ -1203,9 +1203,14 @@ public class MainFrame extends javax.swing.JFrame {
                     nextLabel.setVisible(true);
                     openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
                     simulationPanel.reset();
-                    BorderLayout layout = (BorderLayout) this.getLayout();
+                    BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
                     simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
                 }
+            }
+            if (getCurrentComponentName(mainPanel).equals("treeSimulationPanel")) {
+                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPane.Direction.Right);
+                titleBar.setBackground(new Color(18, 8, 13));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(18, 8, 13)));
             }
         }
     }//GEN-LAST:event_backLabelMouseClicked
