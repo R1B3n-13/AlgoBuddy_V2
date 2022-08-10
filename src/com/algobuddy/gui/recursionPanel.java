@@ -19,11 +19,10 @@ public class recursionPanel extends javax.swing.JPanel {
      * Creates new form recursionPanel
      */
     private int panel_width,
-
-    /**
-     * Creates new form recursionPanel
-     */
-    panel_height;
+            /**
+             * Creates new form recursionPanel
+             */
+            panel_height;
     private ArrayList<ArrayList<Integer>> index;
     private int[] parent, value, level, x_, y_, is_visited;
     private int node_diameter, art_campus, max_level, dif_bet_two_cons;
@@ -73,7 +72,7 @@ public class recursionPanel extends javax.swing.JPanel {
     int ktk = 0;
 
     void process_in_background() {
-        AlgoWorker<Void, Void> Worker = new AlgoWorker<>() {
+        AlgoWorker<Void, Void> recursionWorker = new AlgoWorker<>() {
             @Override
             public Void doInBackground() throws InterruptedException {
 //            dfs(0, -1);
@@ -84,7 +83,7 @@ public class recursionPanel extends javax.swing.JPanel {
                         if (node2 != -1) {
                             edges[node2][node1] = 1;
                             string_flag = 1;
-                            show = "fn( " + strs.get(node2) + ") calls fn(" + strs.get(node1) + ")";
+                            show = "fn(" + strs.get(node2) + ") calls fn(" + strs.get(node1) + ")";
                         }
                         is_visited[node1] = 1;
                     } else {
@@ -107,7 +106,7 @@ public class recursionPanel extends javax.swing.JPanel {
             public void done() {
             }
         };
-        Worker.execute();
+        recursionWorker.execute();
 
     }
 
@@ -288,7 +287,6 @@ public class recursionPanel extends javax.swing.JPanel {
         for (int i = 0; i < index_size; i++) {
             y_[i] += add_value;
         }
-//      System.out.println(node_diameter);
 
         int yy = 50;
         for (int j = 0; j <= max_level; j++) {
@@ -327,7 +325,7 @@ public class recursionPanel extends javax.swing.JPanel {
         repaint();
 
     }
-    
+
     public void init() throws InterruptedException {
         index = MainFrame.getIndex();
         parent = MainFrame.getPar();
@@ -349,8 +347,6 @@ public class recursionPanel extends javax.swing.JPanel {
         super.paint(g1);
 
         g1.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g1.setColor(Color.red);
 
         // ------------for test---------------
 //      g1.drawRect(50, 50, 1477, 929);
@@ -380,41 +376,41 @@ public class recursionPanel extends javax.swing.JPanel {
                     int ex1 = y_[i] + node_diameter / 2, ey1 = x_[i] + node_diameter / 2;
                     int ex2 = y_[j] + node_diameter / 2, ey2 = x_[j] + node_diameter / 2;
                     if (edges[i][j] == 1) {
-                        g1.setColor(Color.red);
+                        g1.setColor(new Color(108, 180, 64)); // front track edge color
                         g1.drawLine(ex1, ey1, ex2, ey2);
                     }
                     if (edges[i][j] == 2) {
-                        g1.setColor(Color.black);
+                        g1.setColor(new Color(38, 112, 139)); // back track edge color
                         g1.drawLine(ex1, ey1, ex2, ey2);
-                        g1.setColor(Color.WHITE);
+                        g1.setColor(new Color(1, 22, 39)); // small circles in between nodes
                         String s1 = Integer.toString(value[j]);
                         int x = (ex1 + ex2) / 2 - font_size / 2, y = (ey1 + ey2) / 2 - font_size / 2;
                         g1.fillOval(x, y, font_size + 4, font_size + 4);
-                        g1.setColor(Color.black);
-                        g1.setFont(new Font("TimesRoman", Font.PLAIN, font_size));
-                        g1.drawString(s1, x + font_size / 2 - 4, y + font_size / 2 + 7);
+                        g1.setColor(new Color(38, 112, 139)); // edge value font color
+                        g1.setFont(new Font("Casteller", Font.BOLD, font_size));
+                        g1.drawString(s1, x + font_size / 2 - 4 * s1.length(), y + font_size / 2 + 7);
                     }
                 }
             }
 
             if (string_flag >= 1) {
-                g1.setColor(Color.white);
-                g1.fillRect(19, 19, 300, 100);
-                g1.setColor(Color.black);
+                g1.setColor(new Color(38, 112, 139)); // info rectangle color
+                g1.fillRect(19, 19, 400, 50);
+                g1.setColor(new Color(182, 207, 216)); // info rectangle font color
                 g1.setFont(new Font("Consolus", Font.BOLD, 25));
-                g1.drawString(show, 50, 50);
+                g1.drawString(show, 215 - 6 * show.length(), 50);
             }
 
             for (int i = 0; i < index.size(); i++) {
 
                 if (is_visited[i] > 0) {
-                    g1.setColor(Color.red);
+                    g1.setColor(new Color(108, 180, 64)); // node color
                     g1.fillOval(y_[i], x_[i], node_diameter, node_diameter);
-                    g1.setColor(Color.black);
-                    g1.setFont(new Font("Consolus", Font.PLAIN, font_size));
+                    g1.setColor(Color.black); // node font color
+                    g1.setFont(new Font("Casteller", Font.BOLD, font_size));
 
                     String st1 = strs.get(i);
-                    g1.drawString(st1, y_[i] + node_diameter / 2 - 5 * st1.length(), x_[i] + node_diameter / 2);
+                    g1.drawString(st1, y_[i] + node_diameter / 2 - 5 * st1.length(), x_[i] + node_diameter / 2 + 5);
                 }
             }
 
