@@ -213,44 +213,50 @@ public class Dijkstra extends GraphBoard {
         g2d.setColor(new Color(210, 52, 52));
         g2d.setFont(new Font("Consolas", Font.ITALIC, 15));
         if (l1) {
-            g2d.drawString("1. Create a queue Q", getWidth() - 315, getHeight() - 950);
+            g2d.drawString("1. Create a min heap H", getWidth() - 315, getHeight() - 950);
+            g2d.drawString("and assign ∞ to all the node distance", getWidth() - 315, getHeight() - 930);
         }
         if (l2) {
-            g2d.drawString("2. Mark the source as visited", getWidth() - 315, getHeight() - 920);
-            g2d.drawString("and put it into Q", getWidth() - 318, getHeight() - 900);
+            g2d.drawString("2. Assign zero to the source distance", getWidth() - 315, getHeight() - 900);
+            g2d.drawString("and put it into H", getWidth() - 318, getHeight() - 880);
         }
         if (l3) {
-            g2d.drawString("3. While Q is non- empty", getWidth() - 315, getHeight() - 870);
+            g2d.drawString("3. While H is non- empty", getWidth() - 315, getHeight() - 850);
         }
         if (l4) {
             g2d.setColor(new Color(238, 247, 137));
-            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 315, getHeight() - 840);
+            g2d.drawString("     i.  Remove the head u of H and", getWidth() - 315, getHeight() - 820);
             g2d.setColor(new Color(210, 52, 52));
         }
         if (l5) {
             g2d.setColor(new Color(238, 247, 137));
-            g2d.drawString("      ii. Mark and enqueue", getWidth() - 315, getHeight() - 810);
-            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 318, getHeight() - 790);
+            g2d.drawString("     ii. For all the neighbors v of u", getWidth() - 315, getHeight() - 790);
+            g2d.drawString("     if dist[v] > dist[u] + w(u, v)", getWidth() - 315, getHeight() - 770);
+            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 740);
+            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 720);
             g2d.setColor(new Color(210, 52, 52));
         }
 
         g2d.setColor(new Color(161, 131, 199));
         if (!l1) {
-            g2d.drawString("1. Create a queue Q", getWidth() - 315, getHeight() - 950);
+            g2d.drawString("1. Create a min heap H", getWidth() - 315, getHeight() - 950);
+            g2d.drawString("and assign ∞ to all the node distance", getWidth() - 315, getHeight() - 930);
         }
         if (!l2) {
-            g2d.drawString("2. Mark the source as visited", getWidth() - 315, getHeight() - 920);
-            g2d.drawString("and put it into Q", getWidth() - 315, getHeight() - 900);
+            g2d.drawString("2. Assign zero to the source distance", getWidth() - 315, getHeight() - 900);
+            g2d.drawString("and put it into H", getWidth() - 318, getHeight() - 880);
         }
         if (!l3) {
-            g2d.drawString("3. While Q is non- empty", getWidth() - 315, getHeight() - 870);
+            g2d.drawString("3. While H is non- empty", getWidth() - 315, getHeight() - 850);
         }
         if (!l4) {
-            g2d.drawString("      i.  Remove the head u of Q", getWidth() - 315, getHeight() - 840);
+            g2d.drawString("     i.  Remove the head u of H and", getWidth() - 315, getHeight() - 820);
         }
         if (!l5) {
-            g2d.drawString("      ii. Mark and enqueue", getWidth() - 315, getHeight() - 810);
-            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 315, getHeight() - 790);
+            g2d.drawString("     ii. For all the neighbors v of u", getWidth() - 315, getHeight() - 790);
+            g2d.drawString("     if dist[v] > dist[u] + w(u, v)", getWidth() - 315, getHeight() - 770);
+            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 740);
+            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 720);
         }
     }
 
