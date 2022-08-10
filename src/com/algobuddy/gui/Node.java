@@ -1,6 +1,5 @@
 package com.algobuddy.gui;
 
-import com.algobuddy.graphalgos.Dijkstra;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,7 +15,7 @@ import java.util.List;
  * @author nebir, nazrul
  */
 public class Node {
-
+    
     private Point p;
     private static final int RADIUS = 23;
     private final Color nodeColor = new Color(108, 180, 64);
@@ -25,7 +24,7 @@ public class Node {
     private Rectangle boundary = new Rectangle();
     protected static LinkedHashSet<Node> selectedNodes = new LinkedHashSet<>();
     private int nodeNumber;
-
+    
     public Node(Point p) {
         if (p.x > GraphBoard.getPaintingBoundary().width - 350) {
             p.x = GraphBoard.getPaintingBoundary().width - 350;
@@ -173,6 +172,7 @@ public class Node {
                 Point p = n.getLocation();
                 int r = Node.getRadius();
                 n.boundary.setBounds(p.x - r, p.y - r, 2 * r, 2 * r);
+                Edge.updateAllBounds(GraphBoard.edges, n);
             }
         }
     }

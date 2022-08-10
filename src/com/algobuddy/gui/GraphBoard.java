@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
-import org.javatuples.Pair;
 
 /**
  *
@@ -26,7 +25,8 @@ public class GraphBoard extends javax.swing.JPanel {
     private static boolean addingEdges = false;
     private static boolean addingNodes = true;
     private static boolean directed = false;
-    private static boolean playing = false;;
+    private static boolean playing = false;
+    ;
     private static int speed = 1650;
     private static Dimension paintingBoundary;
     private static String currentAlgo = "";
@@ -83,6 +83,9 @@ public class GraphBoard extends javax.swing.JPanel {
                     && mousePt.y > 24 && mousePt.y < paintingBoundary.height - 126) {
                 if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                     Node.toggleSource(nodes, mousePt);
+                    if (getCurrentAlgo() == "Dijkstra") {
+                        Edge.setWeight(edges, mousePt);
+                    }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     if (addingEdges) {
                         if (Node.selectedNodes.size() >= 2) {

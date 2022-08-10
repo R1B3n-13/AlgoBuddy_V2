@@ -70,55 +70,33 @@ public class Dijkstra extends GraphBoard {
         }
 
         for (i = coefficient; i < 32; i++) {
-            g2d.setColor(new Color(161, 131, 199));
-            g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-            g2d.drawString(String.valueOf((char) (i + 59)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 96);
-
             g2d.setStroke(new BasicStroke(2));
-
             if ((i & 1) > 0) {
                 g2d.setColor(new Color(154, 192, 230));
             } else {
                 g2d.setColor(new Color(151, 188, 226));
             }
-            g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 83, (getWidth() - 760) / 26, 27);
 
-            g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 38, (getWidth() - 760) / 26, 27);
+            g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 79, (getWidth() - 760) / 26, 27);
 
             if (!isPlaying()) {
-                if (getSource() != null && i != getSource().getNodeNum() + coefficient) {
+                if (getSource() == null) {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    if (i - coefficient < nodes.size()) {
-                        g2d.drawString("∞", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-                    } else {
-                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-                    }
-                } else if (getSource() == null) {
-                    g2d.setColor(new Color(0, 22, 40));
-                    g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    if (i - coefficient < nodes.size()) {
-                        g2d.drawString("∞", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-                    } else {
-                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-                    }
-
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
                 }
 
                 if (getSource() != null && i != coefficient) {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
                 }
             }
         }
 
         g2d.setColor(new Color(161, 131, 199));
         g2d.setFont(new Font("Consolas", Font.ITALIC, 18));
-        g2d.drawString("Distance:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-
-        g2d.drawString("Min Heap:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+        g2d.drawString("Min Heap:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
 
         if (getSource() != null) {
             l1 = false;
@@ -134,11 +112,7 @@ public class Dijkstra extends GraphBoard {
                 g2d.setColor(Color.RED);
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (getSource().getNodeNum() + 65)),
-                        coefficient * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
-
-                g2d.setColor(Color.RED);
-                g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                g2d.drawString("0", (getSource().getNodeNum() + coefficient) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                        coefficient * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
             }
         } else {
             l1 = true;
@@ -153,35 +127,17 @@ public class Dijkstra extends GraphBoard {
         }
 
         if (isPlaying()) {
-            for (i = coefficient; i < 33; i++) {
-                if (i - coefficient < nodes.size()) {
-                    if (dis[i - coefficient] != Integer.MAX_VALUE) {
-                        g2d.setColor(Color.RED);
-                        g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                        g2d.drawString(String.valueOf(dis[i - coefficient]), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-                    } else {
-                        g2d.setColor(new Color(0, 22, 40));
-                        g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                        g2d.drawString("∞", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-                    }
-                } else {
-                    g2d.setColor(new Color(0, 22, 40));
-                    g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-                }
-            }
-
             g2d.setColor(Color.RED);
             g2d.setFont(new Font("Consolas", Font.BOLD, 18));
             i = coefficient;
             for (Pair p : pq) {
                 Node n = (Node) p.getValue1();
-                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
                 i++;
             }
             g2d.setColor(new Color(0, 22, 40));
             while (i < 32) {
-                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
                 i++;
             }
 
@@ -219,7 +175,7 @@ public class Dijkstra extends GraphBoard {
                 g2d.setColor(new Color(234, 123, 114));
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (runningNode.getNodeNum() + 65)),
-                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
             }
         }
 
@@ -233,8 +189,22 @@ public class Dijkstra extends GraphBoard {
                     g2d.drawString("∞", n.getLocation().x - 5, n.getLocation().y - 27);
                 }
             } else {
-                g2d.drawString(getDistance(n), n.getLocation().x - 5, n.getLocation().y - 27);
+                String str = getDistance(n);
+                int N = str.length();
+                g2d.drawString(str, n.getLocation().x - N * 5, n.getLocation().y - 27);
             }
+        }
+
+        for (Edge e : edges) {
+            int X = (e.getNode1().getLocation().x + e.getNode2().getLocation().x) / 2;
+            int Y = (e.getNode1().getLocation().y + e.getNode2().getLocation().y) / 2;
+            String str = String.valueOf(e.getWeight());
+            int N = str.length();
+            g2d.setColor(new Color(119, 142, 209));
+            g2d.fillRect(X - N * 5 - 3, Y - 9, N * 10 + 6, 18);
+            g2d.setColor(new Color(0, 22, 40));
+            g2d.setFont(new Font("Casteller", Font.BOLD, 18));
+            g2d.drawString(str, X - N * 5, Y + 6);
         }
 
         g2d.setColor(new Color(177, 191, 222));
