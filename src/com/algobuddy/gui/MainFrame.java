@@ -606,7 +606,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(function, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(memButton)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         holder.setBackground(new java.awt.Color(255, 255, 255));
@@ -692,7 +692,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(run1)
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addContainerGap(388, Short.MAX_VALUE))
         );
 
         holder.add(fPanel, "card2");
@@ -733,7 +733,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextArea2.setBackground(new java.awt.Color(0, 16, 29));
         jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTextArea2.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         jTextArea2.setForeground(new java.awt.Color(182, 207, 216));
         jTextArea2.setRows(5);
         jTextArea2.setText("\nfunction fn(n,p) {\n  if (p == 0)\n    return 1\n  \n  if (p % 2 == 0)\n    return fn(n*n, p/2)\n  \n  return n * fn(n*n, (p-1)/2)\n}\n");
@@ -761,7 +761,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(fpPanelLayout.createSequentialGroup()
                         .addComponent(jLabel13)
-                        .addGap(119, 129, Short.MAX_VALUE))
+                        .addGap(119, 141, Short.MAX_VALUE))
                     .addGroup(fpPanelLayout.createSequentialGroup()
                         .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(fpPanelLayout.createSequentialGroup()
@@ -810,7 +810,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea3.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         jTextArea3.setForeground(new java.awt.Color(182, 207, 216));
         jTextArea3.setRows(5);
-        jTextArea3.setText("function fn(n,k) {\n/* given n items, how many \ndifferent possible subsets of k items\ncan be formed */\n \n  if (k == 0 || n == k)\n      return 1\n  \n  return fn(n-1, k-1) + fn(n-1, k)\n}");
+        jTextArea3.setText("\nfunction fn(n,k) {\n/* given n items, how many \ndifferent possible subsets of k items\ncan be formed */\n \n  if (k == 0 || n == k)\n      return 1\n  \n  return fn(n-1, k-1) + fn(n-1, k)\n}");
         jScrollPane3.setViewportView(jTextArea3);
 
         bc_n_label.setBackground(new java.awt.Color(255, 255, 255));
@@ -901,7 +901,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(bc_k_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(bc_run_button)
-                .addContainerGap(417, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         holder.add(bcPanel, "card4");
@@ -913,7 +913,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea4.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
         jTextArea4.setForeground(new java.awt.Color(182, 207, 216));
         jTextArea4.setRows(5);
-        jTextArea4.setText("function fn(i,j) {\n  // i-th char of a, j-th char of b\n\n  if (i == a.length ||  j == b.length)\n      return 0\n  \n  if (a[i] == b[j])\n      return 1+fn(i+1, j+1)\n  \n  return Math.max(\n      fn(i+1, j),\n      fn(i, j+1)\n  )\n}");
+        jTextArea4.setText("\nfunction fn(i,j) {\n  // i-th char of a, j-th char of b\n\n  if (i == a.length ||  j == b.length)\n      return 0\n  \n  if (a[i] == b[j])\n      return 1+fn(i+1, j+1)\n  \n  return Math.max(\n      fn(i+1, j),\n      fn(i, j+1)\n  )\n}");
         jTextArea4.setToolTipText("");
         jScrollPane4.setViewportView(jTextArea4);
 
@@ -1049,7 +1049,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(lcs_j_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lcs_run_button)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         holder.add(lcsPanel, "card5");

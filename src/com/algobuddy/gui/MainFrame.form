@@ -1230,7 +1230,7 @@
                             </Property>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Consolas" size="14" style="0"/>
+                              <Font name="Consolas" size="14" style="2"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="d8" green="cf" red="b6" type="rgb"/>
@@ -1368,7 +1368,7 @@
                               <Color blue="d8" green="cf" red="b6" type="rgb"/>
                             </Property>
                             <Property name="rows" type="int" value="5"/>
-                            <Property name="text" type="java.lang.String" value="function fn(n,k) {&#xa;/* given n items, how many &#xa;different possible subsets of k items&#xa;can be formed */&#xa; &#xa;  if (k == 0 || n == k)&#xa;      return 1&#xa;  &#xa;  return fn(n-1, k-1) + fn(n-1, k)&#xa;}"/>
+                            <Property name="text" type="java.lang.String" value="&#xa;function fn(n,k) {&#xa;/* given n items, how many &#xa;different possible subsets of k items&#xa;can be formed */&#xa; &#xa;  if (k == 0 || n == k)&#xa;      return 1&#xa;  &#xa;  return fn(n-1, k-1) + fn(n-1, k)&#xa;}"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -1597,7 +1597,7 @@
                               <Color blue="d8" green="cf" red="b6" type="rgb"/>
                             </Property>
                             <Property name="rows" type="int" value="5"/>
-                            <Property name="text" type="java.lang.String" value="function fn(i,j) {&#xa;  // i-th char of a, j-th char of b&#xa;&#xa;  if (i == a.length ||  j == b.length)&#xa;      return 0&#xa;  &#xa;  if (a[i] == b[j])&#xa;      return 1+fn(i+1, j+1)&#xa;  &#xa;  return Math.max(&#xa;      fn(i+1, j),&#xa;      fn(i, j+1)&#xa;  )&#xa;}"/>
+                            <Property name="text" type="java.lang.String" value="&#xa;function fn(i,j) {&#xa;  // i-th char of a, j-th char of b&#xa;&#xa;  if (i == a.length ||  j == b.length)&#xa;      return 0&#xa;  &#xa;  if (a[i] == b[j])&#xa;      return 1+fn(i+1, j+1)&#xa;  &#xa;  return Math.max(&#xa;      fn(i+1, j),&#xa;      fn(i, j+1)&#xa;  )&#xa;}"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                           </Properties>
                         </Component>
