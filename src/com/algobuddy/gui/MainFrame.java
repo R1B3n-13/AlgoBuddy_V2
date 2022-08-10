@@ -2,6 +2,13 @@ package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.Dijkstra;
+import com.algobuddy.recursionalgos.BinomialCoefficient;
+import com.algobuddy.recursionalgos.BinomialCoefficient_without_mem;
+import com.algobuddy.recursionalgos.FastPower;
+import com.algobuddy.recursionalgos.Fibo_without_mem;
+import com.algobuddy.recursionalgos.Fibonacci;
+import com.algobuddy.recursionalgos.LCS;
+import com.algobuddy.recursionalgos.LCS_without_mem;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatNightOwlIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,14 +26,17 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
@@ -43,6 +53,12 @@ public class MainFrame extends javax.swing.JFrame {
     private int prevX, prevY, extendedState = NORMAL;
     private Action enterAction;
     private static MainFrame mainFrame;
+
+    private int cur_id = 0;
+    private static int[] par2;
+    private static int[] lev2;
+    private static int[] val2;
+    private static ArrayList<ArrayList<Integer>> ind2;
 
     /**
      * Creates new form MainFrame
@@ -76,8 +92,8 @@ public class MainFrame extends javax.swing.JFrame {
         indexPanel = new keeptoo.KGradientPanel();
         indexLabel = new javax.swing.JLabel();
         goToGraphButton = new javax.swing.JButton();
-        goToSortButton = new javax.swing.JButton();
         goToRecursionButton = new javax.swing.JButton();
+        goToSortButton = new javax.swing.JButton();
         userManualButton = new javax.swing.JButton();
         graphIndexPanel = new keeptoo.KGradientPanel();
         graphIndexLabel = new javax.swing.JLabel();
@@ -87,6 +103,56 @@ public class MainFrame extends javax.swing.JFrame {
         goToMstButton = new javax.swing.JButton();
         algoOverviewPanel = new javax.swing.JPanel();
         simulationPanel = new com.algobuddy.gui.GraphPanel();
+        treeSimulationPanel = new javax.swing.JPanel();
+        comPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        function = new javax.swing.JComboBox<>();
+        memButton = new javax.swing.JRadioButton();
+        holder = new javax.swing.JPanel();
+        fPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        input = new javax.swing.JTextField();
+        run1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        fpPanel = new javax.swing.JPanel();
+        n_field = new javax.swing.JTextField();
+        run_button = new javax.swing.JButton();
+        p_field = new javax.swing.JTextField();
+        n_label = new javax.swing.JLabel();
+        p_label = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        bcPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        bc_n_label = new javax.swing.JLabel();
+        bc_k_label = new javax.swing.JLabel();
+        bc_n_field = new javax.swing.JTextField();
+        bc_k_field = new javax.swing.JTextField();
+        bc_run_button = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        lcsPanel = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lcs_a_field = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        lcs_b_field = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lcs_i_field = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        lcs_j_field = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        lcs_run_button = new javax.swing.JButton();
+        artPanel = new com.algobuddy.gui.recursionPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -175,7 +241,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(backLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 720, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1766, Short.MAX_VALUE)
                 .addComponent(minimizeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,7 +292,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(introPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(introPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(introGifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE))
+                        .addComponent(introGifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1832, Short.MAX_VALUE))
                     .addGroup(introPanelLayout.createSequentialGroup()
                         .addGap(227, 227, 227)
                         .addComponent(introTextLabel)
@@ -246,7 +312,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(introTextLabel)
                 .addGap(18, 18, 18)
                 .addComponent(introGifLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(664, Short.MAX_VALUE))
         );
 
         mainPanel.add(introPanel, "introPanel");
@@ -281,33 +347,38 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        goToSortButton.setBackground(new java.awt.Color(101, 89, 94, 50));
-        goToSortButton.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
-        goToSortButton.setForeground(new java.awt.Color(172, 179, 186));
-        goToSortButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/recursionTreeLogo.png"))); // NOI18N
-        goToSortButton.setText("Recursion Tree Builder");
-        goToSortButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
-        goToSortButton.setBorderPainted(false);
-        goToSortButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        goToSortButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        goToSortButton.setIconTextGap(14);
-        goToSortButton.setMaximumSize(new java.awt.Dimension(244, 72));
-        goToSortButton.setMinimumSize(new java.awt.Dimension(244, 72));
-        goToSortButton.setPreferredSize(new java.awt.Dimension(244, 72));
-
         goToRecursionButton.setBackground(new java.awt.Color(101, 89, 94, 50));
-        goToRecursionButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToRecursionButton.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
         goToRecursionButton.setForeground(new java.awt.Color(172, 179, 186));
-        goToRecursionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/sortLogo.png"))); // NOI18N
-        goToRecursionButton.setText("Sorting Algorithms");
+        goToRecursionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/recursionTreeLogo.png"))); // NOI18N
+        goToRecursionButton.setText("Recursion Tree Builder");
         goToRecursionButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         goToRecursionButton.setBorderPainted(false);
         goToRecursionButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        goToRecursionButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        goToRecursionButton.setIconTextGap(20);
+        goToRecursionButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        goToRecursionButton.setIconTextGap(14);
         goToRecursionButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToRecursionButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToRecursionButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToRecursionButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToRecursionButtonMouseClicked(evt);
+            }
+        });
+
+        goToSortButton.setBackground(new java.awt.Color(101, 89, 94, 50));
+        goToSortButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToSortButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToSortButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/sortLogo.png"))); // NOI18N
+        goToSortButton.setText("Sorting Algorithms");
+        goToSortButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
+        goToSortButton.setBorderPainted(false);
+        goToSortButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goToSortButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        goToSortButton.setIconTextGap(20);
+        goToSortButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToSortButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToSortButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
         userManualButton.setBackground(new java.awt.Color(101, 89, 94, 50));
         userManualButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -328,15 +399,15 @@ public class MainFrame extends javax.swing.JFrame {
         indexPanelLayout.setHorizontalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(indexPanelLayout.createSequentialGroup()
-                .addContainerGap(277, Short.MAX_VALUE)
+                .addContainerGap(800, Short.MAX_VALUE)
                 .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(userManualButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(goToGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(goToRecursionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(goToSortButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(goToRecursionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(indexLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(800, Short.MAX_VALUE))
         );
         indexPanelLayout.setVerticalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,12 +417,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(goToGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(goToRecursionButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToSortButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToRecursionButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userManualButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(584, Short.MAX_VALUE))
         );
 
         mainPanel.add(indexPanel, "indexPanel");
@@ -437,7 +508,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToMstButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(1257, Short.MAX_VALUE))
         );
         graphIndexPanelLayout.setVerticalGroup(
             graphIndexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +523,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToMstButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(623, Short.MAX_VALUE))
         );
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
@@ -464,17 +535,565 @@ public class MainFrame extends javax.swing.JFrame {
         algoOverviewPanel.setLayout(algoOverviewPanelLayout);
         algoOverviewPanelLayout.setHorizontalGroup(
             algoOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 1846, Short.MAX_VALUE)
         );
         algoOverviewPanelLayout.setVerticalGroup(
             algoOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 1032, Short.MAX_VALUE)
         );
 
         mainPanel.add(algoOverviewPanel, "bfsOverviewPanel");
 
         simulationPanel.setName("simulationPanel"); // NOI18N
         mainPanel.add(simulationPanel, "bfsSimulationPanel");
+
+        treeSimulationPanel.setBackground(new java.awt.Color(38, 112, 139));
+        treeSimulationPanel.setForeground(new java.awt.Color(255, 255, 255));
+        treeSimulationPanel.setName("treeSimulationPanel"); // NOI18N
+
+        comPanel.setBackground(new java.awt.Color(1, 22, 39));
+
+        jLabel1.setBackground(new java.awt.Color(1, 22, 39));
+        jLabel1.setFont(new java.awt.Font("Consolas", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel1.setText("Pre-defined Template :");
+
+        function.setBackground(new java.awt.Color(38, 112, 139));
+        function.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        function.setForeground(new java.awt.Color(182, 207, 216));
+        function.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibonacci", "Fast Power", "Binomial Coefficent", "Longest Common Subsequence" }));
+        function.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                functionActionPerformed(evt);
+            }
+        });
+
+        memButton.setBackground(new java.awt.Color(1, 22, 39));
+        memButton.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        memButton.setForeground(new java.awt.Color(182, 207, 216));
+        memButton.setSelected(true);
+        memButton.setText("Enable Memoization");
+        memButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        memButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/switchOn.png"))); // NOI18N
+        memButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                memButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout comPanelLayout = new javax.swing.GroupLayout(comPanel);
+        comPanel.setLayout(comPanelLayout);
+        comPanelLayout.setHorizontalGroup(
+            comPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comPanelLayout.createSequentialGroup()
+                .addGroup(comPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(comPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(comPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(function, 0, 250, Short.MAX_VALUE)))
+                    .addGroup(comPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(memButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        comPanelLayout.setVerticalGroup(
+            comPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(comPanelLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(function, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(memButton)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        holder.setBackground(new java.awt.Color(255, 255, 255));
+        holder.setLayout(new java.awt.CardLayout());
+
+        fPanel.setBackground(new java.awt.Color(1, 22, 39));
+
+        jTextArea1.setBackground(new java.awt.Color(0, 16, 29));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(182, 207, 216));
+        jTextArea1.setRows(5);
+        jTextArea1.setText("\nfunction fn(n) {\n  if (n == 0 || n == 1)\n    return n\n  \n  return fn(n-1) + fn(n-2)\n}");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        input.setBackground(new java.awt.Color(38, 112, 139));
+        input.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        input.setForeground(new java.awt.Color(182, 207, 216));
+        input.setText("12");
+
+        run1.setBackground(new java.awt.Color(255, 255, 255));
+        run1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        run1.setForeground(new java.awt.Color(0, 0, 0));
+        run1.setText("Run");
+        run1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                run1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setBackground(new java.awt.Color(1, 22, 39));
+        jLabel9.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel9.setText("n = ");
+
+        jLabel10.setBackground(new java.awt.Color(1, 22, 39));
+        jLabel10.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel10.setText("Recursive Function:");
+
+        jLabel11.setBackground(new java.awt.Color(1, 22, 39));
+        jLabel11.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel11.setText("Function Parameter:");
+
+        javax.swing.GroupLayout fPanelLayout = new javax.swing.GroupLayout(fPanel);
+        fPanel.setLayout(fPanelLayout);
+        fPanelLayout.setHorizontalGroup(
+            fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fPanelLayout.createSequentialGroup()
+                        .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(fPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(0, 145, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(fPanelLayout.createSequentialGroup()
+                        .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(run1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(fPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel10))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        fPanelLayout.setVerticalGroup(
+            fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(run1)
+                .addContainerGap(461, Short.MAX_VALUE))
+        );
+
+        holder.add(fPanel, "card2");
+
+        fpPanel.setBackground(new java.awt.Color(1, 22, 39));
+        fpPanel.setForeground(new java.awt.Color(0, 0, 0));
+        fpPanel.setPreferredSize(new java.awt.Dimension(335, 953));
+
+        n_field.setBackground(new java.awt.Color(38, 112, 139));
+        n_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        n_field.setForeground(new java.awt.Color(182, 207, 216));
+        n_field.setText("2");
+
+        run_button.setBackground(new java.awt.Color(255, 255, 255));
+        run_button.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        run_button.setForeground(new java.awt.Color(0, 0, 0));
+        run_button.setText("Run");
+        run_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                run_buttonActionPerformed(evt);
+            }
+        });
+
+        p_field.setBackground(new java.awt.Color(38, 112, 139));
+        p_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        p_field.setForeground(new java.awt.Color(182, 207, 216));
+        p_field.setText("5");
+
+        n_label.setBackground(new java.awt.Color(255, 255, 255));
+        n_label.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        n_label.setForeground(new java.awt.Color(182, 207, 216));
+        n_label.setText("n = ");
+
+        p_label.setBackground(new java.awt.Color(255, 255, 255));
+        p_label.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        p_label.setForeground(new java.awt.Color(182, 207, 216));
+        p_label.setText("p =");
+
+        jTextArea2.setBackground(new java.awt.Color(0, 16, 29));
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jTextArea2.setForeground(new java.awt.Color(182, 207, 216));
+        jTextArea2.setRows(5);
+        jTextArea2.setText("\nfunction fn(n,p) {\n  if (p == 0)\n    return 1\n  \n  if (p % 2 == 0)\n    return fn(n*n, p/2)\n  \n  return n * fn(n*n, (p-1)/2)\n}\n");
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel12.setText("Recursive Function:");
+
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel13.setText("Function Parameters:");
+
+        javax.swing.GroupLayout fpPanelLayout = new javax.swing.GroupLayout(fpPanel);
+        fpPanel.setLayout(fpPanelLayout);
+        fpPanelLayout.setHorizontalGroup(
+            fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fpPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fpPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(fpPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(119, 129, Short.MAX_VALUE))
+                    .addGroup(fpPanelLayout.createSequentialGroup()
+                        .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(fpPanelLayout.createSequentialGroup()
+                                .addComponent(n_label, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(n_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(fpPanelLayout.createSequentialGroup()
+                                .addComponent(p_label, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(p_field)))
+                            .addComponent(jLabel12))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        fpPanelLayout.setVerticalGroup(
+            fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fpPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(n_label, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(n_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(p_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(p_field))
+                .addGap(18, 18, 18)
+                .addComponent(run_button)
+                .addGap(453, 453, 453))
+        );
+
+        holder.add(fpPanel, "card3");
+
+        bcPanel.setBackground(new java.awt.Color(1, 22, 39));
+        bcPanel.setForeground(new java.awt.Color(0, 0, 0));
+        bcPanel.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+
+        jTextArea3.setBackground(new java.awt.Color(0, 16, 29));
+        jTextArea3.setColumns(20);
+        jTextArea3.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
+        jTextArea3.setForeground(new java.awt.Color(182, 207, 216));
+        jTextArea3.setRows(5);
+        jTextArea3.setText("function fn(n,k) {\n/* given n items, how many \ndifferent possible subsets of k items\ncan be formed */\n \n  if (k == 0 || n == k)\n      return 1\n  \n  return fn(n-1, k-1) + fn(n-1, k)\n}");
+        jScrollPane3.setViewportView(jTextArea3);
+
+        bc_n_label.setBackground(new java.awt.Color(255, 255, 255));
+        bc_n_label.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        bc_n_label.setForeground(new java.awt.Color(182, 207, 216));
+        bc_n_label.setText("n =");
+
+        bc_k_label.setBackground(new java.awt.Color(255, 255, 255));
+        bc_k_label.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        bc_k_label.setForeground(new java.awt.Color(182, 207, 216));
+        bc_k_label.setText("k =");
+
+        bc_n_field.setBackground(new java.awt.Color(38, 112, 139));
+        bc_n_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        bc_n_field.setForeground(new java.awt.Color(182, 207, 216));
+        bc_n_field.setText("5");
+
+        bc_k_field.setBackground(new java.awt.Color(38, 112, 139));
+        bc_k_field.setForeground(new java.awt.Color(182, 207, 216));
+        bc_k_field.setText("2");
+        bc_k_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bc_k_fieldActionPerformed(evt);
+            }
+        });
+
+        bc_run_button.setBackground(new java.awt.Color(255, 255, 255));
+        bc_run_button.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        bc_run_button.setForeground(new java.awt.Color(0, 0, 0));
+        bc_run_button.setText("Run");
+        bc_run_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bc_run_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel14.setText("Recursive Function");
+
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel15.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel15.setText("Function Parameters:");
+
+        javax.swing.GroupLayout bcPanelLayout = new javax.swing.GroupLayout(bcPanel);
+        bcPanel.setLayout(bcPanelLayout);
+        bcPanelLayout.setHorizontalGroup(
+            bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bcPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(bcPanelLayout.createSequentialGroup()
+                        .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addGroup(bcPanelLayout.createSequentialGroup()
+                                .addComponent(bc_n_label, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bc_n_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel15)
+                            .addGroup(bcPanelLayout.createSequentialGroup()
+                                .addComponent(bc_k_label, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bc_run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(bc_k_field))))
+                        .addGap(0, 135, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        bcPanelLayout.setVerticalGroup(
+            bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bcPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bc_n_label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bc_n_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bc_k_label, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bc_k_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(bc_run_button)
+                .addContainerGap(417, Short.MAX_VALUE))
+        );
+
+        holder.add(bcPanel, "card4");
+
+        lcsPanel.setBackground(new java.awt.Color(1, 22, 39));
+
+        jTextArea4.setBackground(new java.awt.Color(0, 16, 29));
+        jTextArea4.setColumns(20);
+        jTextArea4.setFont(new java.awt.Font("Consolas", 2, 14)); // NOI18N
+        jTextArea4.setForeground(new java.awt.Color(182, 207, 216));
+        jTextArea4.setRows(5);
+        jTextArea4.setText("function fn(i,j) {\n  // i-th char of a, j-th char of b\n\n  if (i == a.length ||  j == b.length)\n      return 0\n  \n  if (a[i] == b[j])\n      return 1+fn(i+1, j+1)\n  \n  return Math.max(\n      fn(i+1, j),\n      fn(i, j+1)\n  )\n}");
+        jTextArea4.setToolTipText("");
+        jScrollPane4.setViewportView(jTextArea4);
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel2.setText("Recursive Function ");
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel3.setText("a =");
+
+        lcs_a_field.setBackground(new java.awt.Color(38, 112, 139));
+        lcs_a_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        lcs_a_field.setForeground(new java.awt.Color(182, 207, 216));
+        lcs_a_field.setText("AGDUM");
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel4.setText("b = ");
+
+        lcs_b_field.setBackground(new java.awt.Color(38, 112, 139));
+        lcs_b_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        lcs_b_field.setForeground(new java.awt.Color(182, 207, 216));
+        lcs_b_field.setText("BAGDUM");
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel5.setText("Strings:");
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel6.setText("i = ");
+
+        lcs_i_field.setBackground(new java.awt.Color(38, 112, 139));
+        lcs_i_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        lcs_i_field.setForeground(new java.awt.Color(182, 207, 216));
+        lcs_i_field.setText("0");
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel7.setText("j =");
+
+        lcs_j_field.setBackground(new java.awt.Color(38, 112, 139));
+        lcs_j_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        lcs_j_field.setForeground(new java.awt.Color(182, 207, 216));
+        lcs_j_field.setText("0");
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(182, 207, 216));
+        jLabel8.setText("Function parameters");
+
+        lcs_run_button.setBackground(new java.awt.Color(255, 255, 255));
+        lcs_run_button.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        lcs_run_button.setForeground(new java.awt.Color(0, 0, 0));
+        lcs_run_button.setText("Run");
+        lcs_run_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lcs_run_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout lcsPanelLayout = new javax.swing.GroupLayout(lcsPanel);
+        lcsPanel.setLayout(lcsPanelLayout);
+        lcsPanelLayout.setHorizontalGroup(
+            lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lcsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lcsPanelLayout.createSequentialGroup()
+                        .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(lcsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lcs_run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(lcs_j_field, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel8)
+                            .addGroup(lcsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lcs_i_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(lcsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lcs_a_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(lcsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lcs_b_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 120, Short.MAX_VALUE))
+                    .addGroup(lcsPanelLayout.createSequentialGroup()
+                        .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(lcsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
+        );
+        lcsPanelLayout.setVerticalGroup(
+            lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lcsPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lcs_a_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lcs_b_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lcs_i_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lcs_j_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(lcs_run_button)
+                .addContainerGap(270, Short.MAX_VALUE))
+        );
+
+        holder.add(lcsPanel, "card5");
+
+        artPanel.setBackground(new java.awt.Color(1, 22, 39));
+
+        javax.swing.GroupLayout artPanelLayout = new javax.swing.GroupLayout(artPanel);
+        artPanel.setLayout(artPanelLayout);
+        artPanelLayout.setHorizontalGroup(
+            artPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1481, Short.MAX_VALUE)
+        );
+        artPanelLayout.setVerticalGroup(
+            artPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout treeSimulationPanelLayout = new javax.swing.GroupLayout(treeSimulationPanel);
+        treeSimulationPanel.setLayout(treeSimulationPanelLayout);
+        treeSimulationPanelLayout.setHorizontalGroup(
+            treeSimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(treeSimulationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(treeSimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(holder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(artPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        treeSimulationPanelLayout.setVerticalGroup(
+            treeSimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(treeSimulationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(treeSimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(artPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(treeSimulationPanelLayout.createSequentialGroup()
+                        .addComponent(comPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(holder, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        mainPanel.add(treeSimulationPanel, "treeSimulationPanel");
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -654,6 +1273,200 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_goToDijkstraButtonMouseClicked
 
+    private void functionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_functionActionPerformed
+        if (evt.getSource() == function) {
+            cur_id = function.getSelectedIndex();
+            if (cur_id == 0) {
+                holder.removeAll();
+                holder.add(fPanel);
+                holder.repaint();
+                holder.revalidate();
+            } else if (cur_id == 1) {
+                holder.removeAll();
+                holder.add(fpPanel);
+                holder.repaint();
+                holder.revalidate();
+            } else if (cur_id == 2) {
+                holder.removeAll();
+                holder.add(bcPanel);
+                holder.repaint();
+                holder.revalidate();
+            } else if (cur_id == 3) {
+                holder.removeAll();
+                holder.add(lcsPanel);
+                holder.repaint();
+                holder.revalidate();
+            }
+        }
+    }//GEN-LAST:event_functionActionPerformed
+
+    private void run1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_run1ActionPerformed
+
+        if (evt.getSource() == run1) {
+
+            int num;
+            try {
+                num = Integer.valueOf(input.getText());
+                if (memButton.isSelected()) {
+                    Fibonacci fb = new Fibonacci(num);
+                    ind2 = fb.getId1();
+                    par2 = fb.getPa1();
+                    lev2 = fb.getLev1();
+                    val2 = fb.getV1();
+
+                } else {
+                    Fibo_without_mem fb = new Fibo_without_mem(num);
+                    ind2 = fb.getId1();
+                    par2 = fb.getPa1();
+                    lev2 = fb.getLev1();
+                    val2 = fb.getV1();
+
+                }
+
+                if (ind2.size() >= 40) {
+                    JOptionPane.showMessageDialog(this, "More than 40 call!",
+                            "Error Message", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    artPanel.init();
+                }
+            } catch (NumberFormatException expc) {
+                JOptionPane.showMessageDialog(this, "Please input integer value!",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_run1ActionPerformed
+
+    private void run_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_run_buttonActionPerformed
+        if (evt.getSource() == run_button) {
+            int n, p;
+            //         artPanel.init1();
+            try {
+                n = Integer.valueOf(n_field.getText());
+                p = Integer.valueOf(p_field.getText());
+
+                FastPower fp = new FastPower(n, p);
+                ind2 = fp.getId1();
+                par2 = fp.getPa1();
+                lev2 = fp.getLev1();
+                val2 = fp.getV1();
+
+                if (n > 8 || p > 8) {
+                    JOptionPane.showMessageDialog(this, "n and p should be less than 9",
+                            "Error Message", JOptionPane.WARNING_MESSAGE);
+                } else if (ind2.size() >= 40) {
+                    JOptionPane.showMessageDialog(this, "More than 40 call!",
+                            "Error Message", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    artPanel.init();
+                }
+            } catch (NumberFormatException expc) {
+                JOptionPane.showMessageDialog(this, "Please input integer value!",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_run_buttonActionPerformed
+
+    private void bc_k_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bc_k_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bc_k_fieldActionPerformed
+
+    private void bc_run_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bc_run_buttonActionPerformed
+        if (evt.getSource() == bc_run_button) {
+            int n, k;
+            try {
+                n = Integer.valueOf(bc_n_field.getText());
+                k = Integer.valueOf(bc_k_field.getText());
+                if (memButton.isSelected()) {
+                    BinomialCoefficient bc = new BinomialCoefficient(n, k);
+                    ind2 = bc.getId1();
+                    par2 = bc.getPa1();
+                    lev2 = bc.getLev1();
+                    val2 = bc.getV1();
+                } else {
+                    BinomialCoefficient_without_mem bc = new BinomialCoefficient_without_mem(n, k);
+                    ind2 = bc.getId1();
+                    par2 = bc.getPa1();
+                    lev2 = bc.getLev1();
+                    val2 = bc.getV1();
+                }
+                if (ind2.size() >= 40) {
+                    JOptionPane.showMessageDialog(this, "More than 40 call!",
+                            "Error Message", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    artPanel.init();
+                }
+
+            } catch (NumberFormatException expc) {
+                JOptionPane.showMessageDialog(this, "Please input integer value!",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_bc_run_buttonActionPerformed
+
+    private void lcs_run_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lcs_run_buttonActionPerformed
+        if (evt.getSource() == lcs_run_button) {
+            int i, j;
+            String a, b;
+            try {
+                a = lcs_a_field.getText();
+                b = lcs_b_field.getText();
+                i = Integer.valueOf(lcs_i_field.getText());
+                j = Integer.valueOf(lcs_j_field.getText());
+
+                if (memButton.isSelected()) {
+                    LCS lc = new LCS(a, b, i, j);
+                    ind2 = lc.getId1();
+                    par2 = lc.getPa1();
+                    lev2 = lc.getLev1();
+                    val2 = lc.getV1();
+                } else {
+                    LCS_without_mem lc = new LCS_without_mem(a, b, i, j);
+                    ind2 = lc.getId1();
+                    par2 = lc.getPa1();
+                    lev2 = lc.getLev1();
+                    val2 = lc.getV1();
+                }
+
+                if (ind2.size() >= 40) {
+                    JOptionPane.showMessageDialog(this, "More than 40 call!",
+                            "Error Message", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    artPanel.init();
+                }
+
+            } catch (NumberFormatException expc) {
+                JOptionPane.showMessageDialog(this, "Please input integer value!",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lcs_run_buttonActionPerformed
+
+    private void goToRecursionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToRecursionButtonMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            mainPanel.nextSlidingPanel(10, treeSimulationPanel, JSlidingPane.Direction.Left);
+            titleBar.setBackground(new Color(1, 22, 39));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(1, 22, 39)));
+            nextLabel.setVisible(false);
+        }
+    }//GEN-LAST:event_goToRecursionButtonMouseClicked
+
+    private void memButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memButtonActionPerformed
+        if (memButton.isSelected()) {
+            memButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOn.png"));
+        } else {
+            memButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+        }
+    }//GEN-LAST:event_memButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -796,10 +1609,37 @@ public class MainFrame extends javax.swing.JFrame {
         return mainPanel;
     }
 
+    static ArrayList<ArrayList<Integer>> getIndex() {
+        return ind2;
+    }
+
+    static int[] getPar() {
+        return par2;
+    }
+
+    static int[] getLev() {
+        return lev2;
+    }
+
+    static int[] getVal() {
+        return val2;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel algoOverviewPanel;
+    private com.algobuddy.gui.recursionPanel artPanel;
     private javax.swing.JLabel backLabel;
+    private javax.swing.JPanel bcPanel;
+    private javax.swing.JTextField bc_k_field;
+    private javax.swing.JLabel bc_k_label;
+    private javax.swing.JTextField bc_n_field;
+    private javax.swing.JLabel bc_n_label;
+    private javax.swing.JButton bc_run_button;
     private javax.swing.JLabel closeLabel;
+    private javax.swing.JPanel comPanel;
+    private javax.swing.JPanel fPanel;
+    private javax.swing.JPanel fpPanel;
+    private javax.swing.JComboBox<String> function;
     private javax.swing.JButton goToBfsButton;
     private javax.swing.JButton goToDfsButton;
     private javax.swing.JButton goToDijkstraButton;
@@ -809,17 +1649,56 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton goToSortButton;
     private javax.swing.JLabel graphIndexLabel;
     private keeptoo.KGradientPanel graphIndexPanel;
+    private javax.swing.JPanel holder;
     private javax.swing.JLabel indexLabel;
     private keeptoo.KGradientPanel indexPanel;
+    private javax.swing.JTextField input;
     private javax.swing.JLabel introGifLabel;
     private javax.swing.JLabel introLogoLabel;
     private keeptoo.KGradientPanel introPanel;
     private javax.swing.JLabel introTextLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JPanel lcsPanel;
+    private javax.swing.JTextField lcs_a_field;
+    private javax.swing.JTextField lcs_b_field;
+    private javax.swing.JTextField lcs_i_field;
+    private javax.swing.JTextField lcs_j_field;
+    private javax.swing.JButton lcs_run_button;
     private static com.algobuddy.gui.JSlidingPane mainPanel;
+    private javax.swing.JRadioButton memButton;
     private javax.swing.JLabel minimizeLabel;
+    private javax.swing.JTextField n_field;
+    private javax.swing.JLabel n_label;
     private javax.swing.JLabel nextLabel;
+    private javax.swing.JTextField p_field;
+    private javax.swing.JLabel p_label;
+    private javax.swing.JButton run1;
+    private javax.swing.JButton run_button;
     private com.algobuddy.gui.GraphPanel simulationPanel;
     private javax.swing.JPanel titleBar;
+    private javax.swing.JPanel treeSimulationPanel;
     private javax.swing.JButton userManualButton;
     // End of variables declaration//GEN-END:variables
 }
