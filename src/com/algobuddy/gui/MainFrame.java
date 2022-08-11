@@ -1328,6 +1328,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             } else {
                 fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                function.setEnabled(false);
                 int num;
                 try {
                     num = Integer.valueOf(input.getText());
@@ -1375,6 +1376,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             } else {
                 fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                function.setEnabled(false);
                 int n, p;
                 try {
                     n = Integer.valueOf(n_field.getText());
@@ -1417,6 +1419,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             } else {
                 bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                function.setEnabled(false);
                 int n, k;
                 try {
                     n = Integer.valueOf(bc_n_field.getText());
@@ -1462,6 +1465,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         } else {
             lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+            function.setEnabled(false);
             int i, j;
             String a, b;
             try {

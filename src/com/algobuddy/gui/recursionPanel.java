@@ -333,6 +333,15 @@ public class recursionPanel extends javax.swing.JPanel {
 
         create();
     }
+    
+    public void reset() {
+        fl1 = false;
+        for (int i = 0; i < index.size(); i++) {
+            is_visited[i] = 0;
+        }
+        repaint();
+        isPlaying = false;
+    }
 
     ArrayList<JLabel> arr = new ArrayList<>();
     JLabel label = new JLabel();
