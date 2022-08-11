@@ -676,17 +676,17 @@ public class MainFrame extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(fPanelLayout.createSequentialGroup()
                         .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(fPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fPanelLayout.createSequentialGroup()
-                        .addComponent(fiboRunLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(fiboResetLabel)
-                        .addGap(233, 233, 233))))
+                            .addComponent(jLabel10)
+                            .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(fPanelLayout.createSequentialGroup()
+                                    .addComponent(fiboRunLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(fiboResetLabel))
+                                .addGroup(fPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         fPanelLayout.setVerticalGroup(
             fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1427,6 +1427,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             } else {
                 fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
                 function.setEnabled(false);
                 int n, p;
                 try {
@@ -1470,6 +1471,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             } else {
                 bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
                 function.setEnabled(false);
                 int n, k;
                 try {
@@ -1517,6 +1519,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             } else {
                 lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
                 function.setEnabled(false);
                 int i, j;
                 String a, b;

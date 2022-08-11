@@ -340,6 +340,7 @@ public class recursionPanel extends javax.swing.JPanel {
     }
 
     public void reset() {
+        recursionWorker.cancel(true);
         fl1 = false;
         for (int i = 0; i < index.size(); i++) {
             is_visited[i] = 0;
