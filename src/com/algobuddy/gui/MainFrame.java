@@ -1699,7 +1699,7 @@ public class MainFrame extends javax.swing.JFrame {
     private com.algobuddy.gui.recursionPanel artPanel;
     private javax.swing.JLabel backLabel;
     private javax.swing.JPanel bcPanel;
-    private javax.swing.JLabel bcRunLabel;
+    public static javax.swing.JLabel bcRunLabel;
     private javax.swing.JTextField bc_k_field;
     private javax.swing.JLabel bc_k_label;
     private javax.swing.JTextField bc_n_field;
@@ -1707,9 +1707,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel closeLabel;
     private javax.swing.JPanel comPanel;
     private javax.swing.JPanel fPanel;
-    private javax.swing.JLabel fastPowerRunLabel;
+    public static javax.swing.JLabel fastPowerRunLabel;
     private javax.swing.JLabel fiboResetLabel;
-    private javax.swing.JLabel fiboRunLabel;
+    public static javax.swing.JLabel fiboRunLabel;
     private javax.swing.JPanel fpPanel;
     private javax.swing.JComboBox<String> function;
     private javax.swing.JButton goToBfsButton;
@@ -1753,7 +1753,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JPanel lcsPanel;
-    private javax.swing.JLabel lcsRunLabel;
+    public static javax.swing.JLabel lcsRunLabel;
     private javax.swing.JTextField lcs_a_field;
     private javax.swing.JTextField lcs_b_field;
     private javax.swing.JTextField lcs_i_field;

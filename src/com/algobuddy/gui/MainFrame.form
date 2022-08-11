@@ -1060,6 +1060,9 @@
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fiboRunLabelMouseClicked"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="fiboResetLabel">
                       <Properties>
@@ -1273,6 +1276,9 @@
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fastPowerRunLabelMouseClicked"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1471,6 +1477,9 @@
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bcRunLabelMouseClicked"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1764,6 +1773,9 @@
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lcsRunLabelMouseClicked"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>

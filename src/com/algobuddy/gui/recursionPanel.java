@@ -101,10 +101,10 @@ public class recursionPanel extends javax.swing.JPanel {
 
             @Override
             public void done() {
-            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
-            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
-            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
-            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                MainFrame.fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                MainFrame.fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                MainFrame.bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                MainFrame.lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
             }
         };
         recursionWorker.execute();
@@ -338,7 +338,7 @@ public class recursionPanel extends javax.swing.JPanel {
 
         create();
     }
-    
+
     public void reset() {
         fl1 = false;
         for (int i = 0; i < index.size(); i++) {
