@@ -1560,6 +1560,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void fiboResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fiboResetLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
             artPanel.reset();
+            function.setEnabled(true);
             fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
             fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
             bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
@@ -1572,15 +1573,48 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_fiboResetLabelMouseClicked
 
     private void fpResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fpResetLabelMouseClicked
-        // TODO add your handling code here:
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            artPanel.reset();
+            function.setEnabled(true);
+            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+        }
     }//GEN-LAST:event_fpResetLabelMouseClicked
 
     private void bcResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcResetLabelMouseClicked
-        // TODO add your handling code here:
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            artPanel.reset();
+            function.setEnabled(true);
+            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+        }
     }//GEN-LAST:event_bcResetLabelMouseClicked
 
     private void lcsResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lcsResetLabelMouseClicked
-        // TODO add your handling code here:
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            artPanel.reset();
+            function.setEnabled(true);
+            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+        }
     }//GEN-LAST:event_lcsResetLabelMouseClicked
 
     /**
