@@ -153,7 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lcs_run_button = new javax.swing.JButton();
         lcsRunLabel = new javax.swing.JLabel();
-        artPanel = new com.algobuddy.gui.RecursionPanel();
+        artPanel = new com.algobuddy.gui.recursionPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1368,12 +1368,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void fiboRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fiboRunLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            if (RecursionPanel.isPlaying) {
-                if (RecursionPanel.getRecursionWorker().isPaused()) {
-                    RecursionPanel.getRecursionWorker().resume();
+            if (recursionPanel.isPlaying) {
+                if (recursionPanel.getRecursionWorker().isPaused()) {
+                    recursionPanel.getRecursionWorker().resume();
                     fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
                 } else {
-                    RecursionPanel.getRecursionWorker().pause();
+                    recursionPanel.getRecursionWorker().pause();
                     fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
                 }
             } else {
@@ -1415,12 +1415,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void fastPowerRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fastPowerRunLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            if (RecursionPanel.isPlaying) {
-                if (RecursionPanel.getRecursionWorker().isPaused()) {
-                    RecursionPanel.getRecursionWorker().resume();
+            if (recursionPanel.isPlaying) {
+                if (recursionPanel.getRecursionWorker().isPaused()) {
+                    recursionPanel.getRecursionWorker().resume();
                     fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
                 } else {
-                    RecursionPanel.getRecursionWorker().pause();
+                    recursionPanel.getRecursionWorker().pause();
                     fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
                 }
             } else {
@@ -1457,12 +1457,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void bcRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcRunLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            if (RecursionPanel.isPlaying) {
-                if (RecursionPanel.getRecursionWorker().isPaused()) {
-                    RecursionPanel.getRecursionWorker().resume();
+            if (recursionPanel.isPlaying) {
+                if (recursionPanel.getRecursionWorker().isPaused()) {
+                    recursionPanel.getRecursionWorker().resume();
                     bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
                 } else {
-                    RecursionPanel.getRecursionWorker().pause();
+                    recursionPanel.getRecursionWorker().pause();
                     bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
                 }
             } else {
@@ -1665,7 +1665,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel algoOverviewPanel;
-    private com.algobuddy.gui.RecursionPanel artPanel;
+    private com.algobuddy.gui.recursionPanel artPanel;
     private javax.swing.JLabel backLabel;
     private javax.swing.JPanel bcPanel;
     private javax.swing.JLabel bcRunLabel;

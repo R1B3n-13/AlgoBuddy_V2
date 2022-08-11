@@ -11,24 +11,23 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author nebir, nazrul
+ * @author Nebir, Nazrul
  */
 public class recursionPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form recursionPanel
-     */
     private int panel_width, panel_height;
     private ArrayList<ArrayList<Integer>> index;
-    private int[] parent, value, level, x_, y_, is_visited; // is_visited = 0
+    private int[] parent, value, level, x_, y_, is_visited;
     private int node_diameter, art_campus, max_level, dif_bet_two_cons;
-    private boolean fl1 = false; // false
+    private boolean fl1 = false;
     private int string_flag = 0;
-    private int[][] edges; // edges = 0;
+    private int[][] edges;
     ArrayList<String> strs;
     private int art_speed;
     private String show;
     private Queue<Integer> Q1, Q2;
+    public static boolean isPlaying = false;
+    public static AlgoWorker<Void, Void> recursionWorker;
 
     public recursionPanel() {
         initComponents();
@@ -68,34 +67,35 @@ public class recursionPanel extends javax.swing.JPanel {
     int ktk = 0;
 
     void process_in_background() {
-        AlgoWorker<Void, Void> recursionWorker = new AlgoWorker<>() {
+        recursionWorker = new AlgoWorker<>() {
             @Override
             public Void doInBackground() throws InterruptedException {
-//            dfs(0, -1);
+                while (Q1.size() > 0 && !isCancelled()) {
+                    if (!isPaused()) {
+                        int node1 = Q1.remove(), node2 = Q2.remove();
+                        if (node1 > node2) {
+                            if (node2 != -1) {
+                                edges[node2][node1] = 1;
+                                string_flag = 1;
+                                show = "fn( " + strs.get(node2) + ") calls fn(" + strs.get(node1) + ")";
+                            }
+                            is_visited[node1] = 1;
+                        } else {
+                            if (node1 != -1) {
+                                edges[node1][node2] = 2;
+                            }
+                            string_flag = 2;
+                            show = "fn(" + strs.get(node2) + ") returns " + Integer.toString(value[node2]);
 
-                while (Q1.size() > 0) {
-                    int node1 = Q1.remove(), node2 = Q2.remove();
-                    if (node1 > node2) {
-                        if (node2 != -1) {
-                            edges[node2][node1] = 1;
-                            string_flag = 1;
-                            show = "fn(" + strs.get(node2) + ") calls fn(" + strs.get(node1) + ")";
                         }
-                        is_visited[node1] = 1;
+                        System.out.println(node1 + " " + node2);
+                        repaint();
+                        Thread.sleep(500);
                     } else {
-                        if (node1 != -1) {
-                            edges[node1][node2] = 2;
-                        }
-                        string_flag = 2;
-                        show = "fn(" + strs.get(node2) + ") returns " + Integer.toString(value[node2]);
-
+                        Thread.sleep(200);
                     }
-                    System.out.println(node1 + " " + node2);
-                    repaint();
-                    Thread.sleep(500);
                 }
-
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
@@ -248,7 +248,6 @@ public class recursionPanel extends javax.swing.JPanel {
         art_campus = panel_height - 100;
 
         fl1 = true;
-
         node_diameter = (art_campus) / ((int) (2 * (double) max_level) + 1);
 
         dif_bet_two_cons = node_diameter / 4;
@@ -330,9 +329,9 @@ public class recursionPanel extends javax.swing.JPanel {
         value = MainFrame.getVal();
         panel_width = this.getSize().width;
         panel_height = this.getSize().height;
+        isPlaying = true;
 
         create();
-
     }
 
     ArrayList<JLabel> arr = new ArrayList<>();
@@ -414,6 +413,10 @@ public class recursionPanel extends javax.swing.JPanel {
         }
         //------------for test------------------
 
+    }
+
+    public static AlgoWorker<Void, Void> getRecursionWorker() {
+        return recursionWorker;
     }
 
     /**
