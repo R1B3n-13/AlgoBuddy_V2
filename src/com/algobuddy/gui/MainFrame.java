@@ -117,6 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         fiboRunLabel = new javax.swing.JLabel();
+        fiboResetLabel = new javax.swing.JLabel();
         fpPanel = new javax.swing.JPanel();
         n_field = new javax.swing.JTextField();
         p_field = new javax.swing.JTextField();
@@ -649,6 +650,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        fiboResetLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/resetDisabled.png"))); // NOI18N
+        fiboResetLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fiboResetLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout fPanelLayout = new javax.swing.GroupLayout(fPanel);
         fPanel.setLayout(fPanelLayout);
         fPanelLayout.setHorizontalGroup(
@@ -665,16 +673,17 @@ public class MainFrame extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(fPanelLayout.createSequentialGroup()
                         .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(fPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(fPanelLayout.createSequentialGroup()
-                                    .addComponent(fiboRunLabel)
-                                    .addGap(40, 40, 40)))
+                            .addGroup(fPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fPanelLayout.createSequentialGroup()
+                        .addComponent(fiboRunLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(fiboResetLabel)
+                        .addGap(233, 233, 233))))
         );
         fPanelLayout.setVerticalGroup(
             fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -690,7 +699,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(fiboRunLabel)
+                .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fiboRunLabel)
+                    .addComponent(fiboResetLabel))
                 .addContainerGap(390, Short.MAX_VALUE))
         );
 
@@ -1328,6 +1339,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             } else {
                 fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
                 function.setEnabled(false);
                 int num;
                 try {
@@ -1455,54 +1467,70 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bcRunLabelMouseClicked
 
     private void lcsRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lcsRunLabelMouseClicked
-        if (recursionPanel.isPlaying) {
-            if (recursionPanel.getRecursionWorker().isPaused()) {
-                recursionPanel.getRecursionWorker().resume();
-                lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            if (recursionPanel.isPlaying) {
+                if (recursionPanel.getRecursionWorker().isPaused()) {
+                    recursionPanel.getRecursionWorker().resume();
+                    lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                } else {
+                    recursionPanel.getRecursionWorker().pause();
+                    lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                }
             } else {
-                recursionPanel.getRecursionWorker().pause();
-                lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            }
-        } else {
-            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
-            function.setEnabled(false);
-            int i, j;
-            String a, b;
-            try {
-                a = lcs_a_field.getText();
-                b = lcs_b_field.getText();
-                i = Integer.valueOf(lcs_i_field.getText());
-                j = Integer.valueOf(lcs_j_field.getText());
+                lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                function.setEnabled(false);
+                int i, j;
+                String a, b;
+                try {
+                    a = lcs_a_field.getText();
+                    b = lcs_b_field.getText();
+                    i = Integer.valueOf(lcs_i_field.getText());
+                    j = Integer.valueOf(lcs_j_field.getText());
 
-                if (memButton.isSelected()) {
-                    LCS lc = new LCS(a, b, i, j);
-                    ind2 = lc.getId1();
-                    par2 = lc.getPa1();
-                    lev2 = lc.getLev1();
-                    val2 = lc.getV1();
-                } else {
-                    LCS_without_mem lc = new LCS_without_mem(a, b, i, j);
-                    ind2 = lc.getId1();
-                    par2 = lc.getPa1();
-                    lev2 = lc.getLev1();
-                    val2 = lc.getV1();
+                    if (memButton.isSelected()) {
+                        LCS lc = new LCS(a, b, i, j);
+                        ind2 = lc.getId1();
+                        par2 = lc.getPa1();
+                        lev2 = lc.getLev1();
+                        val2 = lc.getV1();
+                    } else {
+                        LCS_without_mem lc = new LCS_without_mem(a, b, i, j);
+                        ind2 = lc.getId1();
+                        par2 = lc.getPa1();
+                        lev2 = lc.getLev1();
+                        val2 = lc.getV1();
+                    }
+
+                    if (ind2.size() >= 40) {
+                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                                "Error Message", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        artPanel.init();
+                    }
+
+                } catch (NumberFormatException expc) {
+                    JOptionPane.showMessageDialog(this, "Please input integer value!",
+                            "Error Message", JOptionPane.ERROR_MESSAGE);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                if (ind2.size() >= 40) {
-                    JOptionPane.showMessageDialog(this, "More than 40 call!",
-                            "Error Message", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    artPanel.init();
-                }
-
-            } catch (NumberFormatException expc) {
-                JOptionPane.showMessageDialog(this, "Please input integer value!",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_lcsRunLabelMouseClicked
+
+    private void fiboResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fiboResetLabelMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            artPanel.reset();
+            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+        }
+    }//GEN-LAST:event_fiboResetLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1680,6 +1708,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel comPanel;
     private javax.swing.JPanel fPanel;
     private javax.swing.JLabel fastPowerRunLabel;
+    private javax.swing.JLabel fiboResetLabel;
     private javax.swing.JLabel fiboRunLabel;
     private javax.swing.JPanel fpPanel;
     private javax.swing.JComboBox<String> function;

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.*;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -100,6 +101,10 @@ public class recursionPanel extends javax.swing.JPanel {
 
             @Override
             public void done() {
+            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
             }
         };
         recursionWorker.execute();
