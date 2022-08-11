@@ -128,6 +128,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         fastPowerRunLabel = new javax.swing.JLabel();
+        fpResetLabel = new javax.swing.JLabel();
         bcPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
@@ -138,6 +139,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         bcRunLabel = new javax.swing.JLabel();
+        bcResetLabel = new javax.swing.JLabel();
         lcsPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
@@ -153,6 +155,7 @@ public class MainFrame extends javax.swing.JFrame {
         lcs_j_field = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lcsRunLabel = new javax.swing.JLabel();
+        lcsResetLabel = new javax.swing.JLabel();
         artPanel = new com.algobuddy.gui.recursionPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -756,6 +759,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        fpResetLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/resetDisabled.png"))); // NOI18N
+        fpResetLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fpResetLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout fpPanelLayout = new javax.swing.GroupLayout(fpPanel);
         fpPanel.setLayout(fpPanelLayout);
         fpPanelLayout.setHorizontalGroup(
@@ -780,7 +790,10 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(p_label, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fastPowerRunLabel)
+                                    .addGroup(fpPanelLayout.createSequentialGroup()
+                                        .addComponent(fastPowerRunLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(fpResetLabel))
                                     .addComponent(p_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -802,7 +815,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(p_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(p_field))
                 .addGap(18, 18, 18)
-                .addComponent(fastPowerRunLabel)
+                .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fastPowerRunLabel)
+                    .addComponent(fpResetLabel))
                 .addGap(452, 452, 452))
         );
 
@@ -861,6 +876,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        bcResetLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/resetDisabled.png"))); // NOI18N
+        bcResetLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bcResetLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout bcPanelLayout = new javax.swing.GroupLayout(bcPanel);
         bcPanel.setLayout(bcPanelLayout);
         bcPanelLayout.setHorizontalGroup(
@@ -881,8 +903,11 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(bc_k_label, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bcRunLabel)
-                                    .addComponent(bc_k_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(bc_k_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bcPanelLayout.createSequentialGroup()
+                                        .addComponent(bcRunLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(bcResetLabel)))))
                         .addGap(0, 135, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -904,7 +929,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(bc_k_label, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bc_k_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(bcRunLabel)
+                .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bcRunLabel)
+                    .addComponent(bcResetLabel))
                 .addContainerGap(343, Short.MAX_VALUE))
         );
 
@@ -983,6 +1010,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        lcsResetLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/resetDisabled.png"))); // NOI18N
+        lcsResetLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lcsResetLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout lcsPanelLayout = new javax.swing.GroupLayout(lcsPanel);
         lcsPanel.setLayout(lcsPanelLayout);
         lcsPanelLayout.setHorizontalGroup(
@@ -1010,7 +1044,10 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lcsRunLabel)
+                                    .addGroup(lcsPanelLayout.createSequentialGroup()
+                                        .addComponent(lcsRunLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lcsResetLabel))
                                     .addComponent(lcs_j_field, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 120, Short.MAX_VALUE))
                     .addGroup(lcsPanelLayout.createSequentialGroup()
@@ -1049,7 +1086,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lcs_j_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lcsRunLabel)
+                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lcsRunLabel)
+                    .addComponent(lcsResetLabel))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
 
@@ -1532,6 +1571,18 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fiboResetLabelMouseClicked
 
+    private void fpResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fpResetLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fpResetLabelMouseClicked
+
+    private void bcResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcResetLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bcResetLabelMouseClicked
+
+    private void lcsResetLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lcsResetLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lcsResetLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1699,6 +1750,7 @@ public class MainFrame extends javax.swing.JFrame {
     private com.algobuddy.gui.recursionPanel artPanel;
     private javax.swing.JLabel backLabel;
     private javax.swing.JPanel bcPanel;
+    private javax.swing.JLabel bcResetLabel;
     public static javax.swing.JLabel bcRunLabel;
     private javax.swing.JTextField bc_k_field;
     private javax.swing.JLabel bc_k_label;
@@ -1711,6 +1763,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel fiboResetLabel;
     public static javax.swing.JLabel fiboRunLabel;
     private javax.swing.JPanel fpPanel;
+    private javax.swing.JLabel fpResetLabel;
     private javax.swing.JComboBox<String> function;
     private javax.swing.JButton goToBfsButton;
     private javax.swing.JButton goToDfsButton;
@@ -1753,6 +1806,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JPanel lcsPanel;
+    private javax.swing.JLabel lcsResetLabel;
     public static javax.swing.JLabel lcsRunLabel;
     private javax.swing.JTextField lcs_a_field;
     private javax.swing.JTextField lcs_b_field;

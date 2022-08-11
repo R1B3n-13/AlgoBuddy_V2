@@ -1120,7 +1120,11 @@
                                               <Component id="p_label" min="-2" pref="39" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="fastPowerRunLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="fastPowerRunLabel" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="fpResetLabel" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
                                                   <Component id="p_field" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -1151,7 +1155,10 @@
                                   <Component id="p_field" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="fastPowerRunLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="fastPowerRunLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fpResetLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace min="-2" pref="452" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1280,6 +1287,16 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="fpResetLabel">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/algobuddy/gui/img/resetDisabled.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fpResetLabelMouseClicked"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="bcPanel">
@@ -1320,8 +1337,12 @@
                                               <Component id="bc_k_label" min="-2" pref="40" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="bcRunLabel" min="-2" max="-2" attributes="0"/>
                                                   <Component id="bc_k_field" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="bcRunLabel" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="bcResetLabel" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1352,7 +1373,10 @@
                                   <Component id="bc_k_field" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="bcRunLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="bcRunLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bcResetLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace pref="343" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -1481,6 +1505,16 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="bcResetLabel">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/algobuddy/gui/img/resetDisabled.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bcResetLabelMouseClicked"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="lcsPanel">
@@ -1524,7 +1558,11 @@
                                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lcsRunLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lcsRunLabel" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="lcsResetLabel" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
                                                   <Component id="lcs_j_field" min="-2" pref="66" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -1577,7 +1615,10 @@
                                   <Component id="lcs_j_field" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lcsRunLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lcsRunLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lcsResetLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace pref="201" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -1776,6 +1817,16 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lcsResetLabel">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/algobuddy/gui/img/resetDisabled.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lcsResetLabelMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
