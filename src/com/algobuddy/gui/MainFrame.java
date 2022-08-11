@@ -113,13 +113,12 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         input = new javax.swing.JTextField();
-        run1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        fiboRunLabel = new javax.swing.JLabel();
         fpPanel = new javax.swing.JPanel();
         n_field = new javax.swing.JTextField();
-        run_button = new javax.swing.JButton();
         p_field = new javax.swing.JTextField();
         n_label = new javax.swing.JLabel();
         p_label = new javax.swing.JLabel();
@@ -127,6 +126,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        fastPowerRunLabel = new javax.swing.JLabel();
         bcPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
@@ -134,9 +134,9 @@ public class MainFrame extends javax.swing.JFrame {
         bc_k_label = new javax.swing.JLabel();
         bc_n_field = new javax.swing.JTextField();
         bc_k_field = new javax.swing.JTextField();
-        bc_run_button = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        bcRunLabel = new javax.swing.JLabel();
         lcsPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
@@ -152,7 +152,8 @@ public class MainFrame extends javax.swing.JFrame {
         lcs_j_field = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lcs_run_button = new javax.swing.JButton();
-        artPanel = new com.algobuddy.gui.recursionPanel();
+        lcsRunLabel = new javax.swing.JLabel();
+        artPanel = new com.algobuddy.gui.RecursionPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -627,16 +628,6 @@ public class MainFrame extends javax.swing.JFrame {
         input.setForeground(new java.awt.Color(182, 207, 216));
         input.setText("12");
 
-        run1.setBackground(new java.awt.Color(255, 255, 255));
-        run1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        run1.setForeground(new java.awt.Color(0, 0, 0));
-        run1.setText("Run");
-        run1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                run1ActionPerformed(evt);
-            }
-        });
-
         jLabel9.setBackground(new java.awt.Color(1, 22, 39));
         jLabel9.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(182, 207, 216));
@@ -651,6 +642,13 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(182, 207, 216));
         jLabel11.setText("Function Parameter:");
+
+        fiboRunLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
+        fiboRunLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fiboRunLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout fPanelLayout = new javax.swing.GroupLayout(fPanel);
         fPanel.setLayout(fPanelLayout);
@@ -669,11 +667,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(fPanelLayout.createSequentialGroup()
                         .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(run1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(fPanelLayout.createSequentialGroup()
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(fPanelLayout.createSequentialGroup()
+                                    .addComponent(fiboRunLabel)
+                                    .addGap(40, 40, 40)))
                             .addComponent(jLabel10))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -691,8 +691,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(run1)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addComponent(fiboRunLabel)
+                .addContainerGap(390, Short.MAX_VALUE))
         );
 
         holder.add(fPanel, "card2");
@@ -705,16 +705,6 @@ public class MainFrame extends javax.swing.JFrame {
         n_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         n_field.setForeground(new java.awt.Color(182, 207, 216));
         n_field.setText("2");
-
-        run_button.setBackground(new java.awt.Color(255, 255, 255));
-        run_button.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        run_button.setForeground(new java.awt.Color(0, 0, 0));
-        run_button.setText("Run");
-        run_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                run_buttonActionPerformed(evt);
-            }
-        });
 
         p_field.setBackground(new java.awt.Color(38, 112, 139));
         p_field.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -749,6 +739,13 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(182, 207, 216));
         jLabel13.setText("Function Parameters:");
 
+        fastPowerRunLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
+        fastPowerRunLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fastPowerRunLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout fpPanelLayout = new javax.swing.GroupLayout(fpPanel);
         fpPanel.setLayout(fpPanelLayout);
         fpPanelLayout.setHorizontalGroup(
@@ -768,13 +765,13 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(n_label, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(n_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12)
                             .addGroup(fpPanelLayout.createSequentialGroup()
                                 .addComponent(p_label, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(p_field)))
-                            .addComponent(jLabel12))
+                                .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fastPowerRunLabel)
+                                    .addComponent(p_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         fpPanelLayout.setVerticalGroup(
@@ -795,8 +792,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(p_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(p_field))
                 .addGap(18, 18, 18)
-                .addComponent(run_button)
-                .addGap(453, 453, 453))
+                .addComponent(fastPowerRunLabel)
+                .addGap(452, 452, 452))
         );
 
         holder.add(fpPanel, "card3");
@@ -837,16 +834,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        bc_run_button.setBackground(new java.awt.Color(255, 255, 255));
-        bc_run_button.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        bc_run_button.setForeground(new java.awt.Color(0, 0, 0));
-        bc_run_button.setText("Run");
-        bc_run_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bc_run_buttonActionPerformed(evt);
-            }
-        });
-
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(182, 207, 216));
@@ -856,6 +843,13 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(182, 207, 216));
         jLabel15.setText("Function Parameters:");
+
+        bcRunLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
+        bcRunLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bcRunLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout bcPanelLayout = new javax.swing.GroupLayout(bcPanel);
         bcPanel.setLayout(bcPanelLayout);
@@ -876,9 +870,9 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(bcPanelLayout.createSequentialGroup()
                                 .addComponent(bc_k_label, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(bc_run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(bc_k_field))))
+                                .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bcRunLabel)
+                                    .addComponent(bc_k_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 135, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -900,8 +894,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(bc_k_label, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bc_k_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(bc_run_button)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addComponent(bcRunLabel)
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         holder.add(bcPanel, "card4");
@@ -982,6 +976,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        lcsRunLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
+
         javax.swing.GroupLayout lcsPanelLayout = new javax.swing.GroupLayout(lcsPanel);
         lcsPanel.setLayout(lcsPanelLayout);
         lcsPanelLayout.setHorizontalGroup(
@@ -991,12 +987,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lcsPanelLayout.createSequentialGroup()
                         .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lcsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lcs_run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(lcs_j_field, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))
                             .addComponent(jLabel2)
                             .addComponent(jLabel8)
                             .addGroup(lcsPanelLayout.createSequentialGroup()
@@ -1010,7 +1000,15 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(lcsPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lcs_b_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lcs_b_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(lcsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lcsRunLabel)
+                                    .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lcs_run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(lcs_j_field, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))))
                         .addGap(0, 120, Short.MAX_VALUE))
                     .addGroup(lcsPanelLayout.createSequentialGroup()
                         .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1049,7 +1047,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(lcs_j_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lcs_run_button)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(lcsRunLabel)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         holder.add(lcsPanel, "card5");
@@ -1305,115 +1305,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_functionActionPerformed
 
-    private void run1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_run1ActionPerformed
-
-        if (evt.getSource() == run1) {
-
-            int num;
-            try {
-                num = Integer.valueOf(input.getText());
-                if (memButton.isSelected()) {
-                    Fibonacci fb = new Fibonacci(num);
-                    ind2 = fb.getId1();
-                    par2 = fb.getPa1();
-                    lev2 = fb.getLev1();
-                    val2 = fb.getV1();
-
-                } else {
-                    Fibo_without_mem fb = new Fibo_without_mem(num);
-                    ind2 = fb.getId1();
-                    par2 = fb.getPa1();
-                    lev2 = fb.getLev1();
-                    val2 = fb.getV1();
-
-                }
-
-                if (ind2.size() >= 40) {
-                    JOptionPane.showMessageDialog(this, "More than 40 call!",
-                            "Error Message", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    artPanel.init();
-                }
-            } catch (NumberFormatException expc) {
-                JOptionPane.showMessageDialog(this, "Please input integer value!",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }//GEN-LAST:event_run1ActionPerformed
-
-    private void run_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_run_buttonActionPerformed
-        if (evt.getSource() == run_button) {
-            int n, p;
-            //         artPanel.init1();
-            try {
-                n = Integer.valueOf(n_field.getText());
-                p = Integer.valueOf(p_field.getText());
-
-                FastPower fp = new FastPower(n, p);
-                ind2 = fp.getId1();
-                par2 = fp.getPa1();
-                lev2 = fp.getLev1();
-                val2 = fp.getV1();
-
-                if (n > 8 || p > 8) {
-                    JOptionPane.showMessageDialog(this, "n and p should be less than 9",
-                            "Error Message", JOptionPane.WARNING_MESSAGE);
-                } else if (ind2.size() >= 40) {
-                    JOptionPane.showMessageDialog(this, "More than 40 call!",
-                            "Error Message", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    artPanel.init();
-                }
-            } catch (NumberFormatException expc) {
-                JOptionPane.showMessageDialog(this, "Please input integer value!",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_run_buttonActionPerformed
-
     private void bc_k_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bc_k_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bc_k_fieldActionPerformed
-
-    private void bc_run_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bc_run_buttonActionPerformed
-        if (evt.getSource() == bc_run_button) {
-            int n, k;
-            try {
-                n = Integer.valueOf(bc_n_field.getText());
-                k = Integer.valueOf(bc_k_field.getText());
-                if (memButton.isSelected()) {
-                    BinomialCoefficient bc = new BinomialCoefficient(n, k);
-                    ind2 = bc.getId1();
-                    par2 = bc.getPa1();
-                    lev2 = bc.getLev1();
-                    val2 = bc.getV1();
-                } else {
-                    BinomialCoefficient_without_mem bc = new BinomialCoefficient_without_mem(n, k);
-                    ind2 = bc.getId1();
-                    par2 = bc.getPa1();
-                    lev2 = bc.getLev1();
-                    val2 = bc.getV1();
-                }
-                if (ind2.size() >= 40) {
-                    JOptionPane.showMessageDialog(this, "More than 40 call!",
-                            "Error Message", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    artPanel.init();
-                }
-
-            } catch (NumberFormatException expc) {
-                JOptionPane.showMessageDialog(this, "Please input integer value!",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_bc_run_buttonActionPerformed
 
     private void lcs_run_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lcs_run_buttonActionPerformed
         if (evt.getSource() == lcs_run_button) {
@@ -1471,6 +1365,141 @@ public class MainFrame extends javax.swing.JFrame {
             memButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
         }
     }//GEN-LAST:event_memButtonActionPerformed
+
+    private void fiboRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fiboRunLabelMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            if (RecursionPanel.isPlaying) {
+                if (RecursionPanel.getRecursionWorker().isPaused()) {
+                    RecursionPanel.getRecursionWorker().resume();
+                    fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                } else {
+                    RecursionPanel.getRecursionWorker().pause();
+                    fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                }
+            } else {
+                fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                int num;
+                try {
+                    num = Integer.valueOf(input.getText());
+                    if (memButton.isSelected()) {
+                        Fibonacci fb = new Fibonacci(num);
+                        ind2 = fb.getId1();
+                        par2 = fb.getPa1();
+                        lev2 = fb.getLev1();
+                        val2 = fb.getV1();
+
+                    } else {
+                        Fibo_without_mem fb = new Fibo_without_mem(num);
+                        ind2 = fb.getId1();
+                        par2 = fb.getPa1();
+                        lev2 = fb.getLev1();
+                        val2 = fb.getV1();
+
+                    }
+
+                    if (ind2.size() >= 40) {
+                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                                "Error Message", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        artPanel.init();
+                    }
+                } catch (NumberFormatException expc) {
+                    JOptionPane.showMessageDialog(this, "Please input integer value!",
+                            "Error Message", JOptionPane.ERROR_MESSAGE);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_fiboRunLabelMouseClicked
+
+    private void fastPowerRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fastPowerRunLabelMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            if (RecursionPanel.isPlaying) {
+                if (RecursionPanel.getRecursionWorker().isPaused()) {
+                    RecursionPanel.getRecursionWorker().resume();
+                    fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                } else {
+                    RecursionPanel.getRecursionWorker().pause();
+                    fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                }
+            } else {
+                fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                int n, p;
+                try {
+                    n = Integer.valueOf(n_field.getText());
+                    p = Integer.valueOf(p_field.getText());
+
+                    FastPower fp = new FastPower(n, p);
+                    ind2 = fp.getId1();
+                    par2 = fp.getPa1();
+                    lev2 = fp.getLev1();
+                    val2 = fp.getV1();
+
+                    if (n > 8 || p > 8) {
+                        JOptionPane.showMessageDialog(this, "n and p should be less than 9",
+                                "Error Message", JOptionPane.WARNING_MESSAGE);
+                    } else if (ind2.size() >= 40) {
+                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                                "Error Message", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        artPanel.init();
+                    }
+                } catch (NumberFormatException expc) {
+                    JOptionPane.showMessageDialog(this, "Please input integer value!",
+                            "Error Message", JOptionPane.ERROR_MESSAGE);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_fastPowerRunLabelMouseClicked
+
+    private void bcRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcRunLabelMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            if (RecursionPanel.isPlaying) {
+                if (RecursionPanel.getRecursionWorker().isPaused()) {
+                    RecursionPanel.getRecursionWorker().resume();
+                    bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                } else {
+                    RecursionPanel.getRecursionWorker().pause();
+                    bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                }
+            } else {
+                bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                int n, k;
+                try {
+                    n = Integer.valueOf(bc_n_field.getText());
+                    k = Integer.valueOf(bc_k_field.getText());
+                    if (memButton.isSelected()) {
+                        BinomialCoefficient bc = new BinomialCoefficient(n, k);
+                        ind2 = bc.getId1();
+                        par2 = bc.getPa1();
+                        lev2 = bc.getLev1();
+                        val2 = bc.getV1();
+                    } else {
+                        BinomialCoefficient_without_mem bc = new BinomialCoefficient_without_mem(n, k);
+                        ind2 = bc.getId1();
+                        par2 = bc.getPa1();
+                        lev2 = bc.getLev1();
+                        val2 = bc.getV1();
+                    }
+                    if (ind2.size() >= 40) {
+                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                                "Error Message", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        artPanel.init();
+                    }
+
+                } catch (NumberFormatException expc) {
+                    JOptionPane.showMessageDialog(this, "Please input integer value!",
+                            "Error Message", JOptionPane.ERROR_MESSAGE);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_bcRunLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1629,24 +1658,26 @@ public class MainFrame extends javax.swing.JFrame {
     static int[] getVal() {
         return val2;
     }
-    
-    public static GraphPanel getSimPanel(){
+
+    public static GraphPanel getSimPanel() {
         return simulationPanel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel algoOverviewPanel;
-    private com.algobuddy.gui.recursionPanel artPanel;
+    private com.algobuddy.gui.RecursionPanel artPanel;
     private javax.swing.JLabel backLabel;
     private javax.swing.JPanel bcPanel;
+    private javax.swing.JLabel bcRunLabel;
     private javax.swing.JTextField bc_k_field;
     private javax.swing.JLabel bc_k_label;
     private javax.swing.JTextField bc_n_field;
     private javax.swing.JLabel bc_n_label;
-    private javax.swing.JButton bc_run_button;
     private javax.swing.JLabel closeLabel;
     private javax.swing.JPanel comPanel;
     private javax.swing.JPanel fPanel;
+    private javax.swing.JLabel fastPowerRunLabel;
+    private javax.swing.JLabel fiboRunLabel;
     private javax.swing.JPanel fpPanel;
     private javax.swing.JComboBox<String> function;
     private javax.swing.JButton goToBfsButton;
@@ -1690,6 +1721,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JPanel lcsPanel;
+    private javax.swing.JLabel lcsRunLabel;
     private javax.swing.JTextField lcs_a_field;
     private javax.swing.JTextField lcs_b_field;
     private javax.swing.JTextField lcs_i_field;
@@ -1703,8 +1735,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel nextLabel;
     private javax.swing.JTextField p_field;
     private javax.swing.JLabel p_label;
-    private javax.swing.JButton run1;
-    private javax.swing.JButton run_button;
     private static com.algobuddy.gui.GraphPanel simulationPanel;
     private javax.swing.JPanel titleBar;
     private javax.swing.JPanel treeSimulationPanel;

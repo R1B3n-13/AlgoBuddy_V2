@@ -927,11 +927,14 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="run1" min="-2" pref="64" max="-2" attributes="0"/>
                                               <Group type="102" attributes="0">
                                                   <Component id="jLabel9" min="-2" pref="36" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="input" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="fiboRunLabel" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -957,8 +960,8 @@
                                   <Component id="input" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="run1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="388" max="32767" attributes="0"/>
+                              <Component id="fiboRunLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="390" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1003,23 +1006,6 @@
                         <Property name="text" type="java.lang.String" value="12"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="run1">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="0" red="0" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Run"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="run1ActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1062,6 +1048,16 @@
                         <Property name="text" type="java.lang.String" value="Function Parameter:"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="fiboRunLabel">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/algobuddy/gui/img/playEnabled.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fiboRunLabelMouseClicked"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="fpPanel">
@@ -1103,15 +1099,15 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="n_field" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="p_label" min="-2" pref="39" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="run_button" pref="0" max="32767" attributes="0"/>
-                                                  <Component id="p_field" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="fastPowerRunLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="p_field" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -1139,8 +1135,8 @@
                                   <Component id="p_field" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="run_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="453" max="-2" attributes="0"/>
+                              <Component id="fastPowerRunLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="452" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1159,23 +1155,6 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="2"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="run_button">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="0" red="0" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Run"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="run_buttonActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="p_field">
                       <Properties>
@@ -1272,6 +1251,16 @@
                         <Property name="text" type="java.lang.String" value="Function Parameters:"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="fastPowerRunLabel">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/algobuddy/gui/img/playEnabled.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fastPowerRunLabelMouseClicked"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="bcPanel">
@@ -1311,9 +1300,9 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="bc_k_label" min="-2" pref="40" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="bc_run_button" pref="0" max="32767" attributes="0"/>
-                                                  <Component id="bc_k_field" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="bcRunLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="bc_k_field" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1344,8 +1333,8 @@
                                   <Component id="bc_k_field" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="bc_run_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="344" max="32767" attributes="0"/>
+                              <Component id="bcRunLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="343" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1432,23 +1421,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bc_k_fieldActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="bc_run_button">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Consolas" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="0" red="0" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Run"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bc_run_buttonActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel14">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1477,6 +1449,16 @@
                         <Property name="text" type="java.lang.String" value="Function Parameters:"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="bcRunLabel">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/algobuddy/gui/img/playEnabled.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bcRunLabelMouseClicked"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="lcsPanel">
@@ -1499,14 +1481,6 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="lcs_run_button" pref="0" max="32767" attributes="0"/>
-                                                  <Component id="lcs_j_field" pref="66" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
                                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
@@ -1523,6 +1497,17 @@
                                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="lcs_b_field" min="-2" pref="180" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lcsRunLabel" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="lcs_run_button" pref="0" max="32767" attributes="0"/>
+                                                      <Component id="lcs_j_field" pref="66" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
@@ -1574,7 +1559,9 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lcs_run_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="197" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="lcsRunLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="131" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1777,11 +1764,18 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lcs_run_buttonActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="lcsRunLabel">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/algobuddy/gui/img/playEnabled.png"/>
+                        </Property>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="com.algobuddy.gui.recursionPanel" name="artPanel">
+            <Container class="com.algobuddy.gui.RecursionPanel" name="artPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="27" green="16" red="1" type="rgb"/>
