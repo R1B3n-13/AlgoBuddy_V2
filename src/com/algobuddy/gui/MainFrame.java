@@ -151,7 +151,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         lcs_j_field = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        lcs_run_button = new javax.swing.JButton();
         lcsRunLabel = new javax.swing.JLabel();
         artPanel = new com.algobuddy.gui.recursionPanel();
 
@@ -966,17 +965,12 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(182, 207, 216));
         jLabel8.setText("Function parameters");
 
-        lcs_run_button.setBackground(new java.awt.Color(255, 255, 255));
-        lcs_run_button.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        lcs_run_button.setForeground(new java.awt.Color(0, 0, 0));
-        lcs_run_button.setText("Run");
-        lcs_run_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lcs_run_buttonActionPerformed(evt);
+        lcsRunLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
+        lcsRunLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lcsRunLabelMouseClicked(evt);
             }
         });
-
-        lcsRunLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/playEnabled.png"))); // NOI18N
 
         javax.swing.GroupLayout lcsPanelLayout = new javax.swing.GroupLayout(lcsPanel);
         lcsPanel.setLayout(lcsPanelLayout);
@@ -1006,9 +1000,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lcsRunLabel)
-                                    .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lcs_run_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(lcs_j_field, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))))
+                                    .addComponent(lcs_j_field, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 120, Short.MAX_VALUE))
                     .addGroup(lcsPanelLayout.createSequentialGroup()
                         .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1046,10 +1038,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lcs_j_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lcs_run_button)
-                .addGap(42, 42, 42)
                 .addComponent(lcsRunLabel)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         holder.add(lcsPanel, "card5");
@@ -1309,46 +1299,6 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bc_k_fieldActionPerformed
 
-    private void lcs_run_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lcs_run_buttonActionPerformed
-        if (evt.getSource() == lcs_run_button) {
-            int i, j;
-            String a, b;
-            try {
-                a = lcs_a_field.getText();
-                b = lcs_b_field.getText();
-                i = Integer.valueOf(lcs_i_field.getText());
-                j = Integer.valueOf(lcs_j_field.getText());
-
-                if (memButton.isSelected()) {
-                    LCS lc = new LCS(a, b, i, j);
-                    ind2 = lc.getId1();
-                    par2 = lc.getPa1();
-                    lev2 = lc.getLev1();
-                    val2 = lc.getV1();
-                } else {
-                    LCS_without_mem lc = new LCS_without_mem(a, b, i, j);
-                    ind2 = lc.getId1();
-                    par2 = lc.getPa1();
-                    lev2 = lc.getLev1();
-                    val2 = lc.getV1();
-                }
-
-                if (ind2.size() >= 40) {
-                    JOptionPane.showMessageDialog(this, "More than 40 call!",
-                            "Error Message", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    artPanel.init();
-                }
-
-            } catch (NumberFormatException expc) {
-                JOptionPane.showMessageDialog(this, "Please input integer value!",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_lcs_run_buttonActionPerformed
-
     private void goToRecursionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToRecursionButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
             mainPanel.nextSlidingPanel(10, treeSimulationPanel, JSlidingPane.Direction.Left);
@@ -1500,6 +1450,55 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bcRunLabelMouseClicked
+
+    private void lcsRunLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lcsRunLabelMouseClicked
+        if (recursionPanel.isPlaying) {
+            if (recursionPanel.getRecursionWorker().isPaused()) {
+                recursionPanel.getRecursionWorker().resume();
+                lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+            } else {
+                recursionPanel.getRecursionWorker().pause();
+                lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            }
+        } else {
+            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+            int i, j;
+            String a, b;
+            try {
+                a = lcs_a_field.getText();
+                b = lcs_b_field.getText();
+                i = Integer.valueOf(lcs_i_field.getText());
+                j = Integer.valueOf(lcs_j_field.getText());
+
+                if (memButton.isSelected()) {
+                    LCS lc = new LCS(a, b, i, j);
+                    ind2 = lc.getId1();
+                    par2 = lc.getPa1();
+                    lev2 = lc.getLev1();
+                    val2 = lc.getV1();
+                } else {
+                    LCS_without_mem lc = new LCS_without_mem(a, b, i, j);
+                    ind2 = lc.getId1();
+                    par2 = lc.getPa1();
+                    lev2 = lc.getLev1();
+                    val2 = lc.getV1();
+                }
+
+                if (ind2.size() >= 40) {
+                    JOptionPane.showMessageDialog(this, "More than 40 call!",
+                            "Error Message", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    artPanel.init();
+                }
+
+            } catch (NumberFormatException expc) {
+                JOptionPane.showMessageDialog(this, "Please input integer value!",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lcsRunLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1726,7 +1725,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField lcs_b_field;
     private javax.swing.JTextField lcs_i_field;
     private javax.swing.JTextField lcs_j_field;
-    private javax.swing.JButton lcs_run_button;
     private static com.algobuddy.gui.JSlidingPane mainPanel;
     private javax.swing.JRadioButton memButton;
     private javax.swing.JLabel minimizeLabel;
