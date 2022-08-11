@@ -293,7 +293,7 @@ public class GraphPanel extends javax.swing.JPanel {
             if (GraphBoard.isPlaying() && enableVdoRadioButton.isSelected()) {
                 BorderLayout layout = (BorderLayout) this.getLayout();
                 Component comp = layout.getLayoutComponent(BorderLayout.CENTER);
-                ScreenRecorder recorder = new ScreenRecorder((JComponent) comp, vdoNameTextField.getText());
+                new ScreenRecorder((JComponent) comp, vdoNameTextField.getText());
             }
         }
     }//GEN-LAST:event_playLabelMouseClicked
