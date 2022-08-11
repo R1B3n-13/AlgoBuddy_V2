@@ -1629,6 +1629,10 @@ public class MainFrame extends javax.swing.JFrame {
     static int[] getVal() {
         return val2;
     }
+    
+    public static GraphPanel getSimPanel(){
+        return simulationPanel;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel algoOverviewPanel;
@@ -1701,7 +1705,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel p_label;
     private javax.swing.JButton run1;
     private javax.swing.JButton run_button;
-    private com.algobuddy.gui.GraphPanel simulationPanel;
+    private static com.algobuddy.gui.GraphPanel simulationPanel;
     private javax.swing.JPanel titleBar;
     private javax.swing.JPanel treeSimulationPanel;
     private javax.swing.JButton userManualButton;

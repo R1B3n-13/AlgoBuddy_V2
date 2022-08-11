@@ -2,12 +2,14 @@ package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.Dijkstra;
+import com.algobuddy.videorecorder.ScreenRecorder;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.ListIterator;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,6 +44,8 @@ public class GraphPanel extends javax.swing.JPanel {
         speedSlider = new javax.swing.JSlider();
         playLabel = new javax.swing.JLabel();
         resetLabel = new javax.swing.JLabel();
+        enableVdoRadioButton = new javax.swing.JRadioButton();
+        vdoNameTextField = new javax.swing.JTextField();
         graphHidePanel2 = new javax.swing.JPanel();
         graphHidePanel1 = new javax.swing.JPanel();
         graphHidePanel3 = new javax.swing.JPanel();
@@ -110,7 +114,7 @@ public class GraphPanel extends javax.swing.JPanel {
         disconnectNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         disconnectNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         disconnectNodesButton.setText("DISCONNECT");
-        disconnectNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        disconnectNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 77, 129)));
         disconnectNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         disconnectNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
         disconnectNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,7 +129,7 @@ public class GraphPanel extends javax.swing.JPanel {
         deleteNodesButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         deleteNodesButton.setForeground(new java.awt.Color(177, 191, 222));
         deleteNodesButton.setText("DELETE");
-        deleteNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        deleteNodesButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 77, 129)));
         deleteNodesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteNodesButton.setPreferredSize(new java.awt.Dimension(120, 21));
         deleteNodesButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,7 +144,7 @@ public class GraphPanel extends javax.swing.JPanel {
         clearAllButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         clearAllButton.setForeground(new java.awt.Color(177, 191, 222));
         clearAllButton.setText("CLEAR");
-        clearAllButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(177, 191, 222)));
+        clearAllButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(8, 77, 129)));
         clearAllButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clearAllButton.setPreferredSize(new java.awt.Dimension(120, 21));
         clearAllButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,7 +178,7 @@ public class GraphPanel extends javax.swing.JPanel {
             }
         });
         graphWestPanel.add(playLabel);
-        playLabel.setBounds(70, 260, 24, 24);
+        playLabel.setBounds(60, 260, 24, 24);
 
         resetLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/resetDisabled.png"))); // NOI18N
         resetLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -184,7 +188,30 @@ public class GraphPanel extends javax.swing.JPanel {
             }
         });
         graphWestPanel.add(resetLabel);
-        resetLabel.setBounds(110, 260, 24, 24);
+        resetLabel.setBounds(118, 260, 24, 24);
+
+        enableVdoRadioButton.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        enableVdoRadioButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        enableVdoRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        enableVdoRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        enableVdoRadioButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        enableVdoRadioButton.setIconTextGap(0);
+        enableVdoRadioButton.setMaximumSize(new java.awt.Dimension(24, 24));
+        enableVdoRadioButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        enableVdoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enableVdoRadioButtonActionPerformed(evt);
+            }
+        });
+        graphWestPanel.add(enableVdoRadioButton);
+        enableVdoRadioButton.setBounds(87, 260, 24, 24);
+
+        vdoNameTextField.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        vdoNameTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        vdoNameTextField.setText("FileName");
+        vdoNameTextField.setEnabled(false);
+        graphWestPanel.add(vdoNameTextField);
+        vdoNameTextField.setBounds(40, 300, 120, 26);
 
         graphHidePanel2.setBackground(new java.awt.Color(0, 22, 40));
         graphHidePanel2.setPreferredSize(new java.awt.Dimension(0, 800));
@@ -197,11 +224,11 @@ public class GraphPanel extends javax.swing.JPanel {
         );
         graphHidePanel2Layout.setVerticalGroup(
             graphHidePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 760, Short.MAX_VALUE)
         );
 
         graphWestPanel.add(graphHidePanel2);
-        graphHidePanel2.setBounds(0, 292, 180, 800);
+        graphHidePanel2.setBounds(0, 332, 180, 760);
 
         graphHidePanel1.setBackground(new java.awt.Color(0, 22, 40));
         graphHidePanel1.setPreferredSize(new java.awt.Dimension(0, 24));
@@ -210,7 +237,7 @@ public class GraphPanel extends javax.swing.JPanel {
         graphHidePanel1.setLayout(graphHidePanel1Layout);
         graphHidePanel1Layout.setHorizontalGroup(
             graphHidePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 180, Short.MAX_VALUE)
         );
         graphHidePanel1Layout.setVerticalGroup(
             graphHidePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,6 +290,11 @@ public class GraphPanel extends javax.swing.JPanel {
     private void playLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playLabelMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
             playLabelAction();
+            if (GraphBoard.isPlaying() && enableVdoRadioButton.isSelected()) {
+                BorderLayout layout = (BorderLayout) this.getLayout();
+                Component comp = layout.getLayoutComponent(BorderLayout.CENTER);
+                ScreenRecorder recorder = new ScreenRecorder((JComponent) comp, vdoNameTextField.getText());
+            }
         }
     }//GEN-LAST:event_playLabelMouseClicked
 
@@ -318,6 +350,14 @@ public class GraphPanel extends javax.swing.JPanel {
         int speed = 3300 - speedSlider.getValue();
         GraphBoard.setSpeed(speed);
     }//GEN-LAST:event_speedSliderStateChanged
+
+    private void enableVdoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableVdoRadioButtonActionPerformed
+        if (enableVdoRadioButton.isSelected()) {
+            vdoNameTextField.setEnabled(true);
+        } else {
+            vdoNameTextField.setEnabled(false);
+        }
+    }//GEN-LAST:event_enableVdoRadioButtonActionPerformed
 
     /**
      * Resets the graph panel to its initial state
@@ -522,6 +562,7 @@ public class GraphPanel extends javax.swing.JPanel {
     private javax.swing.JButton deleteNodesButton;
     private javax.swing.JRadioButton directedStateRadioButton;
     private javax.swing.JButton disconnectNodesButton;
+    private javax.swing.JRadioButton enableVdoRadioButton;
     private javax.swing.JPanel graphHidePanel1;
     private javax.swing.JPanel graphHidePanel2;
     private javax.swing.JPanel graphHidePanel3;
@@ -529,5 +570,6 @@ public class GraphPanel extends javax.swing.JPanel {
     private static javax.swing.JLabel playLabel;
     private static javax.swing.JLabel resetLabel;
     private static javax.swing.JSlider speedSlider;
+    private javax.swing.JTextField vdoNameTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,24 +11,20 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author Nebir, Nazrul
+ * @author nebir, nazrul
  */
 public class recursionPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form recursionPanel
      */
-    private int panel_width,
-            /**
-             * Creates new form recursionPanel
-             */
-            panel_height;
+    private int panel_width, panel_height;
     private ArrayList<ArrayList<Integer>> index;
-    private int[] parent, value, level, x_, y_, is_visited;
+    private int[] parent, value, level, x_, y_, is_visited; // is_visited = 0
     private int node_diameter, art_campus, max_level, dif_bet_two_cons;
-    private boolean fl1 = false;
+    private boolean fl1 = false; // false
     private int string_flag = 0;
-    private int[][] edges;
+    private int[][] edges; // edges = 0;
     ArrayList<String> strs;
     private int art_speed;
     private String show;
@@ -252,6 +248,7 @@ public class recursionPanel extends javax.swing.JPanel {
         art_campus = panel_height - 100;
 
         fl1 = true;
+
         node_diameter = (art_campus) / ((int) (2 * (double) max_level) + 1);
 
         dif_bet_two_cons = node_diameter / 4;
