@@ -118,6 +118,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         fiboRunLabel = new javax.swing.JLabel();
         fiboResetLabel = new javax.swing.JLabel();
+        jSlider1 = new javax.swing.JSlider();
         fpPanel = new javax.swing.JPanel();
         n_field = new javax.swing.JTextField();
         p_field = new javax.swing.JTextField();
@@ -129,6 +130,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         fastPowerRunLabel = new javax.swing.JLabel();
         fpResetLabel = new javax.swing.JLabel();
+        jSlider2 = new javax.swing.JSlider();
         bcPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
@@ -140,6 +142,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         bcRunLabel = new javax.swing.JLabel();
         bcResetLabel = new javax.swing.JLabel();
+        jSlider3 = new javax.swing.JSlider();
         lcsPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
@@ -156,6 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lcsRunLabel = new javax.swing.JLabel();
         lcsResetLabel = new javax.swing.JLabel();
+        jSlider4 = new javax.swing.JSlider();
         artPanel = new com.algobuddy.gui.recursionPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -660,6 +664,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jSlider1.setMaximum(3000);
+        jSlider1.setMinimum(300);
+        jSlider1.setValue(1650);
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout fPanelLayout = new javax.swing.GroupLayout(fPanel);
         fPanel.setLayout(fPanelLayout);
         fPanelLayout.setHorizontalGroup(
@@ -687,6 +700,10 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(fPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         fPanelLayout.setVerticalGroup(
             fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -705,7 +722,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(fPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(fiboRunLabel)
                     .addComponent(fiboResetLabel))
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(352, Short.MAX_VALUE))
         );
 
         holder.add(fPanel, "card2");
@@ -766,6 +785,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jSlider2.setMaximum(3000);
+        jSlider2.setMinimum(300);
+        jSlider2.setValue(1650);
+        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider2StateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout fpPanelLayout = new javax.swing.GroupLayout(fpPanel);
         fpPanel.setLayout(fpPanelLayout);
         fpPanelLayout.setHorizontalGroup(
@@ -796,6 +824,10 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addComponent(fpResetLabel))
                                     .addComponent(p_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(fpPanelLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         fpPanelLayout.setVerticalGroup(
             fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -818,7 +850,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(fpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fastPowerRunLabel)
                     .addComponent(fpResetLabel))
-                .addGap(452, 452, 452))
+                .addGap(18, 18, 18)
+                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(414, 414, 414))
         );
 
         holder.add(fpPanel, "card3");
@@ -883,6 +917,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jSlider3.setMaximum(3000);
+        jSlider3.setMinimum(300);
+        jSlider3.setValue(1650);
+        jSlider3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider3StateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout bcPanelLayout = new javax.swing.GroupLayout(bcPanel);
         bcPanel.setLayout(bcPanelLayout);
         bcPanelLayout.setHorizontalGroup(
@@ -910,6 +953,10 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addComponent(bcResetLabel)))))
                         .addGap(0, 135, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(bcPanelLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bcPanelLayout.setVerticalGroup(
             bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -932,7 +979,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(bcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bcRunLabel)
                     .addComponent(bcResetLabel))
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(305, Short.MAX_VALUE))
         );
 
         holder.add(bcPanel, "card4");
@@ -1017,6 +1066,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jSlider4.setMaximum(3000);
+        jSlider4.setMinimum(300);
+        jSlider4.setValue(1650);
+        jSlider4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider4StateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout lcsPanelLayout = new javax.swing.GroupLayout(lcsPanel);
         lcsPanel.setLayout(lcsPanelLayout);
         lcsPanelLayout.setHorizontalGroup(
@@ -1057,6 +1115,10 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
+            .addGroup(lcsPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         lcsPanelLayout.setVerticalGroup(
             lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1089,7 +1151,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(lcsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lcsRunLabel)
                     .addComponent(lcsResetLabel))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         holder.add(lcsPanel, "card5");
@@ -1161,11 +1225,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_titleBarMouseDragged
 
     private void minimizeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseExited
-        minimizeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\minimizeLabel.png"));
+        minimizeLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "minimizeLabel.png"));
     }//GEN-LAST:event_minimizeLabelMouseExited
 
     private void minimizeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseEntered
-        minimizeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\minimizeLabelHover.png"));
+        minimizeLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "minimizeLabelHover.png"));
     }//GEN-LAST:event_minimizeLabelMouseEntered
 
     private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
@@ -1176,11 +1240,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeLabelMouseClicked
 
     private void closeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseExited
-        closeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\closeLabel.png"));
+        closeLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "closeLabel.png"));
     }//GEN-LAST:event_closeLabelMouseExited
 
     private void closeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseEntered
-        closeLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\closeLabelHover.png"));
+        closeLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "closeLabelHover.png"));
     }//GEN-LAST:event_closeLabelMouseEntered
 
     private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
@@ -1197,11 +1261,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_introTextLabelMouseEntered
 
     private void backLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseEntered
-        backLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\backLabelHover.png"));
+        backLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "backLabelHover.png"));
     }//GEN-LAST:event_backLabelMouseEntered
 
     private void backLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseExited
-        backLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\backLabel.png"));
+        backLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "backLabel.png"));
     }//GEN-LAST:event_backLabelMouseExited
 
     private void backLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backLabelMouseClicked
@@ -1226,22 +1290,22 @@ public class MainFrame extends javax.swing.JFrame {
                 GraphBoard.setCurrentAlgo(null);
             }
             if (getCurrentComponentName(mainPanel).equals("simulationPanel")) {
-                if (GraphBoard.getCurrentAlgo() == "BFS") {
+                if ("BFS".equals(GraphBoard.getCurrentAlgo())) {
                     mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
                     titleBar.setBackground(new Color(57, 55, 55));
                     titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
                     nextLabel.setVisible(true);
-                    openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+                    openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
                     simulationPanel.reset();
                     BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
                     simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
                 }
-                if (GraphBoard.getCurrentAlgo() == "Dijkstra") {
+                if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
                     mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
                     titleBar.setBackground(new Color(57, 55, 55));
                     titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
                     nextLabel.setVisible(true);
-                    openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+                    openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
                     simulationPanel.reset();
                     BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
                     simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
@@ -1265,7 +1329,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void goToBfsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToBfsButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+            openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
             mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
             titleBar.setBackground(new Color(57, 55, 55));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
@@ -1275,16 +1339,16 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_goToBfsButtonMouseClicked
 
     private void nextLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseEntered
-        nextLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\nextLabelHover.png"));
+        nextLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "nextLabelHover.png"));
     }//GEN-LAST:event_nextLabelMouseEntered
 
     private void nextLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseExited
-        nextLabel.setIcon(new javax.swing.ImageIcon("src\\com\\algobuddy\\gui\\img\\nextLabel.png"));
+        nextLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "nextLabel.png"));
     }//GEN-LAST:event_nextLabelMouseExited
 
     private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
         if (getCurrentComponentName(mainPanel).equals("algoOverviewPanel")) {
-            if (GraphBoard.getCurrentAlgo() == "BFS") {
+            if ("BFS".equals(GraphBoard.getCurrentAlgo())) {
                 mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
                 simulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
                 titleBar.setBackground(new Color(0, 14, 26));
@@ -1292,7 +1356,7 @@ public class MainFrame extends javax.swing.JFrame {
                 nextLabel.setVisible(false);
                 algoOverviewPanel.removeAll();
             }
-            if (GraphBoard.getCurrentAlgo() == "Dijkstra") {
+            if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
                 mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
                 simulationPanel.add(new Dijkstra(), java.awt.BorderLayout.CENTER);
                 titleBar.setBackground(new Color(0, 14, 26));
@@ -1309,7 +1373,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void goToDijkstraButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToDijkstraButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            openHtml(algoOverviewPanel, "src\\com\\algobuddy\\gui\\html\\bfs.htm");
+            openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
             mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
             titleBar.setBackground(new Color(57, 55, 55));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
@@ -1321,26 +1385,33 @@ public class MainFrame extends javax.swing.JFrame {
     private void functionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_functionActionPerformed
         if (evt.getSource() == function) {
             cur_id = function.getSelectedIndex();
-            if (cur_id == 0) {
-                holder.removeAll();
-                holder.add(fPanel);
-                holder.repaint();
-                holder.revalidate();
-            } else if (cur_id == 1) {
-                holder.removeAll();
-                holder.add(fpPanel);
-                holder.repaint();
-                holder.revalidate();
-            } else if (cur_id == 2) {
-                holder.removeAll();
-                holder.add(bcPanel);
-                holder.repaint();
-                holder.revalidate();
-            } else if (cur_id == 3) {
-                holder.removeAll();
-                holder.add(lcsPanel);
-                holder.repaint();
-                holder.revalidate();
+            switch (cur_id) {
+                case 0 -> {
+                    holder.removeAll();
+                    holder.add(fPanel);
+                    holder.repaint();
+                    holder.revalidate();
+                }
+                case 1 -> {
+                    holder.removeAll();
+                    holder.add(fpPanel);
+                    holder.repaint();
+                    holder.revalidate();
+                }
+                case 2 -> {
+                    holder.removeAll();
+                    holder.add(bcPanel);
+                    holder.repaint();
+                    holder.revalidate();
+                }
+                case 3 -> {
+                    holder.removeAll();
+                    holder.add(lcsPanel);
+                    holder.repaint();
+                    holder.revalidate();
+                }
+                default -> {
+                }
             }
         }
     }//GEN-LAST:event_functionActionPerformed
@@ -1360,9 +1431,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void memButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memButtonActionPerformed
         if (memButton.isSelected()) {
-            memButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOn.png"));
+            memButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOn.png"));
         } else {
-            memButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+            memButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
         }
     }//GEN-LAST:event_memButtonActionPerformed
 
@@ -1371,14 +1442,14 @@ public class MainFrame extends javax.swing.JFrame {
             if (recursionPanel.isPlaying) {
                 if (recursionPanel.getRecursionWorker().isPaused()) {
                     recursionPanel.getRecursionWorker().resume();
-                    fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                    fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
                 } else {
                     recursionPanel.getRecursionWorker().pause();
-                    fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                    fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
                 }
             } else {
-                fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
-                fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
+                fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                fiboResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
                 function.setEnabled(false);
                 int num;
                 try {
@@ -1420,14 +1491,14 @@ public class MainFrame extends javax.swing.JFrame {
             if (recursionPanel.isPlaying) {
                 if (recursionPanel.getRecursionWorker().isPaused()) {
                     recursionPanel.getRecursionWorker().resume();
-                    fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                    fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
                 } else {
                     recursionPanel.getRecursionWorker().pause();
-                    fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                    fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
                 }
             } else {
-                fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
-                fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
+                fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                fpResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
                 function.setEnabled(false);
                 int n, p;
                 try {
@@ -1464,14 +1535,14 @@ public class MainFrame extends javax.swing.JFrame {
             if (recursionPanel.isPlaying) {
                 if (recursionPanel.getRecursionWorker().isPaused()) {
                     recursionPanel.getRecursionWorker().resume();
-                    bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                    bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
                 } else {
                     recursionPanel.getRecursionWorker().pause();
-                    bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                    bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
                 }
             } else {
-                bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
-                bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
+                bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                bcResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
                 function.setEnabled(false);
                 int n, k;
                 try {
@@ -1512,14 +1583,14 @@ public class MainFrame extends javax.swing.JFrame {
             if (recursionPanel.isPlaying) {
                 if (recursionPanel.getRecursionWorker().isPaused()) {
                     recursionPanel.getRecursionWorker().resume();
-                    lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                    lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
                 } else {
                     recursionPanel.getRecursionWorker().pause();
-                    lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                    lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
                 }
             } else {
-                lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
-                lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
+                lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                lcsResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
                 function.setEnabled(false);
                 int i, j;
                 String a, b;
@@ -1564,14 +1635,14 @@ public class MainFrame extends javax.swing.JFrame {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             artPanel.reset();
             function.setEnabled(true);
-            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fiboResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
         }
     }//GEN-LAST:event_fiboResetLabelMouseClicked
 
@@ -1579,14 +1650,14 @@ public class MainFrame extends javax.swing.JFrame {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             artPanel.reset();
             function.setEnabled(true);
-            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fiboResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
         }
     }//GEN-LAST:event_fpResetLabelMouseClicked
 
@@ -1594,14 +1665,14 @@ public class MainFrame extends javax.swing.JFrame {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             artPanel.reset();
             function.setEnabled(true);
-            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fiboResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
         }
     }//GEN-LAST:event_bcResetLabelMouseClicked
 
@@ -1609,16 +1680,32 @@ public class MainFrame extends javax.swing.JFrame {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             artPanel.reset();
             function.setEnabled(true);
-            fiboResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fpResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            bcResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            lcsResetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            fiboResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fpResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            bcResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            lcsResetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
         }
     }//GEN-LAST:event_lcsResetLabelMouseClicked
+
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+        artPanel.setRecursionSpeed(3300 - jSlider1.getValue());
+    }//GEN-LAST:event_jSlider1StateChanged
+
+    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
+        artPanel.setRecursionSpeed(3300 - jSlider1.getValue());
+    }//GEN-LAST:event_jSlider2StateChanged
+
+    private void jSlider3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider3StateChanged
+        artPanel.setRecursionSpeed(3300 - jSlider1.getValue());
+    }//GEN-LAST:event_jSlider3StateChanged
+
+    private void jSlider4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider4StateChanged
+        artPanel.setRecursionSpeed(3300 - jSlider1.getValue());
+    }//GEN-LAST:event_jSlider4StateChanged
 
     /**
      * @param args the command line arguments
@@ -1838,6 +1925,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSlider2;
+    private javax.swing.JSlider jSlider3;
+    private javax.swing.JSlider jSlider4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;

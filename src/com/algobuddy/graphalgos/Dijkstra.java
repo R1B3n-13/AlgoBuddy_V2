@@ -18,12 +18,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import org.javatuples.Pair;
 
 /**
@@ -38,9 +40,12 @@ public class Dijkstra extends GraphBoard {
     private boolean l1, l2, l3, l4, l5;
     private AlgoWorker<Void, Void> dijkstraWorker;
     private List<Pair<Node, Node>> processingNodes;
+    private Pair<Node, Node> runningEdge;
     private Node runningNode;
     private boolean completed = false;
     private int coefficient = 6;
+    private Timer animationTimer;
+    private double progress;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -147,17 +152,28 @@ public class Dijkstra extends GraphBoard {
                 Node n2 = (Node) p.getValue1();
 
                 if (isDirected()) {
-                    new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), new Color(218, 226, 237),
-                            new BasicStroke((float) 4), new BasicStroke(), 25);
+                    if (p.equals(runningEdge)) {
+                        new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), progress, new Color(218, 226, 237),
+                                new BasicStroke((float) 4), new BasicStroke(), 25);
+                    } else {
+                        new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), 1, new Color(218, 226, 237),
+                                new BasicStroke((float) 4), new BasicStroke(), 25);
+                    }
                 } else {
-                    new DrawLine(g2d, n1.getLocation(), n2.getLocation(), new Color(218, 226, 237), new BasicStroke(4));
+                    if (p.equals(runningEdge)) {
+                        new DrawLine(g2d, n1.getLocation(), n2.getLocation(), progress, new Color(218, 226, 237), new BasicStroke(4));
+                    } else {
+                        new DrawLine(g2d, n1.getLocation(), n2.getLocation(), 1, new Color(218, 226, 237), new BasicStroke(4));
+                    }
                 }
 
                 g2d.setColor(new Color(245, 204, 158));
                 g2d.fillOval(n1.getLocation().x - Node.getRadius(), n1.getLocation().y - Node.getRadius(),
                         2 * Node.getRadius(), 2 * Node.getRadius());
-                g2d.fillOval(n2.getLocation().x - Node.getRadius(), n2.getLocation().y - Node.getRadius(),
-                        2 * Node.getRadius(), 2 * Node.getRadius());
+                if (!p.equals(runningEdge) || progress >= 1) {
+                    g2d.fillOval(n2.getLocation().x - Node.getRadius(), n2.getLocation().y - Node.getRadius(),
+                            2 * Node.getRadius(), 2 * Node.getRadius());
+                }
 
                 g2d.setColor(new Color(0, 22, 40));
                 g2d.setFont(new Font("Casteller", Font.BOLD, 18));
@@ -260,6 +276,24 @@ public class Dijkstra extends GraphBoard {
         }
     }
 
+    private void startAnimationTimer() {
+        int delay = getSpeed() / 165;  // Set your desired delay (in milliseconds)
+        animationTimer = new Timer(delay, e -> {
+            progress += 0.01;
+            progress = Math.min(progress, 1);
+            repaint();
+        });
+        animationTimer.start();
+    }
+
+    private void stopAnimationTimer() {
+        if (animationTimer != null && animationTimer.isRunning()) {
+            animationTimer.stop();
+            progress = 0;
+            runningEdge = null;
+        }
+    }
+
     public void start() {
         if (getSource() == null) {
             JOptionPane.showMessageDialog(null,
@@ -267,8 +301,8 @@ public class Dijkstra extends GraphBoard {
                     "ERROR!",
                     JOptionPane.ERROR_MESSAGE);
             setPlayingState(false);
-            GraphPanel.getPlayLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            GraphPanel.getResetLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            GraphPanel.getResetLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
             repaint();
             return;
         }
@@ -292,7 +326,6 @@ public class Dijkstra extends GraphBoard {
             @Override
             public Void doInBackground() throws InterruptedException {
                 while (!pq.isEmpty() && !isCancelled()) {
-
                     if (!isPaused()) {
                         Pair p = pq.poll();
                         Node u = (Node) p.getValue1();
@@ -308,11 +341,15 @@ public class Dijkstra extends GraphBoard {
                                 Node v = (Node) q.getValue0();
                                 int w = (int) q.getValue1();
                                 if (dis[v.getNodeNum()] > dis[u.getNodeNum()] + w) {
-                                    dis[v.getNodeNum()] = dis[u.getNodeNum()] + w;
-                                    pq.add(Pair.with(dis[v.getNodeNum()], v));
+                                    runningEdge = new Pair<>(u, v);
                                     processingNodes.add(Pair.with(u, v));
                                     l5 = true;
                                     l1 = l2 = l4 = false;
+                                    startAnimationTimer();
+                                    waitFor(getSpeed());
+                                    stopAnimationTimer();
+                                    dis[v.getNodeNum()] = dis[u.getNodeNum()] + w;
+                                    pq.add(Pair.with(dis[v.getNodeNum()], v));
                                     repaint();
                                     waitFor(getSpeed());
                                 }
@@ -333,7 +370,7 @@ public class Dijkstra extends GraphBoard {
                 completed = true;
                 resetCode();
                 repaint();
-                GraphPanel.getPlayLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
             }
         };
         dijkstraWorker.execute();

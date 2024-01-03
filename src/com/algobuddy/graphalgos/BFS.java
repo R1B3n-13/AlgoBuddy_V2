@@ -15,12 +15,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import org.javatuples.Pair;
 
 /**
@@ -32,12 +34,16 @@ public class BFS extends GraphBoard {
     private Graph g;
     private Queue<Node> q;
     private boolean[] vis;
+    private static int[] dis;
     private boolean l1, l2, l3, l4, l5;
     private AlgoWorker<Void, Void> bfsWorker;
     private List<Pair<Node, Node>> processingNodes;
+    private Pair<Node, Node> runningEdge;
     private Node runningNode;
     private boolean completed = false;
     private int coefficient = 6;
+    private Timer animationTimer;
+    private double progress;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -119,7 +125,7 @@ public class BFS extends GraphBoard {
 
         if (getSource() != null) {
             l1 = false;
-            g2d.setColor(new Color(231, 204, 158));
+            g2d.setColor(new Color(245, 204, 158));
             g2d.fillOval(getSource().getLocation().x - Node.getRadius(), getSource().getLocation().y - Node.getRadius(),
                     2 * Node.getRadius(), 2 * Node.getRadius());
             g2d.setColor(new Color(0, 22, 40));
@@ -187,17 +193,28 @@ public class BFS extends GraphBoard {
                 Node n2 = (Node) p.getValue1();
 
                 if (isDirected()) {
-                    new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), new Color(218, 226, 237),
-                            new BasicStroke((float) 4), new BasicStroke(), 25);
+                    if (p.equals(runningEdge)) {
+                        new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), progress, new Color(218, 226, 237),
+                                new BasicStroke((float) 4), new BasicStroke(), 25);
+                    } else {
+                        new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), 1, new Color(218, 226, 237),
+                                new BasicStroke((float) 4), new BasicStroke(), 25);
+                    }
                 } else {
-                    new DrawLine(g2d, n1.getLocation(), n2.getLocation(), new Color(218, 226, 237), new BasicStroke(4));
+                    if (p.equals(runningEdge)) {
+                        new DrawLine(g2d, n1.getLocation(), n2.getLocation(), progress, new Color(218, 226, 237), new BasicStroke(4));
+                    } else {
+                        new DrawLine(g2d, n1.getLocation(), n2.getLocation(), 1, new Color(218, 226, 237), new BasicStroke(4));
+                    }
                 }
 
                 g2d.setColor(new Color(245, 204, 158));
                 g2d.fillOval(n1.getLocation().x - Node.getRadius(), n1.getLocation().y - Node.getRadius(),
                         2 * Node.getRadius(), 2 * Node.getRadius());
-                g2d.fillOval(n2.getLocation().x - Node.getRadius(), n2.getLocation().y - Node.getRadius(),
-                        2 * Node.getRadius(), 2 * Node.getRadius());
+                if (!p.equals(runningEdge) || progress >= 1) {
+                    g2d.fillOval(n2.getLocation().x - Node.getRadius(), n2.getLocation().y - Node.getRadius(),
+                            2 * Node.getRadius(), 2 * Node.getRadius());
+                }
 
                 g2d.setColor(new Color(0, 22, 40));
                 g2d.setFont(new Font("Casteller", Font.BOLD, 18));
@@ -217,6 +234,20 @@ public class BFS extends GraphBoard {
                         (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
             }
         }
+
+        for (Node n : nodes) {
+            g2d.setFont(new Font("Casteller", Font.BOLD, 18));
+            g2d.setColor(new Color(161, 56, 64));
+
+            if (getSource() == n) {
+                g2d.drawString("0", n.getLocation().x - 5, n.getLocation().y - 27);
+            } else if (isPlaying() && !"0".equals(getDistance(n))) {
+                String str = getDistance(n);
+                int N = str.length();
+                g2d.drawString(str, n.getLocation().x - N * 5, n.getLocation().y - 27);
+            }
+        }
+
         g2d.setColor(new Color(177, 191, 222));
         g2d.setFont(new Font("Consolas", Font.BOLD, 30));
         g2d.drawString("Algorithm", getWidth() - 240, getHeight() - 1000);
@@ -264,6 +295,24 @@ public class BFS extends GraphBoard {
         }
     }
 
+    private void startAnimationTimer() {
+        int delay = getSpeed() / 165;  // Set your desired delay (in milliseconds)
+        animationTimer = new Timer(delay, e -> {
+            progress += 0.01;
+            progress = Math.min(progress, 1);
+            repaint();
+        });
+        animationTimer.start();
+    }
+
+    private void stopAnimationTimer() {
+        if (animationTimer != null && animationTimer.isRunning()) {
+            animationTimer.stop();
+            progress = 0;
+            runningEdge = null;
+        }
+    }
+
     public void start() {
         if (getSource() == null) {
             JOptionPane.showMessageDialog(null,
@@ -271,14 +320,15 @@ public class BFS extends GraphBoard {
                     "ERROR!",
                     JOptionPane.ERROR_MESSAGE);
             setPlayingState(false);
-            GraphPanel.getPlayLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
-            GraphPanel.getResetLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
+            GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            GraphPanel.getResetLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
             repaint();
             return;
         }
         completed = false;
         g = new Graph(nodes.size());
         vis = new boolean[nodes.size()];
+        dis = new int[nodes.size()];
         q = new LinkedList<>();
         processingNodes = new ArrayList<>();
         for (Edge e : edges) {
@@ -289,6 +339,7 @@ public class BFS extends GraphBoard {
         }
 
         vis[getSource().getNodeNum()] = true;
+        dis[getSource().getNodeNum()] = 0;
         q.add(getSource());
 
         bfsWorker = new AlgoWorker<>() {
@@ -307,11 +358,16 @@ public class BFS extends GraphBoard {
                             if (!isPaused()) {
                                 Node v = it.next();
                                 if (!vis[v.getNodeNum()]) {
-                                    vis[v.getNodeNum()] = true;
-                                    q.add(v);
+                                    runningEdge = new Pair<>(u, v);
                                     processingNodes.add(Pair.with(u, v));
                                     l5 = true;
                                     l1 = l2 = l4 = false;
+                                    startAnimationTimer();
+                                    waitFor(getSpeed());
+                                    stopAnimationTimer();
+                                    vis[v.getNodeNum()] = true;
+                                    dis[v.getNodeNum()] = dis[u.getNodeNum()] + 1;
+                                    q.add(v);
                                     repaint();
                                     waitFor(getSpeed());
                                 }
@@ -331,7 +387,7 @@ public class BFS extends GraphBoard {
                 super.done();
                 completed = true;
                 resetCode();
-                GraphPanel.getPlayLabel().setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
                 repaint();
             }
         };
@@ -348,5 +404,12 @@ public class BFS extends GraphBoard {
 
     public void resetCode() {
         l1 = l2 = l3 = l4 = l5 = false;
+    }
+
+    public static String getDistance(Node n) {
+        if (dis[n.getNodeNum()] != Integer.MAX_VALUE) {
+            return String.valueOf(dis[n.getNodeNum()]);
+        }
+        return "∞";
     }
 }

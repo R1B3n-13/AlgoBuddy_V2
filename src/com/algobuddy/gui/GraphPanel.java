@@ -6,6 +6,7 @@ import com.algobuddy.videorecorder.ScreenRecorder;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.Iterator;
 import java.util.ListIterator;
 import javax.swing.ImageIcon;
@@ -303,11 +304,11 @@ public class GraphPanel extends javax.swing.JPanel {
             if (addEdgesRadioButton.isSelected()) {
                 GraphBoard.setAddingEdges(true);
                 GraphBoard.setAddingNodes(false);
-                addEdgesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOn.png"));
-                addNodesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+                addEdgesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOn.png"));
+                addNodesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
             } else {
                 GraphBoard.setAddingEdges(false);
-                addEdgesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+                addEdgesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
             }
         }
     }//GEN-LAST:event_addEdgesRadioButtonActionPerformed
@@ -317,11 +318,11 @@ public class GraphPanel extends javax.swing.JPanel {
             if (addNodesRadioButton.isSelected()) {
                 GraphBoard.setAddingNodes(true);
                 GraphBoard.setAddingEdges(false);
-                addNodesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOn.png"));
-                addEdgesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+                addNodesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOn.png"));
+                addEdgesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
             } else {
                 GraphBoard.setAddingNodes(false);
-                addNodesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+                addNodesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
             }
         }
     }//GEN-LAST:event_addNodesRadioButtonActionPerformed
@@ -330,11 +331,11 @@ public class GraphPanel extends javax.swing.JPanel {
         if (!GraphBoard.isPlaying()) {
             if (directedStateRadioButton.isSelected()) {
                 GraphBoard.setDirected(true);
-                directedStateRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOn.png"));
+                directedStateRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOn.png"));
                 clearEdgesAction();
             } else {
                 GraphBoard.setDirected(false);
-                directedStateRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+                directedStateRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
                 clearEdgesAction();
             }
         }
@@ -367,10 +368,10 @@ public class GraphPanel extends javax.swing.JPanel {
         clearAllAction();
         GraphBoard.setAddingNodes(true);
         GraphBoard.setAddingEdges(false);
-        addNodesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOn.png"));
-        addEdgesRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+        addNodesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOn.png"));
+        addEdgesRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
         GraphBoard.setDirected(false);
-        directedStateRadioButton.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\switchOff.png"));
+        directedStateRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
         speedSlider.setValue(1650);
         clearEdgesAction();
         Node.selectNone(GraphBoard.nodes);
@@ -387,17 +388,17 @@ public class GraphPanel extends javax.swing.JPanel {
             if (GraphBoard.isPlaying()) {
                 if (bfs.getBfsWorker().isPaused()) {
                     bfs.getBfsWorker().resume();
-                    playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
                 } else {
                     bfs.getBfsWorker().pause();
                     if (!bfs.isCompleted()) {
-                        playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
                     }
                 }
             } else if (!GraphBoard.nodes.isEmpty()) {
                 GraphBoard.setPlayingState(true);
-                playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
-                resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
+                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
                 bfs.start();
             }
         }
@@ -405,17 +406,17 @@ public class GraphPanel extends javax.swing.JPanel {
             if (GraphBoard.isPlaying()) {
                 if (dijkstra.getDijkstraWorker().isPaused()) {
                     dijkstra.getDijkstraWorker().resume();
-                    playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
+                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
                 } else {
                     dijkstra.getDijkstraWorker().pause();
                     if (!dijkstra.isCompleted()) {
-                        playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
                     }
                 }
             } else if (!GraphBoard.nodes.isEmpty()) {
                 GraphBoard.setPlayingState(true);
-                playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\pauseButton.png"));
-                resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetEnabled.png"));
+                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
                 dijkstra.start();
             }
         }
@@ -435,8 +436,8 @@ public class GraphPanel extends javax.swing.JPanel {
             bfs.resetCode();
             GraphBoard.setSource(null);
             Node.selectNone(GraphBoard.nodes);
-            resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
             repaint();
         }
         if (comp instanceof Dijkstra dijkstra) {
@@ -447,8 +448,8 @@ public class GraphPanel extends javax.swing.JPanel {
             dijkstra.resetCode();
             GraphBoard.setSource(null);
             Node.selectNone(GraphBoard.nodes);
-            resetLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\resetDisabled.png"));
-            playLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playEnabled.png"));
+            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
             repaint();
         }
     }

@@ -13,7 +13,7 @@ import java.awt.geom.GeneralPath;
  */
 public class DrawArrow {
 
-    public DrawArrow(final Graphics2D gfx, final Point start, final Point end, final Color col, final Stroke lineStroke,
+    public DrawArrow(final Graphics2D gfx, final Point start, final Point end, double progress, final Color col, final Stroke lineStroke,
             final Stroke arrowStroke, final float arrowSize) {
 
         gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -22,10 +22,10 @@ public class DrawArrow {
         final Point newStart = new Point(getIntersectionPoint(end, start));
         final Point newEnd = new Point(getIntersectionPoint(start, end));
 
-        final double startx = newStart.x;
-        final double starty = newStart.y;
-        final double endx = newEnd.x;
-        final double endy = newEnd.y;
+        int endx = (int) (newStart.x + (newEnd.x - newStart.x) * progress);
+        int endy = (int) (newStart.y + (newEnd.y - newStart.y) * progress);
+        int startx = newStart.x;
+        int starty = newStart.y;
 
         gfx.setStroke(arrowStroke);
         gfx.setColor(col);
@@ -61,7 +61,7 @@ public class DrawArrow {
         gfx.fill(polygon);
 
         gfx.setStroke(lineStroke);
-        gfx.drawLine((int) startx, (int) starty, (int) (endx + cx), (int) (endy + cy));
+        gfx.drawLine(startx, starty, (int) (endx + cx), (int) (endy + cy));
     }
 
     private Point getIntersectionPoint(Point p1, Point p2) {

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.File;
 import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -24,7 +25,7 @@ public class recursionPanel extends javax.swing.JPanel {
     private int string_flag = 0;
     private int[][] edges;
     ArrayList<String> strs;
-    private int art_speed;
+    private static int art_speed;
     private String show;
     private Queue<Integer> Q1, Q2;
     public static boolean isPlaying = false;
@@ -39,7 +40,7 @@ public class recursionPanel extends javax.swing.JPanel {
             return;
         }
         repaint();
-        Thread.sleep(800);
+        Thread.sleep(art_speed);
         if (par != -1) {
             edges[par][node] = 1;
             string_flag = 1;
@@ -56,7 +57,7 @@ public class recursionPanel extends javax.swing.JPanel {
         if (fl1 == false) {
             return;
         }
-        Thread.sleep(800);
+        Thread.sleep(art_speed);
         string_flag = 2;
         show = "fn(" + strs.get(node) + ") returns " + Integer.toString(value[node]);
         if (par != -1) {
@@ -101,10 +102,10 @@ public class recursionPanel extends javax.swing.JPanel {
 
             @Override
             public void done() {
-                MainFrame.fiboRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
-                MainFrame.fastPowerRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
-                MainFrame.bcRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
-                MainFrame.lcsRunLabel.setIcon(new ImageIcon("src\\com\\algobuddy\\gui\\img\\playDisabled.png"));
+                MainFrame.fiboRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                MainFrame.fastPowerRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                MainFrame.bcRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                MainFrame.lcsRunLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
             }
         };
         recursionWorker.execute();
@@ -430,6 +431,10 @@ public class recursionPanel extends javax.swing.JPanel {
 
     }
 
+    public static void setRecursionSpeed(int speed) {
+        art_speed = speed;
+    }
+    
     public static AlgoWorker<Void, Void> getRecursionWorker() {
         return recursionWorker;
     }
