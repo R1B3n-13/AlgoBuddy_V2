@@ -25,7 +25,7 @@ public class recursionPanel extends javax.swing.JPanel {
     private int string_flag = 0;
     private int[][] edges;
     ArrayList<String> strs;
-    private static int art_speed;
+    private static int art_speed = 500;
     private String show;
     private Queue<Integer> Q1, Q2;
     public static boolean isPlaying = false;
@@ -92,7 +92,7 @@ public class recursionPanel extends javax.swing.JPanel {
                         }
                         System.out.println(node1 + " " + node2);
                         repaint();
-                        Thread.sleep(500);
+                        Thread.sleep(art_speed);
                     } else {
                         Thread.sleep(200);
                     }
@@ -434,7 +434,7 @@ public class recursionPanel extends javax.swing.JPanel {
     public static void setRecursionSpeed(int speed) {
         art_speed = speed;
     }
-    
+
     public static AlgoWorker<Void, Void> getRecursionWorker() {
         return recursionWorker;
     }

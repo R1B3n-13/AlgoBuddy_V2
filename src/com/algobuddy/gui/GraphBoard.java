@@ -83,7 +83,7 @@ public class GraphBoard extends javax.swing.JPanel {
                     && mousePt.y > 24 && mousePt.y < paintingBoundary.height - 126) {
                 if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                     Node.toggleSource(nodes, mousePt);
-                    if ("Dijkstra".equals(getCurrentAlgo())) {
+                    if ("Dijkstra".equals(getCurrentAlgo()) || "Prim's".equals(getCurrentAlgo())) {
                         Edge.setWeight(edges, mousePt);
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {

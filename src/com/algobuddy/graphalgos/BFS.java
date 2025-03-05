@@ -72,7 +72,7 @@ public class BFS extends GraphBoard {
             i++;
         }
 
-        for (i = coefficient; i < 32; i++) {
+        for (i = coefficient; i < coefficient + 26; i++) {
             g2d.setColor(new Color(161, 131, 199));
             g2d.setFont(new Font("Consolas", Font.BOLD, 18));
             g2d.drawString(String.valueOf((char) (i + 59)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 96);
@@ -85,7 +85,6 @@ public class BFS extends GraphBoard {
                 g2d.setColor(new Color(151, 188, 226));
             }
             g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 83, (getWidth() - 760) / 26, 27);
-
             g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 38, (getWidth() - 760) / 26, 27);
 
             if (!isPlaying()) {
@@ -120,7 +119,6 @@ public class BFS extends GraphBoard {
         g2d.setColor(new Color(161, 131, 199));
         g2d.setFont(new Font("Consolas", Font.ITALIC, 18));
         g2d.drawString("Visited:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
-
         g2d.drawString("Queue:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
 
         if (getSource() != null) {
@@ -156,7 +154,7 @@ public class BFS extends GraphBoard {
         }
 
         if (isPlaying()) {
-            for (i = coefficient; i < 33; i++) {
+            for (i = coefficient; i < coefficient + 27; i++) {
                 if (i - coefficient < nodes.size()) {
                     if (vis[i - coefficient]) {
                         g2d.setColor(Color.RED);
@@ -182,7 +180,7 @@ public class BFS extends GraphBoard {
                 i++;
             }
             g2d.setColor(new Color(0, 22, 40));
-            while (i < 32) {
+            while (i < coefficient + 26) {
                 g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 i++;
             }

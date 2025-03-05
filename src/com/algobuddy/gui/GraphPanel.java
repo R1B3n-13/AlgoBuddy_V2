@@ -2,6 +2,7 @@ package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.Dijkstra;
+import com.algobuddy.graphalgos.Prims;
 import com.algobuddy.videorecorder.ScreenRecorder;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -420,6 +421,24 @@ public class GraphPanel extends javax.swing.JPanel {
                 dijkstra.start();
             }
         }
+        if (comp instanceof Prims prims) {
+            if (GraphBoard.isPlaying()) {
+                if (prims.getPrimsWorker().isPaused()) {
+                    prims.getPrimsWorker().resume();
+                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                } else {
+                    prims.getPrimsWorker().pause();
+                    if (!prims.isCompleted()) {
+                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+                    }
+                }
+            } else if (!GraphBoard.nodes.isEmpty()) {
+                GraphBoard.setPlayingState(true);
+                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
+                prims.start();
+            }
+        }
     }
 
     /**
@@ -446,6 +465,18 @@ public class GraphPanel extends javax.swing.JPanel {
             }
             GraphBoard.setPlayingState(false);
             dijkstra.resetCode();
+            GraphBoard.setSource(null);
+            Node.selectNone(GraphBoard.nodes);
+            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            repaint();
+        }
+        if (comp instanceof Prims prims) {
+            if (GraphBoard.isPlaying()) {
+                prims.getPrimsWorker().cancel(true);
+            }
+            GraphBoard.setPlayingState(false);
+            prims.resetCode();
             GraphBoard.setSource(null);
             Node.selectNone(GraphBoard.nodes);
             resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
@@ -561,7 +592,7 @@ public class GraphPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton addNodesRadioButton;
     private javax.swing.JButton clearAllButton;
     private javax.swing.JButton deleteNodesButton;
-    private javax.swing.JRadioButton directedStateRadioButton;
+    public static javax.swing.JRadioButton directedStateRadioButton;
     private javax.swing.JButton disconnectNodesButton;
     private javax.swing.JRadioButton enableVdoRadioButton;
     private javax.swing.JPanel graphHidePanel1;

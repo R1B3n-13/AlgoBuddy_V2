@@ -2,6 +2,7 @@ package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.Dijkstra;
+import com.algobuddy.graphalgos.Prims;
 import com.algobuddy.recursionalgos.BinomialCoefficient;
 import com.algobuddy.recursionalgos.BinomialCoefficient_without_mem;
 import com.algobuddy.recursionalgos.FastPower;
@@ -100,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToBfsButton = new javax.swing.JButton();
         goToDijkstraButton = new javax.swing.JButton();
         goToDfsButton = new javax.swing.JButton();
-        goToMstButton = new javax.swing.JButton();
+        goToPrimsButton = new javax.swing.JButton();
         algoOverviewPanel = new javax.swing.JPanel();
         simulationPanel = new com.algobuddy.gui.GraphPanel();
         treeSimulationPanel = new javax.swing.JPanel();
@@ -489,16 +490,21 @@ public class MainFrame extends javax.swing.JFrame {
         goToDfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToDfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
 
-        goToMstButton.setBackground(new java.awt.Color(89, 94, 101, 50));
-        goToMstButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
-        goToMstButton.setForeground(new java.awt.Color(172, 179, 186));
-        goToMstButton.setText("Minimum Spanning Tree");
-        goToMstButton.setBorder(null);
-        goToMstButton.setBorderPainted(false);
-        goToMstButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        goToMstButton.setMaximumSize(new java.awt.Dimension(244, 72));
-        goToMstButton.setMinimumSize(new java.awt.Dimension(244, 72));
-        goToMstButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToPrimsButton.setBackground(new java.awt.Color(89, 94, 101, 50));
+        goToPrimsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToPrimsButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToPrimsButton.setText("MST (Prim's)");
+        goToPrimsButton.setBorder(null);
+        goToPrimsButton.setBorderPainted(false);
+        goToPrimsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goToPrimsButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToPrimsButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToPrimsButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToPrimsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToPrimsButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout graphIndexPanelLayout = new javax.swing.GroupLayout(graphIndexPanel);
         graphIndexPanel.setLayout(graphIndexPanelLayout);
@@ -515,7 +521,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goToMstButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(goToPrimsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(1257, Short.MAX_VALUE))
         );
         graphIndexPanelLayout.setVerticalGroup(
@@ -530,7 +536,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(goToMstButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goToPrimsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(623, Short.MAX_VALUE))
         );
 
@@ -730,7 +736,6 @@ public class MainFrame extends javax.swing.JFrame {
         holder.add(fPanel, "card2");
 
         fpPanel.setBackground(new java.awt.Color(1, 22, 39));
-        fpPanel.setForeground(new java.awt.Color(0, 0, 0));
         fpPanel.setPreferredSize(new java.awt.Dimension(335, 953));
 
         n_field.setBackground(new java.awt.Color(38, 112, 139));
@@ -858,7 +863,6 @@ public class MainFrame extends javax.swing.JFrame {
         holder.add(fpPanel, "card3");
 
         bcPanel.setBackground(new java.awt.Color(1, 22, 39));
-        bcPanel.setForeground(new java.awt.Color(0, 0, 0));
         bcPanel.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         jTextArea3.setBackground(new java.awt.Color(0, 16, 29));
@@ -1290,26 +1294,21 @@ public class MainFrame extends javax.swing.JFrame {
                 GraphBoard.setCurrentAlgo(null);
             }
             if (getCurrentComponentName(mainPanel).equals("simulationPanel")) {
+                GraphPanel.directedStateRadioButton.setEnabled(true);
+                mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
+                titleBar.setBackground(new Color(57, 55, 55));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
+                nextLabel.setVisible(true);
                 if ("BFS".equals(GraphBoard.getCurrentAlgo())) {
-                    mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
-                    titleBar.setBackground(new Color(57, 55, 55));
-                    titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
-                    nextLabel.setVisible(true);
                     openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-                    simulationPanel.reset();
-                    BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
-                    simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
-                }
-                if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
-                    mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
-                    titleBar.setBackground(new Color(57, 55, 55));
-                    titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
-                    nextLabel.setVisible(true);
+                } else if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
                     openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-                    simulationPanel.reset();
-                    BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
-                    simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+                } else if ("Prim's".equals(GraphBoard.getCurrentAlgo())) {
+                    openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
                 }
+                simulationPanel.reset();
+                BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
+                simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
             }
             if (getCurrentComponentName(mainPanel).equals("treeSimulationPanel")) {
                 mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPane.Direction.Right);
@@ -1348,22 +1347,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
         if (getCurrentComponentName(mainPanel).equals("algoOverviewPanel")) {
+
+            mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+
             if ("BFS".equals(GraphBoard.getCurrentAlgo())) {
-                mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
                 simulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
-                titleBar.setBackground(new Color(0, 14, 26));
-                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
-                nextLabel.setVisible(false);
-                algoOverviewPanel.removeAll();
-            }
-            if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
-                mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+            } else if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
                 simulationPanel.add(new Dijkstra(), java.awt.BorderLayout.CENTER);
-                titleBar.setBackground(new Color(0, 14, 26));
-                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
-                nextLabel.setVisible(false);
-                algoOverviewPanel.removeAll();
+            } else if ("Prim's".equals(GraphBoard.getCurrentAlgo())) {
+                simulationPanel.add(new Prims(), java.awt.BorderLayout.CENTER);
             }
+
+            titleBar.setBackground(new Color(0, 14, 26));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
+            nextLabel.setVisible(false);
+            algoOverviewPanel.removeAll();
+
         }
     }//GEN-LAST:event_nextLabelMouseClicked
 
@@ -1471,7 +1470,7 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
                     if (ind2.size() >= 40) {
-                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                        JOptionPane.showMessageDialog(this, "More than 40 calls!",
                                 "Error Message", JOptionPane.WARNING_MESSAGE);
                     } else {
                         artPanel.init();
@@ -1479,8 +1478,10 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException expc) {
                     JOptionPane.showMessageDialog(this, "Please input integer value!",
                             "Error Message", JOptionPane.ERROR_MESSAGE);
+
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainFrame.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -1515,7 +1516,7 @@ public class MainFrame extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "n and p should be less than 9",
                                 "Error Message", JOptionPane.WARNING_MESSAGE);
                     } else if (ind2.size() >= 40) {
-                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                        JOptionPane.showMessageDialog(this, "More than 40 calls!",
                                 "Error Message", JOptionPane.WARNING_MESSAGE);
                     } else {
                         artPanel.init();
@@ -1523,8 +1524,10 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException expc) {
                     JOptionPane.showMessageDialog(this, "Please input integer value!",
                             "Error Message", JOptionPane.ERROR_MESSAGE);
+
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainFrame.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -1562,7 +1565,7 @@ public class MainFrame extends javax.swing.JFrame {
                         val2 = bc.getV1();
                     }
                     if (ind2.size() >= 40) {
-                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                        JOptionPane.showMessageDialog(this, "More than 40 calls!",
                                 "Error Message", JOptionPane.WARNING_MESSAGE);
                     } else {
                         artPanel.init();
@@ -1571,8 +1574,10 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException expc) {
                     JOptionPane.showMessageDialog(this, "Please input integer value!",
                             "Error Message", JOptionPane.ERROR_MESSAGE);
+
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainFrame.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -1615,7 +1620,7 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
                     if (ind2.size() >= 40) {
-                        JOptionPane.showMessageDialog(this, "More than 40 call!",
+                        JOptionPane.showMessageDialog(this, "More than 40 calls!",
                                 "Error Message", JOptionPane.WARNING_MESSAGE);
                     } else {
                         artPanel.init();
@@ -1624,8 +1629,10 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException expc) {
                     JOptionPane.showMessageDialog(this, "Please input integer value!",
                             "Error Message", JOptionPane.ERROR_MESSAGE);
+
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainFrame.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -1707,6 +1714,18 @@ public class MainFrame extends javax.swing.JFrame {
         artPanel.setRecursionSpeed(3300 - jSlider1.getValue());
     }//GEN-LAST:event_jSlider4StateChanged
 
+    private void goToPrimsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToPrimsButtonMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
+            mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
+            titleBar.setBackground(new Color(57, 55, 55));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
+            nextLabel.setVisible(true);
+            GraphBoard.setCurrentAlgo("Prim's");
+            GraphPanel.directedStateRadioButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_goToPrimsButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1716,8 +1735,10 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(new FlatNightOwlIJTheme());
             UIManager.put("Button.arc", 0);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1726,6 +1747,7 @@ public class MainFrame extends javax.swing.JFrame {
             mainFrame = new MainFrame();
             mainFrame.setVisible(true);
         });
+
     }
 
     private class EnterAction extends AbstractAction {
@@ -1766,8 +1788,10 @@ public class MainFrame extends javax.swing.JFrame {
                 if (Desktop.isDesktopSupported()) {
                     try {
                         Desktop.getDesktop().browse(e.getURL().toURI());
+
                     } catch (URISyntaxException | IOException ex) {
-                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MainFrame.class
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -1824,6 +1848,7 @@ public class MainFrame extends javax.swing.JFrame {
                 int y = rctngl.y;
                 g2.setColor(new Color(38, 36, 36));
                 g2.fillRect(x, y, 9, 30);
+
             }
 
             private class ScrollBarButton extends JButton {
@@ -1893,7 +1918,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton goToDfsButton;
     private javax.swing.JButton goToDijkstraButton;
     private javax.swing.JButton goToGraphButton;
-    private javax.swing.JButton goToMstButton;
+    private javax.swing.JButton goToPrimsButton;
     private javax.swing.JButton goToRecursionButton;
     private javax.swing.JButton goToSortButton;
     private javax.swing.JLabel graphIndexLabel;

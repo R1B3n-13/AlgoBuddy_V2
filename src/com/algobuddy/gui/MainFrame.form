@@ -524,7 +524,7 @@
                                   <Component id="goToDfsButton" min="-2" max="-2" attributes="0"/>
                                   <Component id="goToBfsButton" min="-2" max="-2" attributes="0"/>
                                   <Component id="goToDijkstraButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="goToMstButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="goToPrimsButton" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -544,7 +544,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="goToDijkstraButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="goToMstButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="goToPrimsButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="623" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -659,7 +659,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="goToMstButton">
+            <Component class="javax.swing.JButton" name="goToPrimsButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new java.awt.Color(89, 94, 101, 50)" type="code"/>
@@ -670,7 +670,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ba" green="b3" red="ac" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Minimum Spanning Tree"/>
+                <Property name="text" type="java.lang.String" value="MST (Prim&apos;s)"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -688,6 +688,9 @@
                   <Dimension value="[244, 72]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goToPrimsButtonMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
