@@ -39,7 +39,7 @@ public class Dijkstra extends GraphBoard {
     private static int[] dis;
     private boolean l1, l2, l3, l4, l5;
     private AlgoWorker<Void, Void> dijkstraWorker;
-    private List<Pair<Node, Node>> processingNodes;
+    private List<Pair<Node, Node>> processedEdges;
     private Pair<Node, Node> runningEdge;
     private Node runningNode;
     private boolean completed = false;
@@ -146,7 +146,7 @@ public class Dijkstra extends GraphBoard {
                 i++;
             }
 
-            for (Pair p : processingNodes) {
+            for (Pair p : processedEdges) {
 
                 Node n1 = (Node) p.getValue0();
                 Node n2 = (Node) p.getValue1();
@@ -311,7 +311,7 @@ public class Dijkstra extends GraphBoard {
         dis = new int[nodes.size()];
         Arrays.fill(dis, Integer.MAX_VALUE);
         pq = new PriorityQueue<>(30, (a, b) -> a.getValue0() - b.getValue0());
-        processingNodes = new ArrayList<>();
+        processedEdges = new ArrayList<>();
         for (Edge e : edges) {
             g.addEdge(e.getNode1(), e.getNode2(), e.getWeight());
             if (!isDirected()) {
@@ -342,7 +342,7 @@ public class Dijkstra extends GraphBoard {
                                 int w = (int) q.getValue1();
                                 if (dis[v.getNodeNum()] > dis[u.getNodeNum()] + w) {
                                     runningEdge = new Pair<>(u, v);
-                                    processingNodes.add(Pair.with(u, v));
+                                    processedEdges.add(runningEdge);
                                     l5 = true;
                                     l1 = l2 = l4 = false;
                                     startAnimationTimer();

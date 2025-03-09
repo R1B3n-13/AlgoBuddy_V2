@@ -37,7 +37,7 @@ public class BFS extends GraphBoard {
     private static int[] dis;
     private boolean l1, l2, l3, l4, l5;
     private AlgoWorker<Void, Void> bfsWorker;
-    private List<Pair<Node, Node>> processingNodes;
+    private List<Pair<Node, Node>> processedEdges;
     private Pair<Node, Node> runningEdge;
     private Node runningNode;
     private boolean completed = false;
@@ -50,8 +50,7 @@ public class BFS extends GraphBoard {
         setPaintingBoundary(getSize());
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Color color1 = new Color(0, 22, 41);
         Color color2 = new Color(0, 23, 39);
         GradientPaint gp = new GradientPaint(0, 0, color1, getWidth(), getHeight(), color2);
@@ -185,7 +184,7 @@ public class BFS extends GraphBoard {
                 i++;
             }
 
-            for (Pair p : processingNodes) {
+            for (Pair p : processedEdges) {
 
                 Node n1 = (Node) p.getValue0();
                 Node n2 = (Node) p.getValue1();
@@ -328,7 +327,7 @@ public class BFS extends GraphBoard {
         vis = new boolean[nodes.size()];
         dis = new int[nodes.size()];
         q = new LinkedList<>();
-        processingNodes = new ArrayList<>();
+        processedEdges = new ArrayList<>();
         for (Edge e : edges) {
             g.addEdge(e.getNode1(), e.getNode2());
             if (!isDirected()) {
@@ -357,7 +356,7 @@ public class BFS extends GraphBoard {
                                 Node v = it.next();
                                 if (!vis[v.getNodeNum()]) {
                                     runningEdge = new Pair<>(u, v);
-                                    processingNodes.add(Pair.with(u, v));
+                                    processedEdges.add(runningEdge);
                                     l5 = true;
                                     l1 = l2 = l4 = false;
                                     startAnimationTimer();

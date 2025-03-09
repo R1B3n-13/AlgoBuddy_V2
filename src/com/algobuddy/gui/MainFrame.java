@@ -3,6 +3,7 @@ package com.algobuddy.gui;
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.Dijkstra;
 import com.algobuddy.graphalgos.Prims;
+import com.algobuddy.graphalgos.Tarjans;
 import com.algobuddy.recursionalgos.BinomialCoefficient;
 import com.algobuddy.recursionalgos.BinomialCoefficient_without_mem;
 import com.algobuddy.recursionalgos.FastPower;
@@ -84,7 +85,6 @@ public class MainFrame extends javax.swing.JFrame {
         closeLabel = new javax.swing.JLabel();
         minimizeLabel = new javax.swing.JLabel();
         backLabel = new javax.swing.JLabel();
-        nextLabel = new javax.swing.JLabel();
         mainPanel = new com.algobuddy.gui.JSlidingPane();
         introPanel = new keeptoo.KGradientPanel();
         introLogoLabel = new javax.swing.JLabel();
@@ -94,7 +94,6 @@ public class MainFrame extends javax.swing.JFrame {
         indexLabel = new javax.swing.JLabel();
         goToGraphButton = new javax.swing.JButton();
         goToRecursionButton = new javax.swing.JButton();
-        goToSortButton = new javax.swing.JButton();
         userManualButton = new javax.swing.JButton();
         graphIndexPanel = new keeptoo.KGradientPanel();
         graphIndexLabel = new javax.swing.JLabel();
@@ -102,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToDijkstraButton = new javax.swing.JButton();
         goToDfsButton = new javax.swing.JButton();
         goToPrimsButton = new javax.swing.JButton();
-        algoOverviewPanel = new javax.swing.JPanel();
+        goToTarjansButton = new javax.swing.JButton();
         simulationPanel = new com.algobuddy.gui.GraphPanel();
         treeSimulationPanel = new javax.swing.JPanel();
         comPanel = new javax.swing.JPanel();
@@ -228,29 +227,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        nextLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/nextLabel.png"))); // NOI18N
-        nextLabel.setVisible(false);
-        nextLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nextLabelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                nextLabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                nextLabelMouseExited(evt);
-            }
-        });
-
         javax.swing.GroupLayout titleBarLayout = new javax.swing.GroupLayout(titleBar);
         titleBar.setLayout(titleBarLayout);
         titleBarLayout.setHorizontalGroup(
             titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titleBarLayout.createSequentialGroup()
                 .addComponent(backLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nextLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1766, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1784, Short.MAX_VALUE)
                 .addComponent(minimizeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -260,7 +243,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addComponent(closeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
             .addComponent(minimizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(backLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(nextLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(titleBar, java.awt.BorderLayout.PAGE_START);
@@ -375,20 +357,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        goToSortButton.setBackground(new java.awt.Color(101, 89, 94, 50));
-        goToSortButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
-        goToSortButton.setForeground(new java.awt.Color(172, 179, 186));
-        goToSortButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/algobuddy/gui/img/sortLogo.png"))); // NOI18N
-        goToSortButton.setText("Sorting Algorithms");
-        goToSortButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
-        goToSortButton.setBorderPainted(false);
-        goToSortButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        goToSortButton.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        goToSortButton.setIconTextGap(20);
-        goToSortButton.setMaximumSize(new java.awt.Dimension(244, 72));
-        goToSortButton.setMinimumSize(new java.awt.Dimension(244, 72));
-        goToSortButton.setPreferredSize(new java.awt.Dimension(244, 72));
-
         userManualButton.setBackground(new java.awt.Color(101, 89, 94, 50));
         userManualButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
         userManualButton.setForeground(new java.awt.Color(172, 179, 186));
@@ -413,7 +381,6 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(userManualButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(goToGraphButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(goToSortButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(goToRecursionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(indexLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(800, Short.MAX_VALUE))
@@ -421,17 +388,15 @@ public class MainFrame extends javax.swing.JFrame {
         indexPanelLayout.setVerticalGroup(
             indexPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(indexPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(42, 42, 42)
                 .addComponent(indexLabel)
-                .addGap(45, 45, 45)
+                .addGap(50, 50, 50)
                 .addComponent(goToGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(goToSortButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(goToRecursionButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(userManualButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(584, Short.MAX_VALUE))
+                .addContainerGap(597, Short.MAX_VALUE))
         );
 
         mainPanel.add(indexPanel, "indexPanel");
@@ -506,6 +471,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        goToTarjansButton.setBackground(new java.awt.Color(89, 94, 101, 50));
+        goToTarjansButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToTarjansButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToTarjansButton.setText("SCC (Tarjan's)");
+        goToTarjansButton.setBorder(null);
+        goToTarjansButton.setBorderPainted(false);
+        goToTarjansButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goToTarjansButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToTarjansButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToTarjansButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToTarjansButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToTarjansButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout graphIndexPanelLayout = new javax.swing.GroupLayout(graphIndexPanel);
         graphIndexPanel.setLayout(graphIndexPanelLayout);
         graphIndexPanelLayout.setHorizontalGroup(
@@ -521,7 +502,8 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(goToDfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goToPrimsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(goToPrimsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goToTarjansButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(1257, Short.MAX_VALUE))
         );
         graphIndexPanelLayout.setVerticalGroup(
@@ -537,26 +519,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToPrimsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(623, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToTarjansButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(545, Short.MAX_VALUE))
         );
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
-
-        algoOverviewPanel.setBackground(new java.awt.Color(57, 55, 55));
-        algoOverviewPanel.setName("algoOverviewPanel"); // NOI18N
-
-        javax.swing.GroupLayout algoOverviewPanelLayout = new javax.swing.GroupLayout(algoOverviewPanel);
-        algoOverviewPanel.setLayout(algoOverviewPanelLayout);
-        algoOverviewPanelLayout.setHorizontalGroup(
-            algoOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1846, Short.MAX_VALUE)
-        );
-        algoOverviewPanelLayout.setVerticalGroup(
-            algoOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1032, Short.MAX_VALUE)
-        );
-
-        mainPanel.add(algoOverviewPanel, "bfsOverviewPanel");
 
         simulationPanel.setName("simulationPanel"); // NOI18N
         mainPanel.add(simulationPanel, "bfsSimulationPanel");
@@ -891,11 +859,6 @@ public class MainFrame extends javax.swing.JFrame {
         bc_k_field.setBackground(new java.awt.Color(38, 112, 139));
         bc_k_field.setForeground(new java.awt.Color(182, 207, 216));
         bc_k_field.setText("2");
-        bc_k_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bc_k_fieldActionPerformed(evt);
-            }
-        });
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
@@ -1285,27 +1248,14 @@ public class MainFrame extends javax.swing.JFrame {
                 titleBar.setBackground(new Color(18, 8, 13));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(18, 8, 13)));
             }
-            if (getCurrentComponentName(mainPanel).equals("algoOverviewPanel")) {
+            if (getCurrentComponentName(mainPanel).equals("simulationPanel")) {
+                GraphPanel.directedStateRadioButton.setEnabled(true);
+                GraphBoard.setDirected(false);
+                GraphPanel.directedStateRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
                 mainPanel.nextSlidingPanel(10, graphIndexPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(8, 13, 18));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
-                nextLabel.setVisible(false);
-                algoOverviewPanel.removeAll();
                 GraphBoard.setCurrentAlgo(null);
-            }
-            if (getCurrentComponentName(mainPanel).equals("simulationPanel")) {
-                GraphPanel.directedStateRadioButton.setEnabled(true);
-                mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Right);
-                titleBar.setBackground(new Color(57, 55, 55));
-                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
-                nextLabel.setVisible(true);
-                if ("BFS".equals(GraphBoard.getCurrentAlgo())) {
-                    openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-                } else if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
-                    openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-                } else if ("Prim's".equals(GraphBoard.getCurrentAlgo())) {
-                    openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-                }
                 simulationPanel.reset();
                 BorderLayout layout = (BorderLayout) simulationPanel.getLayout();
                 simulationPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
@@ -1328,43 +1278,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void goToBfsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToBfsButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-            mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
-            titleBar.setBackground(new Color(57, 55, 55));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
-            nextLabel.setVisible(true);
+            mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+            simulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
+            titleBar.setBackground(new Color(0, 14, 26));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
             GraphBoard.setCurrentAlgo("BFS");
         }
     }//GEN-LAST:event_goToBfsButtonMouseClicked
-
-    private void nextLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseEntered
-        nextLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "nextLabelHover.png"));
-    }//GEN-LAST:event_nextLabelMouseEntered
-
-    private void nextLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseExited
-        nextLabel.setIcon(new javax.swing.ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "nextLabel.png"));
-    }//GEN-LAST:event_nextLabelMouseExited
-
-    private void nextLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextLabelMouseClicked
-        if (getCurrentComponentName(mainPanel).equals("algoOverviewPanel")) {
-
-            mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
-
-            if ("BFS".equals(GraphBoard.getCurrentAlgo())) {
-                simulationPanel.add(new BFS(), java.awt.BorderLayout.CENTER);
-            } else if ("Dijkstra".equals(GraphBoard.getCurrentAlgo())) {
-                simulationPanel.add(new Dijkstra(), java.awt.BorderLayout.CENTER);
-            } else if ("Prim's".equals(GraphBoard.getCurrentAlgo())) {
-                simulationPanel.add(new Prims(), java.awt.BorderLayout.CENTER);
-            }
-
-            titleBar.setBackground(new Color(0, 14, 26));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
-            nextLabel.setVisible(false);
-            algoOverviewPanel.removeAll();
-
-        }
-    }//GEN-LAST:event_nextLabelMouseClicked
 
     private void formWindowDeiconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeiconified
         setExtendedState(extendedState);
@@ -1372,11 +1292,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void goToDijkstraButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToDijkstraButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-            mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
-            titleBar.setBackground(new Color(57, 55, 55));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
-            nextLabel.setVisible(true);
+            mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+            simulationPanel.add(new Dijkstra(), java.awt.BorderLayout.CENTER);
+            titleBar.setBackground(new Color(0, 14, 26));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
             GraphBoard.setCurrentAlgo("Dijkstra");
         }
     }//GEN-LAST:event_goToDijkstraButtonMouseClicked
@@ -1415,16 +1334,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_functionActionPerformed
 
-    private void bc_k_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bc_k_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bc_k_fieldActionPerformed
-
     private void goToRecursionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToRecursionButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
             mainPanel.nextSlidingPanel(10, treeSimulationPanel, JSlidingPane.Direction.Left);
             titleBar.setBackground(new Color(1, 22, 39));
             titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(1, 22, 39)));
-            nextLabel.setVisible(false);
         }
     }//GEN-LAST:event_goToRecursionButtonMouseClicked
 
@@ -1716,15 +1630,27 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void goToPrimsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToPrimsButtonMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            openHtml(algoOverviewPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "html" + File.separator + "bfs.htm");
-            mainPanel.nextSlidingPanel(10, algoOverviewPanel, JSlidingPane.Direction.Left);
-            titleBar.setBackground(new Color(57, 55, 55));
-            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(57, 55, 55)));
-            nextLabel.setVisible(true);
-            GraphBoard.setCurrentAlgo("Prim's");
             GraphPanel.directedStateRadioButton.setEnabled(false);
+            GraphBoard.setDirected(false);
+            GraphPanel.directedStateRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOff.png"));
+            mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+            simulationPanel.add(new Prims(), java.awt.BorderLayout.CENTER);
+            titleBar.setBackground(new Color(0, 14, 26));
+            titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
+            GraphBoard.setCurrentAlgo("Prim's");
         }
     }//GEN-LAST:event_goToPrimsButtonMouseClicked
+
+    private void goToTarjansButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToTarjansButtonMouseClicked
+        GraphPanel.directedStateRadioButton.setEnabled(false);
+        GraphBoard.setDirected(true);
+        GraphPanel.directedStateRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOn.png"));
+        mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+        simulationPanel.add(new Tarjans(), java.awt.BorderLayout.CENTER);
+        titleBar.setBackground(new Color(0, 14, 26));
+        titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
+        GraphBoard.setCurrentAlgo("Tarjans's");
+    }//GEN-LAST:event_goToTarjansButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1895,7 +1821,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel algoOverviewPanel;
     private com.algobuddy.gui.recursionPanel artPanel;
     private javax.swing.JLabel backLabel;
     private javax.swing.JPanel bcPanel;
@@ -1920,7 +1845,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton goToGraphButton;
     private javax.swing.JButton goToPrimsButton;
     private javax.swing.JButton goToRecursionButton;
-    private javax.swing.JButton goToSortButton;
+    private javax.swing.JButton goToTarjansButton;
     private javax.swing.JLabel graphIndexLabel;
     private keeptoo.KGradientPanel graphIndexPanel;
     private javax.swing.JPanel holder;
@@ -1970,7 +1895,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JTextField n_field;
     private javax.swing.JLabel n_label;
-    private javax.swing.JLabel nextLabel;
     private javax.swing.JTextField p_field;
     private javax.swing.JLabel p_label;
     private static com.algobuddy.gui.GraphPanel simulationPanel;

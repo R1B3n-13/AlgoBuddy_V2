@@ -26,6 +26,10 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import org.javatuples.Pair;
 
+/**
+ *
+ * @author Nebir, Nazrul
+ */
 public class Prims extends GraphBoard {
 
     private Graph g;
@@ -247,7 +251,7 @@ public class Prims extends GraphBoard {
             g2d.drawString("and an unordered set S for MST nodes", getWidth() - 315, getHeight() - 930);
         }
         if (l2) {
-            g2d.drawString("2. Start with source node in S", getWidth() - 315, getHeight() - 900);
+            g2d.drawString("2. Insert a random starting node in S", getWidth() - 315, getHeight() - 900);
             g2d.drawString("and add its edges to H", getWidth() - 318, getHeight() - 880);
         }
         if (l3) {
@@ -273,7 +277,7 @@ public class Prims extends GraphBoard {
             g2d.drawString("and a set S for MST nodes", getWidth() - 315, getHeight() - 930);
         }
         if (!l2) {
-            g2d.drawString("2. Start with source node in S", getWidth() - 315, getHeight() - 900);
+            g2d.drawString("2. Insert a random starting node in S", getWidth() - 315, getHeight() - 900);
             g2d.drawString("and add its edges to H", getWidth() - 318, getHeight() - 880);
         }
         if (!l3) {
@@ -284,9 +288,9 @@ public class Prims extends GraphBoard {
         }
         if (!l5) {
             g2d.drawString("     ii. If v not in S,", getWidth() - 315, getHeight() - 790);
-            g2d.drawString("         add (u, v) to MST", getWidth() - 315, getHeight() - 770);
-            g2d.drawString("         Add v to S", getWidth() - 315, getHeight() - 750);
-            g2d.drawString("         Add v's edges to H", getWidth() - 315, getHeight() - 730);
+            g2d.drawString("            add (u, v) to MST", getWidth() - 315, getHeight() - 770);
+            g2d.drawString("            Add v to S", getWidth() - 315, getHeight() - 750);
+            g2d.drawString("            Add v's edges to H", getWidth() - 315, getHeight() - 730);
         }
     }
 
@@ -311,7 +315,7 @@ public class Prims extends GraphBoard {
     public void start() {
         if (getSource() == null) {
             JOptionPane.showMessageDialog(null,
-                    "No source node found!",
+                    "No starting node found!",
                     "ERROR!",
                     JOptionPane.ERROR_MESSAGE);
             setPlayingState(false);

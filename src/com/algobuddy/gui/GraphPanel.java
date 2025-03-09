@@ -3,6 +3,7 @@ package com.algobuddy.gui;
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.Dijkstra;
 import com.algobuddy.graphalgos.Prims;
+import com.algobuddy.graphalgos.Tarjans;
 import com.algobuddy.videorecorder.ScreenRecorder;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -439,6 +440,24 @@ public class GraphPanel extends javax.swing.JPanel {
                 prims.start();
             }
         }
+        if (comp instanceof Tarjans tarjans) {
+            if (GraphBoard.isPlaying()) {
+                if (tarjans.getTarjansWorker().isPaused()) {
+                    tarjans.getTarjansWorker().resume();
+                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                } else {
+                    tarjans.getTarjansWorker().pause();
+                    if (!tarjans.isCompleted()) {
+                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+                    }
+                }
+            } else if (!GraphBoard.nodes.isEmpty()) {
+                GraphBoard.setPlayingState(true);
+                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
+                tarjans.start();
+            }
+        }
     }
 
     /**
@@ -477,6 +496,18 @@ public class GraphPanel extends javax.swing.JPanel {
             }
             GraphBoard.setPlayingState(false);
             prims.resetCode();
+            GraphBoard.setSource(null);
+            Node.selectNone(GraphBoard.nodes);
+            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            repaint();
+        }
+        if (comp instanceof Tarjans tarjans) {
+            if (GraphBoard.isPlaying()) {
+                tarjans.getTarjansWorker().cancel(true);
+            }
+            GraphBoard.setPlayingState(false);
+            tarjans.resetCode();
             GraphBoard.setSource(null);
             Node.selectNone(GraphBoard.nodes);
             resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));

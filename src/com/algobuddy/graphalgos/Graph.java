@@ -6,7 +6,7 @@ import org.javatuples.Pair;
 
 /**
  *
- * @author nebir, nazrul
+ * @author Nebir, Nazrul
  */
 public class Graph {
 
