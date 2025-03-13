@@ -3,6 +3,7 @@ package com.algobuddy.gui;
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.DFS;
 import com.algobuddy.graphalgos.Dijkstra;
+import com.algobuddy.graphalgos.Kahns;
 import com.algobuddy.graphalgos.Prims;
 import com.algobuddy.graphalgos.Tarjans;
 import com.algobuddy.videorecorder.ScreenRecorder;
@@ -10,6 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.ListIterator;
 import javax.swing.ImageIcon;
@@ -387,94 +389,37 @@ public class GraphPanel extends javax.swing.JPanel {
     private void playLabelAction() {
         BorderLayout layout = (BorderLayout) this.getLayout();
         Component comp = layout.getLayoutComponent(BorderLayout.CENTER);
-        if (comp instanceof BFS bfs) {
-            if (GraphBoard.isPlaying()) {
-                if (bfs.getBfsWorker().isPaused()) {
-                    bfs.getBfsWorker().resume();
-                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                } else {
-                    bfs.getBfsWorker().pause();
-                    if (!bfs.isCompleted()) {
-                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+        if (comp != null) {
+            String className = comp.getClass().getSimpleName();
+            String workerMethodName = "get" + className + "Worker";
+            try {
+                Method getWorkerMethod = comp.getClass().getMethod(workerMethodName);
+                Object worker = getWorkerMethod.invoke(comp);
+                if (GraphBoard.isPlaying()) {
+                    Method isPausedMethod = worker.getClass().getMethod("isPaused");
+                    boolean isPaused = (boolean) isPausedMethod.invoke(worker);
+                    if (isPaused) {
+                        Method resumeMethod = worker.getClass().getMethod("resume");
+                        resumeMethod.invoke(worker);
+                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                    } else {
+                        Method pauseMethod = worker.getClass().getMethod("pause");
+                        pauseMethod.invoke(worker);
+                        Method isCompletedMethod = comp.getClass().getMethod("isCompleted");
+                        boolean isCompleted = (boolean) isCompletedMethod.invoke(comp);
+                        if (!isCompleted) {
+                            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+                        }
                     }
-                }
-            } else if (!GraphBoard.nodes.isEmpty()) {
-                GraphBoard.setPlayingState(true);
-                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
-                bfs.start();
-            }
-        }
-        if (comp instanceof Dijkstra dijkstra) {
-            if (GraphBoard.isPlaying()) {
-                if (dijkstra.getDijkstraWorker().isPaused()) {
-                    dijkstra.getDijkstraWorker().resume();
+                } else if (!GraphBoard.nodes.isEmpty()) {
+                    GraphBoard.setPlayingState(true);
                     playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                } else {
-                    dijkstra.getDijkstraWorker().pause();
-                    if (!dijkstra.isCompleted()) {
-                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-                    }
+                    resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
+                    Method startMethod = comp.getClass().getMethod("start");
+                    startMethod.invoke(comp);
                 }
-            } else if (!GraphBoard.nodes.isEmpty()) {
-                GraphBoard.setPlayingState(true);
-                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
-                dijkstra.start();
-            }
-        }
-        if (comp instanceof Prims prims) {
-            if (GraphBoard.isPlaying()) {
-                if (prims.getPrimsWorker().isPaused()) {
-                    prims.getPrimsWorker().resume();
-                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                } else {
-                    prims.getPrimsWorker().pause();
-                    if (!prims.isCompleted()) {
-                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-                    }
-                }
-            } else if (!GraphBoard.nodes.isEmpty()) {
-                GraphBoard.setPlayingState(true);
-                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
-                prims.start();
-            }
-        }
-        if (comp instanceof Tarjans tarjans) {
-            if (GraphBoard.isPlaying()) {
-                if (tarjans.getTarjansWorker().isPaused()) {
-                    tarjans.getTarjansWorker().resume();
-                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                } else {
-                    tarjans.getTarjansWorker().pause();
-                    if (!tarjans.isCompleted()) {
-                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-                    }
-                }
-            } else if (!GraphBoard.nodes.isEmpty()) {
-                GraphBoard.setPlayingState(true);
-                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
-                tarjans.start();
-            }
-        }
-        if (comp instanceof DFS dfs) {
-            if (GraphBoard.isPlaying()) {
-                if (dfs.getDfsWorker().isPaused()) {
-                    dfs.getDfsWorker().resume();
-                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                } else {
-                    dfs.getDfsWorker().pause();
-                    if (!dfs.isCompleted()) {
-                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-                    }
-                }
-            } else if (!GraphBoard.nodes.isEmpty()) {
-                GraphBoard.setPlayingState(true);
-                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
-                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
-                dfs.start();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -485,65 +430,27 @@ public class GraphPanel extends javax.swing.JPanel {
     private void resetLabelAction() {
         BorderLayout layout = (BorderLayout) this.getLayout();
         Component comp = layout.getLayoutComponent(BorderLayout.CENTER);
-        if (comp instanceof BFS bfs) {
-            if (GraphBoard.isPlaying()) {
-                bfs.getBfsWorker().cancel(true);
+        if (comp != null) {
+            String className = comp.getClass().getSimpleName();
+            String workerMethodName = "get" + className + "Worker";
+            try {
+                Method getWorkerMethod = comp.getClass().getMethod(workerMethodName);
+                Object worker = getWorkerMethod.invoke(comp);
+                if (GraphBoard.isPlaying()) {
+                    Method cancelMethod = worker.getClass().getMethod("cancel", boolean.class);
+                    cancelMethod.invoke(worker, true);
+                }
+                GraphBoard.setPlayingState(false);
+                Method resetCodeMethod = comp.getClass().getMethod("resetCode");
+                resetCodeMethod.invoke(comp);
+                GraphBoard.setSource(null);
+                Node.selectNone(GraphBoard.nodes);
+                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+                repaint();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            GraphBoard.setPlayingState(false);
-            bfs.resetCode();
-            GraphBoard.setSource(null);
-            Node.selectNone(GraphBoard.nodes);
-            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
-            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-            repaint();
-        }
-        if (comp instanceof Dijkstra dijkstra) {
-            if (GraphBoard.isPlaying()) {
-                dijkstra.getDijkstraWorker().cancel(true);
-            }
-            GraphBoard.setPlayingState(false);
-            dijkstra.resetCode();
-            GraphBoard.setSource(null);
-            Node.selectNone(GraphBoard.nodes);
-            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
-            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-            repaint();
-        }
-        if (comp instanceof Prims prims) {
-            if (GraphBoard.isPlaying()) {
-                prims.getPrimsWorker().cancel(true);
-            }
-            GraphBoard.setPlayingState(false);
-            prims.resetCode();
-            GraphBoard.setSource(null);
-            Node.selectNone(GraphBoard.nodes);
-            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
-            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-            repaint();
-        }
-        if (comp instanceof Tarjans tarjans) {
-            if (GraphBoard.isPlaying()) {
-                tarjans.getTarjansWorker().cancel(true);
-            }
-            GraphBoard.setPlayingState(false);
-            tarjans.resetCode();
-            GraphBoard.setSource(null);
-            Node.selectNone(GraphBoard.nodes);
-            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
-            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-            repaint();
-        }
-        if (comp instanceof DFS dfs) {
-            if (GraphBoard.isPlaying()) {
-                dfs.getDfsWorker().cancel(true);
-            }
-            GraphBoard.setPlayingState(false);
-            dfs.resetCode();
-            GraphBoard.setSource(null);
-            Node.selectNone(GraphBoard.nodes);
-            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
-            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
-            repaint();
         }
     }
 

@@ -378,8 +378,10 @@ public class Prims extends GraphBoard {
                 super.done();
                 completed = true;
                 resetCode();
+                if (!isCancelled()) {
+                    GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                }
                 repaint();
-                GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
             }
         };
         primsWorker.execute();

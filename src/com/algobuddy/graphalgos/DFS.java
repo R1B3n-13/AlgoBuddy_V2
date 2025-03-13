@@ -428,14 +428,16 @@ public class DFS extends GraphBoard {
                 super.done();
                 completed = true;
                 resetCode();
-                GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                if (!isCancelled()) {
+                    GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                }
                 repaint();
             }
         };
         dfsWorker.execute();
     }
 
-    public AlgoWorker<Void, Void> getDfsWorker() {
+    public AlgoWorker<Void, Void> getDFSWorker() {
         return dfsWorker;
     }
 

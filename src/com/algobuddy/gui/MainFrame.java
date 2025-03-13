@@ -3,6 +3,7 @@ package com.algobuddy.gui;
 import com.algobuddy.graphalgos.BFS;
 import com.algobuddy.graphalgos.DFS;
 import com.algobuddy.graphalgos.Dijkstra;
+import com.algobuddy.graphalgos.Kahns;
 import com.algobuddy.graphalgos.Prims;
 import com.algobuddy.graphalgos.Tarjans;
 import com.algobuddy.recursionalgos.BinomialCoefficient;
@@ -103,6 +104,7 @@ public class MainFrame extends javax.swing.JFrame {
         goToDfsButton = new javax.swing.JButton();
         goToPrimsButton = new javax.swing.JButton();
         goToTarjansButton = new javax.swing.JButton();
+        goToKahnsButton = new javax.swing.JButton();
         simulationPanel = new com.algobuddy.gui.GraphPanel();
         treeSimulationPanel = new javax.swing.JPanel();
         comPanel = new javax.swing.JPanel();
@@ -493,6 +495,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        goToKahnsButton.setBackground(new java.awt.Color(89, 94, 101, 50));
+        goToKahnsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
+        goToKahnsButton.setForeground(new java.awt.Color(172, 179, 186));
+        goToKahnsButton.setText("Toposort (Kahn's)");
+        goToKahnsButton.setBorder(null);
+        goToKahnsButton.setBorderPainted(false);
+        goToKahnsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goToKahnsButton.setMaximumSize(new java.awt.Dimension(244, 72));
+        goToKahnsButton.setMinimumSize(new java.awt.Dimension(244, 72));
+        goToKahnsButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToKahnsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToKahnsButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout graphIndexPanelLayout = new javax.swing.GroupLayout(graphIndexPanel);
         graphIndexPanel.setLayout(graphIndexPanelLayout);
         graphIndexPanelLayout.setHorizontalGroup(
@@ -509,7 +527,8 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(goToBfsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(goToPrimsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goToTarjansButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(goToTarjansButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goToKahnsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(1257, Short.MAX_VALUE))
         );
         graphIndexPanelLayout.setVerticalGroup(
@@ -527,7 +546,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(goToPrimsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goToTarjansButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(545, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToKahnsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(467, Short.MAX_VALUE))
         );
 
         mainPanel.add(graphIndexPanel, "graphIndexPanel");
@@ -1666,6 +1687,17 @@ public class MainFrame extends javax.swing.JFrame {
         GraphBoard.setCurrentAlgo("DFS");
     }//GEN-LAST:event_goToDfsButtonMouseClicked
 
+    private void goToKahnsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToKahnsButtonMouseClicked
+        GraphPanel.directedStateRadioButton.setEnabled(false);
+        GraphBoard.setDirected(true);
+        GraphPanel.directedStateRadioButton.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "switchOn.png"));
+        mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+        simulationPanel.add(new Kahns(), java.awt.BorderLayout.CENTER);
+        titleBar.setBackground(new Color(0, 14, 26));
+        titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
+        GraphBoard.setCurrentAlgo("Kahn's");
+    }//GEN-LAST:event_goToKahnsButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1857,6 +1889,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton goToDfsButton;
     private javax.swing.JButton goToDijkstraButton;
     private javax.swing.JButton goToGraphButton;
+    private javax.swing.JButton goToKahnsButton;
     private javax.swing.JButton goToPrimsButton;
     private javax.swing.JButton goToRecursionButton;
     private javax.swing.JButton goToTarjansButton;

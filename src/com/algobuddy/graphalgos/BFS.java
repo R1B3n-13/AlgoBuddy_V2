@@ -17,6 +17,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.List;
@@ -230,6 +231,54 @@ public class BFS extends GraphBoard {
                 g2d.drawString(String.valueOf((char) (runningNode.getNodeNum() + 65)),
                         (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
             }
+
+            // Display BFS Distances
+            if (dis != null && dis.length > 0) {
+                g2d.setColor(new Color(177, 191, 222));
+                g2d.setFont(new Font("Consolas", Font.BOLD, 20));
+                g2d.drawString("BFS Distances:", getWidth() - 315, getHeight() - 650);
+
+                StringBuilder distanceStr = new StringBuilder();
+                for (i = 0; i < dis.length; i++) {
+                    char nodeName = (char) (i + 65);
+                    if (dis[i] == Integer.MAX_VALUE) {
+                        distanceStr.append(nodeName).append(": ∞").append(", ");
+                    } else {
+                        distanceStr.append(nodeName).append(": ").append(dis[i]).append(", ");
+                    }
+                }
+                if (distanceStr.length() > 2) {
+                    distanceStr.setLength(distanceStr.length() - 2); // Remove last comma and space
+                }
+
+                // Word wrap for long distance arrays
+                String distances = distanceStr.toString();
+                int maxWidth = 200;
+                List<String> lines = new ArrayList<>();
+                String[] pairs = distances.split(", ");
+                StringBuilder currentLine = new StringBuilder();
+
+                for (String pair : pairs) {
+                    if (currentLine.length() + pair.length() + 2 <= maxWidth / 8) {
+                        if (currentLine.length() > 0) {
+                            currentLine.append(", ");
+                        }
+                        currentLine.append(pair);
+                    } else {
+                        lines.add(currentLine.toString());
+                        currentLine = new StringBuilder(pair);
+                    }
+                }
+
+                if (currentLine.length() > 0) {
+                    lines.add(currentLine.toString());
+                }
+
+                g2d.setColor(new Color(238, 247, 137));
+                for (int j = 0; j < lines.size(); j++) {
+                    g2d.drawString(lines.get(j), getWidth() - 315, getHeight() - 620 + j * 25);
+                }
+            }
         }
 
         for (Node n : nodes) {
@@ -238,7 +287,7 @@ public class BFS extends GraphBoard {
 
             if (getSource() == n) {
                 g2d.drawString("0", n.getLocation().x - 5, n.getLocation().y - 27);
-            } else if (isPlaying() && !"0".equals(getDistance(n))) {
+            } else if (isPlaying() && !"∞".equals(getDistance(n))) {
                 String str = getDistance(n);
                 int N = str.length();
                 g2d.drawString(str, n.getLocation().x - N * 5, n.getLocation().y - 27);
@@ -326,6 +375,7 @@ public class BFS extends GraphBoard {
         g = new Graph(nodes.size());
         vis = new boolean[nodes.size()];
         dis = new int[nodes.size()];
+        Arrays.fill(dis, Integer.MAX_VALUE);
         q = new LinkedList<>();
         processedEdges = new ArrayList<>();
         for (Edge e : edges) {
@@ -384,14 +434,16 @@ public class BFS extends GraphBoard {
                 super.done();
                 completed = true;
                 resetCode();
-                GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                if (!isCancelled()) {
+                    GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                }
                 repaint();
             }
         };
         bfsWorker.execute();
     }
 
-    public AlgoWorker<Void, Void> getBfsWorker() {
+    public AlgoWorker<Void, Void> getBFSWorker() {
         return bfsWorker;
     }
 
@@ -404,6 +456,9 @@ public class BFS extends GraphBoard {
     }
 
     public static String getDistance(Node n) {
-        return String.valueOf(dis[n.getNodeNum()]);
+        if (dis[n.getNodeNum()] != Integer.MAX_VALUE) {
+            return String.valueOf(dis[n.getNodeNum()]);
+        }
+        return "∞";
     }
 }
