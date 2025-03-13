@@ -351,7 +351,7 @@ public class BFS extends GraphBoard {
                         repaint();
                         waitFor(getSpeed());
                         var it = g.getAdj()[u.getNodeNum()].listIterator();
-                        while (it.hasNext()) {
+                        while (it.hasNext() && !isCancelled()) {
                             if (!isPaused()) {
                                 Node v = it.next();
                                 if (!vis[v.getNodeNum()]) {
@@ -404,9 +404,6 @@ public class BFS extends GraphBoard {
     }
 
     public static String getDistance(Node n) {
-        if (dis[n.getNodeNum()] != Integer.MAX_VALUE) {
-            return String.valueOf(dis[n.getNodeNum()]);
-        }
-        return "∞";
+        return String.valueOf(dis[n.getNodeNum()]);
     }
 }

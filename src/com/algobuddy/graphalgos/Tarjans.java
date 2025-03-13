@@ -25,22 +25,23 @@ import org.javatuples.Pair;
 
 public class Tarjans extends GraphBoard {
 
-    private Stack<Node> stack;           // DFS stack
-    private int[] disc, low;             // Discovery and low-link arrays
-    private boolean[] onStack;           // Tracks nodes currently on stack
-    private List<List<Node>> sccs;       // Stores identified SCCs
-    private int time;                    // Discovery time counter
-    private Color[] sccColors;           // Colors for SCCs
-    private Node poppedNode;             // Node popped
-    private List<Pair<Node, Node>> processedEdges; // Edges that are being processed or have already been processed
+    private Stack<Node> stack;                          // DFS stack
+    private int[] disc, low;                            // Discovery and low-link arrays
+    private boolean[] onStack;                          // Tracks nodes currently on stack
+    private List<List<Node>> sccs;                      // Stores identified SCCs
+    private int time;                                   // Discovery time counter
+    private Color[] sccColors;                          // Colors for SCCs
+    private Node poppedNode;                            // Node popped
+    private List<Pair<Node, Node>> processedEdges;      // Edges that are being processed or have already been processed
     private boolean l1, l2, l3, l4, l5, l6, l7, l8, l9; // Flags to highlight algorithm steps
-    private AlgoWorker<Void, Void> tarjansWorker; // Worker thread for algorithm execution
-    private boolean completed = false;   // Tracks algorithm completion
-    private int coefficient = 6;         // Offset for visualization slots
-    private Edge runningEdge;            // Current edge being animated
-    private Node runningNode;            // Current node being animated
-    private double progress;             // Animation progress (0 to 1)
-    private Timer animationTimer;        // Timer for edge animation
+    private AlgoWorker<Void, Void> tarjansWorker;       // Worker thread for algorithm execution
+    private boolean completed = false;                  // Tracks algorithm completion
+    private int coefficient = 6;                        // Offset for visualization slots
+    private Edge runningEdge;                           // Current edge being animated
+    private Node runningNode;                           // Current node being animated
+    private boolean isBacktracking;                     // Flag to show running node in different color when backtracking 
+    private double progress;                            // Animation progress (0 to 1)
+    private Timer animationTimer;                       // Timer for edge animation
 
     @Override
     protected void paintComponent(Graphics gfx) {
@@ -185,7 +186,11 @@ public class Tarjans extends GraphBoard {
         // Draw running node
         if (isPlaying() && runningNode != null && !completed) {
             g2d.setStroke(new BasicStroke(3));
-            g2d.setColor(new Color(240, 10, 9));
+            if (!isBacktracking) {
+                g2d.setColor(new Color(240, 10, 9));
+            } else {
+                g2d.setColor(new Color(113, 121, 126));
+            }
             g2d.drawOval(runningNode.getLocation().x - Node.getRadius(), runningNode.getLocation().y - Node.getRadius(),
                     2 * Node.getRadius(), 2 * Node.getRadius());
         }
@@ -278,10 +283,10 @@ public class Tarjans extends GraphBoard {
             g2d.drawString("      of u, if low[u] == disc[u]", getWidth() - 315, getHeight() - 610);
         }
         if (!l8) {
-            g2d.drawString("        a. Pop from the stack till u", getWidth() - 315, getHeight() - 580);
+            g2d.drawString("         a. Pop from the stack till u", getWidth() - 315, getHeight() - 580);
         }
         if (!l9) {
-            g2d.drawString("        b. Add the popped nodes in SCC", getWidth() - 315, getHeight() - 550);
+            g2d.drawString("         b. Add the popped nodes in SCC", getWidth() - 315, getHeight() - 550);
         }
     }
 
@@ -292,33 +297,32 @@ public class Tarjans extends GraphBoard {
 
         ArrayList<Color> colors = new ArrayList<>();
 
-        // These 26 colors are derived from the Polychrome 36 palette
-        colors.add(new Color(240, 59, 32));   // Vermilion 1
-        colors.add(new Color(67, 99, 216));   // Blue 2
+        colors.add(new Color(224, 176, 255)); // Mauve 1
+        colors.add(new Color(229, 43, 80));   // Amaranth 2
         colors.add(new Color(254, 178, 76));  // Orange 3
-        colors.add(new Color(158, 83, 148));  // Purple 4
-        colors.add(new Color(255, 211, 0));   // Yellow 5
-        colors.add(new Color(189, 57, 60));   // Crimson 6
+        colors.add(new Color(125, 249, 255)); // Electric Blue 4
+        colors.add(new Color(208, 240, 192)); // Tea Green 5
+        colors.add(new Color(244, 194, 194)); // Tea Rose 6
         colors.add(new Color(34, 181, 246));  // Cyan 7
         colors.add(new Color(245, 130, 51));  // Amber 8
-        colors.add(new Color(142, 68, 173));  // Violet 9
-        colors.add(new Color(165, 38, 57));   // Ruby 10
-        colors.add(new Color(97, 83, 204));   // Indigo 11
+        colors.add(new Color(204, 204, 255)); // Periwinkle 9
+        colors.add(new Color(255, 36, 0));    // Scarlet 10
+        colors.add(new Color(185, 217, 235)); // Columbia Blue 11
         colors.add(new Color(232, 193, 112)); // Gold 12
         colors.add(new Color(247, 92, 128));  // Salmon 13
-        colors.add(new Color(173, 101, 61));  // Brown 14
+        colors.add(new Color(227, 218, 201)); // Bone 14
         colors.add(new Color(181, 122, 167)); // Lavender 15
         colors.add(new Color(120, 133, 205)); // Periwinkle 16
         colors.add(new Color(233, 132, 209)); // Pink 17
         colors.add(new Color(237, 167, 155)); // Coral 18
-        colors.add(new Color(75, 92, 143));   // Navy 19
+        colors.add(new Color(0, 255, 191));   // Aquamarine 19
         colors.add(new Color(252, 138, 10));  // Tangerine 20
         colors.add(new Color(206, 61, 100));  // Cerise 21
-        colors.add(new Color(100, 57, 72));   // Burgundy 22
+        colors.add(new Color(255, 153, 102)); // Atomic Tangerine 22
         colors.add(new Color(196, 147, 190)); // Orchid 23
         colors.add(new Color(170, 170, 170)); // Silver 24
-        colors.add(new Color(71, 71, 71));    // Charcoal 25
-        colors.add(new Color(105, 73, 119));  // Plum 26
+        colors.add(new Color(233, 116, 81));  // Burnt Sienna 25
+        colors.add(new Color(178, 132, 190)); // African Violet 26
 
         return colors.toArray(Color[]::new);
     }
@@ -365,21 +369,16 @@ public class Tarjans extends GraphBoard {
             @Override
             public Void doInBackground() throws InterruptedException {
                 for (int i = 0; i < nodes.size(); i++) {
+                    if (isCancelled()) {
+                        return null;
+                    }
                     if (!isPaused()) {
                         if (disc[i] == 0) {
-                            for (Edge e : edges) {
-                                if (e.getNode1().getNodeNum() == i) {
-                                    runningNode = e.getNode1();
-                                    break;
-                                }
-                                if (e.getNode2().getNodeNum() == i) {
-                                    runningNode = e.getNode2();
-                                    break;
-                                }
-                            }
+                            runningNode = nodes.get(i);
                             l1 = true;
                             repaint();
                             waitFor(getSpeed() / 2);
+
                             l1 = false;
                             l2 = true;
                             dfs(i);
@@ -394,6 +393,10 @@ public class Tarjans extends GraphBoard {
 
             private void dfs(int u) throws InterruptedException {
 
+                if (isCancelled()) {
+                    return;
+                }
+
                 disc[u] = low[u] = ++time;
                 stack.push(nodes.get(u));
                 onStack[u] = true;
@@ -403,20 +406,16 @@ public class Tarjans extends GraphBoard {
                 waitFor(getSpeed() / 2);
                 l3 = false;
 
-                for (Edge e : edges) {
-                    if (e.getNode1().getNodeNum() == u) {
-                        runningNode = e.getNode1();
-                        break;
-                    }
-                    if (e.getNode2().getNodeNum() == u) {
-                        runningNode = e.getNode2();
-                        break;
-                    }
-                }
+                runningNode = nodes.get(u);
                 repaint();
                 waitFor(getSpeed() / 2);
 
                 for (Edge e : edges) {
+
+                    if (isCancelled()) {
+                        return;
+                    }
+
                     if (!isPaused()) {
                         if (e.getNode1().getNodeNum() == u) {
                             int v = e.getNode2().getNodeNum();
@@ -430,6 +429,8 @@ public class Tarjans extends GraphBoard {
                                 waitFor(getSpeed());
                                 stopAnimationTimer();
                                 dfs(v);
+
+                                isBacktracking = true;
                                 l4 = l5 = l3 = false;
                                 l6 = true;
                                 runningNode = e.getNode1();
@@ -438,6 +439,7 @@ public class Tarjans extends GraphBoard {
                                 low[u] = Math.min(low[u], low[v]);
                                 repaint();
                                 waitFor(getSpeed());
+                                isBacktracking = false;
                             } else if (onStack[v]) {
                                 l4 = l3 = l6 = false;
                                 l5 = true;
@@ -451,11 +453,14 @@ public class Tarjans extends GraphBoard {
                     }
                 }
 
+                isBacktracking = true;
+                repaint();
+                waitFor(getSpeed() / 2);
                 if (low[u] == disc[u]) {
                     l3 = l4 = l5 = l6 = false;
                     l7 = true;
                     List<Node> scc = new ArrayList<>();
-                    while (!stack.isEmpty()) {
+                    while (!stack.isEmpty() && !isCancelled()) {
                         if (!isPaused()) {
                             Node node = stack.pop();
                             poppedNode = node;
@@ -482,6 +487,7 @@ public class Tarjans extends GraphBoard {
                     l9 = false;
                 }
                 l7 = false;
+                isBacktracking = false;
             }
 
             @Override

@@ -1,6 +1,7 @@
 package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
+import com.algobuddy.graphalgos.DFS;
 import com.algobuddy.graphalgos.Dijkstra;
 import com.algobuddy.graphalgos.Prims;
 import com.algobuddy.graphalgos.Tarjans;
@@ -454,6 +455,11 @@ public class MainFrame extends javax.swing.JFrame {
         goToDfsButton.setMaximumSize(new java.awt.Dimension(244, 72));
         goToDfsButton.setMinimumSize(new java.awt.Dimension(244, 72));
         goToDfsButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        goToDfsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goToDfsButtonMouseClicked(evt);
+            }
+        });
 
         goToPrimsButton.setBackground(new java.awt.Color(89, 94, 101, 50));
         goToPrimsButton.setFont(new java.awt.Font("Cambria", 1, 20)); // NOI18N
@@ -1651,6 +1657,14 @@ public class MainFrame extends javax.swing.JFrame {
         titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
         GraphBoard.setCurrentAlgo("Tarjans's");
     }//GEN-LAST:event_goToTarjansButtonMouseClicked
+
+    private void goToDfsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToDfsButtonMouseClicked
+        mainPanel.nextSlidingPanel(10, simulationPanel, JSlidingPane.Direction.Left);
+        simulationPanel.add(new DFS(), java.awt.BorderLayout.CENTER);
+        titleBar.setBackground(new Color(0, 14, 26));
+        titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 14, 26)));
+        GraphBoard.setCurrentAlgo("DFS");
+    }//GEN-LAST:event_goToDfsButtonMouseClicked
 
     /**
      * @param args the command line arguments

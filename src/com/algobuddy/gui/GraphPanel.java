@@ -1,6 +1,7 @@
 package com.algobuddy.gui;
 
 import com.algobuddy.graphalgos.BFS;
+import com.algobuddy.graphalgos.DFS;
 import com.algobuddy.graphalgos.Dijkstra;
 import com.algobuddy.graphalgos.Prims;
 import com.algobuddy.graphalgos.Tarjans;
@@ -458,6 +459,24 @@ public class GraphPanel extends javax.swing.JPanel {
                 tarjans.start();
             }
         }
+        if (comp instanceof DFS dfs) {
+            if (GraphBoard.isPlaying()) {
+                if (dfs.getDfsWorker().isPaused()) {
+                    dfs.getDfsWorker().resume();
+                    playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                } else {
+                    dfs.getDfsWorker().pause();
+                    if (!dfs.isCompleted()) {
+                        playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+                    }
+                }
+            } else if (!GraphBoard.nodes.isEmpty()) {
+                GraphBoard.setPlayingState(true);
+                playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "pauseButton.png"));
+                resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetEnabled.png"));
+                dfs.start();
+            }
+        }
     }
 
     /**
@@ -508,6 +527,18 @@ public class GraphPanel extends javax.swing.JPanel {
             }
             GraphBoard.setPlayingState(false);
             tarjans.resetCode();
+            GraphBoard.setSource(null);
+            Node.selectNone(GraphBoard.nodes);
+            resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));
+            playLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playEnabled.png"));
+            repaint();
+        }
+        if (comp instanceof DFS dfs) {
+            if (GraphBoard.isPlaying()) {
+                dfs.getDfsWorker().cancel(true);
+            }
+            GraphBoard.setPlayingState(false);
+            dfs.resetCode();
             GraphBoard.setSource(null);
             Node.selectNone(GraphBoard.nodes);
             resetLabel.setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "resetDisabled.png"));

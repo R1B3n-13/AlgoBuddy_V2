@@ -5,9 +5,6 @@ import com.algobuddy.gui.DrawArrow;
 import com.algobuddy.gui.DrawLine;
 import com.algobuddy.gui.Edge;
 import com.algobuddy.gui.GraphBoard;
-import static com.algobuddy.gui.GraphBoard.isDirected;
-import static com.algobuddy.gui.GraphBoard.isPlaying;
-import static com.algobuddy.gui.GraphBoard.setPlayingState;
 import com.algobuddy.gui.GraphPanel;
 import com.algobuddy.gui.Node;
 import java.awt.BasicStroke;
@@ -20,9 +17,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Stack;
 import java.util.List;
-import java.util.PriorityQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -32,16 +28,19 @@ import org.javatuples.Pair;
  *
  * @author nebir, nazrul
  */
-public class Dijkstra extends GraphBoard {
+public class DFS extends GraphBoard {
 
     private Graph g;
-    private PriorityQueue<Pair<Integer, Node>> pq;
+    private Stack<Node> inDFS;
+    private boolean[] vis;
     private static int[] dis;
-    private boolean l1, l2, l3, l4, l5;
-    private AlgoWorker<Void, Void> dijkstraWorker;
+    private boolean l1, l2, l3, l4, l5, l6;
+    private AlgoWorker<Void, Void> dfsWorker;
     private List<Pair<Node, Node>> processedEdges;
     private Pair<Node, Node> runningEdge;
     private Node runningNode;
+    private Node poppedNode;
+    private boolean isBacktracking;
     private boolean completed = false;
     private int coefficient = 6;
     private Timer animationTimer;
@@ -52,8 +51,7 @@ public class Dijkstra extends GraphBoard {
         setPaintingBoundary(getSize());
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Color color1 = new Color(0, 22, 41);
         Color color2 = new Color(0, 23, 39);
         GradientPaint gp = new GradientPaint(0, 0, color1, getWidth(), getHeight(), color2);
@@ -75,37 +73,57 @@ public class Dijkstra extends GraphBoard {
         }
 
         for (i = coefficient; i < coefficient + 26; i++) {
+            g2d.setColor(new Color(161, 131, 199));
+            g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+            g2d.drawString(String.valueOf((char) (i + 59)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 96);
+
             g2d.setStroke(new BasicStroke(2));
+
             if ((i & 1) > 0) {
                 g2d.setColor(new Color(154, 192, 230));
             } else {
                 g2d.setColor(new Color(151, 188, 226));
             }
-
-            g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 79, (getWidth() - 760) / 26, 27);
+            g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 83, (getWidth() - 760) / 26, 27);
+            g2d.fillRect((i * ((getWidth() - 700) / 26) + 2), getHeight() - 38, (getWidth() - 760) / 26, 27);
 
             if (!isPlaying()) {
-                if (getSource() == null) {
+                if (getSource() != null && i != getSource().getNodeNum() + coefficient) {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
+                    if (i - coefficient < nodes.size()) {
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                    } else {
+                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                    }
+                } else if (getSource() == null) {
+                    g2d.setColor(new Color(0, 22, 40));
+                    g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+                    if (i - coefficient < nodes.size()) {
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                    } else {
+                        g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                    }
+
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 }
 
                 if (getSource() != null && i != coefficient) {
                     g2d.setColor(new Color(0, 22, 40));
                     g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 }
             }
         }
 
         g2d.setColor(new Color(161, 131, 199));
         g2d.setFont(new Font("Consolas", Font.ITALIC, 18));
-        g2d.drawString("Min Heap:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
+        g2d.drawString("Visited:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+        g2d.drawString("In Recursion:", ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
 
         if (getSource() != null) {
             l1 = false;
-            g2d.setColor(new Color(231, 204, 158));
+            g2d.setColor(new Color(245, 204, 158));
             g2d.fillOval(getSource().getLocation().x - Node.getRadius(), getSource().getLocation().y - Node.getRadius(),
                     2 * Node.getRadius(), 2 * Node.getRadius());
             g2d.setColor(new Color(0, 22, 40));
@@ -117,7 +135,11 @@ public class Dijkstra extends GraphBoard {
                 g2d.setColor(Color.RED);
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (getSource().getNodeNum() + 65)),
-                        coefficient * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
+                        coefficient * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+
+                g2d.setColor(Color.RED);
+                g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+                g2d.drawString("1", (getSource().getNodeNum() + coefficient) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
             }
         } else {
             l1 = true;
@@ -132,17 +154,38 @@ public class Dijkstra extends GraphBoard {
         }
 
         if (isPlaying()) {
+            for (i = coefficient; i < coefficient + 27; i++) {
+                if (i - coefficient < nodes.size()) {
+                    if (vis[i - coefficient]) {
+                        g2d.setColor(Color.RED);
+                        g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+                        g2d.drawString("1", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                    } else {
+                        g2d.setColor(new Color(0, 22, 40));
+                        g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+                        g2d.drawString("0", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                    }
+                } else {
+                    g2d.setColor(new Color(0, 22, 40));
+                    g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+                    g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 64);
+                }
+            }
+
             g2d.setColor(Color.RED);
             g2d.setFont(new Font("Consolas", Font.BOLD, 18));
             i = coefficient;
-            for (Pair p : pq) {
-                Node n = (Node) p.getValue1();
-                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
+
+            Object[] stackArray = inDFS.toArray();
+            for (int j = 0; j < stackArray.length; j++) {
+                Node n = (Node) stackArray[j];
+                g2d.drawString(String.valueOf((char) (n.getNodeNum() + 65)), i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 i++;
             }
+
             g2d.setColor(new Color(0, 22, 40));
             while (i < coefficient + 26) {
-                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
+                g2d.drawString("-", i * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 i++;
             }
 
@@ -183,44 +226,36 @@ public class Dijkstra extends GraphBoard {
                         n2.getLocation().y + 5);
             }
 
-            if (!completed) {
+            if (!completed && runningNode != null) {
                 g2d.setStroke(new BasicStroke(3));
-                g2d.setColor(new Color(240, 10, 9));
+                if (!isBacktracking) {
+                    g2d.setColor(new Color(240, 10, 9));
+                } else {
+                    g2d.setColor(new Color(113, 121, 126));
+                }
+
                 g2d.drawOval(runningNode.getLocation().x - Node.getRadius(), runningNode.getLocation().y - Node.getRadius(),
                         2 * Node.getRadius(), 2 * Node.getRadius());
+            }
+            if (!completed && poppedNode != null) {
                 g2d.setColor(new Color(234, 123, 114));
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
-                g2d.drawString(String.valueOf((char) (runningNode.getNodeNum() + 65)),
-                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
+                g2d.drawString(String.valueOf((char) (poppedNode.getNodeNum() + 65)),
+                        (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
             }
         }
 
         for (Node n : nodes) {
             g2d.setFont(new Font("Casteller", Font.BOLD, 18));
             g2d.setColor(new Color(161, 56, 64));
-            if (!isPlaying()) {
-                if (getSource() == n) {
-                    g2d.drawString("0", n.getLocation().x - 5, n.getLocation().y - 27);
-                } else {
-                    g2d.drawString("∞", n.getLocation().x - 5, n.getLocation().y - 27);
-                }
-            } else {
+
+            if (getSource() == n) {
+                g2d.drawString("0", n.getLocation().x - 5, n.getLocation().y - 27);
+            } else if (isPlaying() && !"0".equals(getDistance(n))) {
                 String str = getDistance(n);
                 int N = str.length();
                 g2d.drawString(str, n.getLocation().x - N * 5, n.getLocation().y - 27);
             }
-        }
-
-        for (Edge e : edges) {
-            int X = (e.getNode1().getLocation().x + e.getNode2().getLocation().x) / 2;
-            int Y = (e.getNode1().getLocation().y + e.getNode2().getLocation().y) / 2;
-            String str = String.valueOf(e.getWeight());
-            int N = str.length();
-            g2d.setColor(new Color(119, 142, 209));
-            g2d.fillRect(X - N * 5 - 3, Y - 9, N * 10 + 6, 18);
-            g2d.setColor(new Color(0, 22, 40));
-            g2d.setFont(new Font("Casteller", Font.BOLD, 18));
-            g2d.drawString(str, X - N * 5, Y + 6);
         }
 
         g2d.setColor(new Color(177, 191, 222));
@@ -229,50 +264,56 @@ public class Dijkstra extends GraphBoard {
         g2d.setColor(new Color(210, 52, 52));
         g2d.setFont(new Font("Consolas", Font.ITALIC, 15));
         if (l1) {
-            g2d.drawString("1. Create a min heap H", getWidth() - 315, getHeight() - 950);
-            g2d.drawString("and assign ∞ to all the node distance", getWidth() - 315, getHeight() - 930);
+            g2d.drawString("1. Initialize visited array with 0", getWidth() - 315, getHeight() - 950);
         }
         if (l2) {
-            g2d.drawString("2. Assign zero to the source distance", getWidth() - 315, getHeight() - 900);
-            g2d.drawString("and put it into H", getWidth() - 318, getHeight() - 880);
+            g2d.drawString("2. Select a source node", getWidth() - 315, getHeight() - 920);
         }
         if (l3) {
-            g2d.drawString("3. While H is non- empty", getWidth() - 315, getHeight() - 850);
+            g2d.drawString("3. DFS(node):", getWidth() - 315, getHeight() - 890);
         }
         if (l4) {
             g2d.setColor(new Color(238, 247, 137));
-            g2d.drawString("     i.  Remove the head u of H and", getWidth() - 315, getHeight() - 820);
+            g2d.drawString("      i.  Mark node as visited", getWidth() - 315, getHeight() - 860);
             g2d.setColor(new Color(210, 52, 52));
         }
         if (l5) {
             g2d.setColor(new Color(238, 247, 137));
-            g2d.drawString("     ii. For all the neighbors v of u", getWidth() - 315, getHeight() - 790);
-            g2d.drawString("     if dist[v] > dist[u] + w(u, v)", getWidth() - 315, getHeight() - 770);
-            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 740);
-            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 720);
+            g2d.drawString("      ii.  For each unvisited", getWidth() - 315, getHeight() - 830);
+            g2d.drawString("      neighbor v of node:", getWidth() - 318, getHeight() - 810);
+            g2d.drawString("          Recursively call DFS(v)", getWidth() - 318, getHeight() - 790);
+            g2d.setColor(new Color(210, 52, 52));
+        }
+        if (l6) {
+            g2d.setColor(new Color(238, 247, 137));
+            g2d.drawString("      iii. If all the neighbors", getWidth() - 315, getHeight() - 760);
+            g2d.drawString("      of a node are explored:", getWidth() - 318, getHeight() - 740);
+            g2d.drawString("          Backtrack to its parent", getWidth() - 318, getHeight() - 720);
             g2d.setColor(new Color(210, 52, 52));
         }
 
         g2d.setColor(new Color(161, 131, 199));
         if (!l1) {
-            g2d.drawString("1. Create a min heap H", getWidth() - 315, getHeight() - 950);
-            g2d.drawString("and assign ∞ to all the node distance", getWidth() - 315, getHeight() - 930);
+            g2d.drawString("1. Initialize visited array with 0", getWidth() - 315, getHeight() - 950);
         }
         if (!l2) {
-            g2d.drawString("2. Assign zero to the source distance", getWidth() - 315, getHeight() - 900);
-            g2d.drawString("and put it into H", getWidth() - 318, getHeight() - 880);
+            g2d.drawString("2. Select a source node", getWidth() - 315, getHeight() - 920);
         }
         if (!l3) {
-            g2d.drawString("3. While H is non-empty", getWidth() - 315, getHeight() - 850);
+            g2d.drawString("3. DFS(node):", getWidth() - 315, getHeight() - 890);
         }
         if (!l4) {
-            g2d.drawString("     i.  Remove the head u of H and", getWidth() - 315, getHeight() - 820);
+            g2d.drawString("      i.  Mark node as visited", getWidth() - 315, getHeight() - 860);
         }
         if (!l5) {
-            g2d.drawString("     ii. For all the neighbors v of u", getWidth() - 315, getHeight() - 790);
-            g2d.drawString("     if dist[v] > dist[u] + w(u, v)", getWidth() - 315, getHeight() - 770);
-            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 740);
-            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 720);
+            g2d.drawString("      ii. For each unvisited", getWidth() - 315, getHeight() - 830);
+            g2d.drawString("      neighbor v of node:", getWidth() - 315, getHeight() - 810);
+            g2d.drawString("          Recursively call DFS(v)", getWidth() - 315, getHeight() - 790);
+        }
+        if (!l6) {
+            g2d.drawString("      iii. If all the neighbors", getWidth() - 315, getHeight() - 760);
+            g2d.drawString("      of a node are explored:", getWidth() - 318, getHeight() - 740);
+            g2d.drawString("          Backtrack to its parent", getWidth() - 318, getHeight() - 720);
         }
     }
 
@@ -308,60 +349,78 @@ public class Dijkstra extends GraphBoard {
         }
         completed = false;
         g = new Graph(nodes.size());
+        vis = new boolean[nodes.size()];
         dis = new int[nodes.size()];
-        Arrays.fill(dis, Integer.MAX_VALUE);
-        pq = new PriorityQueue<>(30, (a, b) -> a.getValue0() - b.getValue0());
+        runningNode = null;
+        poppedNode = null;
+
+        inDFS = new Stack<>();
         processedEdges = new ArrayList<>();
         for (Edge e : edges) {
-            g.addEdge(e.getNode1(), e.getNode2(), e.getWeight());
+            g.addEdge(e.getNode1(), e.getNode2());
             if (!isDirected()) {
-                g.addEdge(e.getNode2(), e.getNode1(), e.getWeight());
+                g.addEdge(e.getNode2(), e.getNode1());
             }
         }
 
-        dis[getSource().getNodeNum()] = 0;
-        pq.add(Pair.with(0, getSource()));
-
-        dijkstraWorker = new AlgoWorker<>() {
+        dfsWorker = new AlgoWorker<>() {
             @Override
             public Void doInBackground() throws InterruptedException {
-                while (!pq.isEmpty() && !isCancelled()) {
+                dfs(getSource(), 0);
+                return null;
+            }
+
+            private void dfs(Node u, int currentDist) throws InterruptedException {
+                if (isCancelled()) {
+                    return;
+                }
+
+                runningNode = u;
+                inDFS.push(u);
+                vis[u.getNodeNum()] = true;
+                dis[u.getNodeNum()] = currentDist;
+                l4 = l3 = true;
+                l1 = l2 = l5 = l6 = false;
+                repaint();
+                waitFor(getSpeed());
+
+                for (Node v : g.getAdj()[u.getNodeNum()]) {
+                    if (isCancelled()) {
+                        return;
+                    }
                     if (!isPaused()) {
-                        Pair p = pq.poll();
-                        Node u = (Node) p.getValue1();
-                        runningNode = u;
-                        l4 = l3 = true;
-                        l1 = l2 = l5 = false;
-                        repaint();
-                        waitFor(getSpeed());
-                        var it = g.getWadj()[u.getNodeNum()].listIterator();
-                        while (it.hasNext() && !isCancelled()) {
-                            if (!isPaused()) {
-                                Pair q = it.next();
-                                Node v = (Node) q.getValue0();
-                                int w = (int) q.getValue1();
-                                if (dis[v.getNodeNum()] > dis[u.getNodeNum()] + w) {
-                                    runningEdge = new Pair<>(u, v);
-                                    processedEdges.add(runningEdge);
-                                    l5 = true;
-                                    l1 = l2 = l4 = false;
-                                    startAnimationTimer();
-                                    waitFor(getSpeed());
-                                    stopAnimationTimer();
-                                    dis[v.getNodeNum()] = dis[u.getNodeNum()] + w;
-                                    pq.add(Pair.with(dis[v.getNodeNum()], v));
-                                    repaint();
-                                    waitFor(getSpeed());
-                                }
-                            } else {
-                                waitFor(200);
-                            }
+                        if (!vis[v.getNodeNum()]) {
+                            runningEdge = new Pair<>(u, v);
+                            processedEdges.add(runningEdge);
+                            l5 = true;
+                            l1 = l2 = l4 = l6 = false;
+                            startAnimationTimer();
+                            waitFor(getSpeed());
+                            stopAnimationTimer();
+                            l5 = false;
+
+                            dfs(v, currentDist + 1);
+
+                            isBacktracking = true;
+                            runningNode = u;
+                            l6 = true;
+                            l1 = l2 = l4 = l5 = false;
+                            repaint();
+                            waitFor(getSpeed() / 2);
+                            isBacktracking = false;
                         }
+
                     } else {
                         waitFor(200);
                     }
                 }
-                return null;
+
+                isBacktracking = true;
+                poppedNode = inDFS.pop();
+                repaint();
+                waitFor(getSpeed() / 2);
+                poppedNode = null;
+                isBacktracking = false;
             }
 
             @Override
@@ -369,15 +428,15 @@ public class Dijkstra extends GraphBoard {
                 super.done();
                 completed = true;
                 resetCode();
-                repaint();
                 GraphPanel.getPlayLabel().setIcon(new ImageIcon("src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "img" + File.separator + "playDisabled.png"));
+                repaint();
             }
         };
-        dijkstraWorker.execute();
+        dfsWorker.execute();
     }
 
-    public AlgoWorker<Void, Void> getDijkstraWorker() {
-        return dijkstraWorker;
+    public AlgoWorker<Void, Void> getDfsWorker() {
+        return dfsWorker;
     }
 
     public boolean isCompleted() {
@@ -385,13 +444,10 @@ public class Dijkstra extends GraphBoard {
     }
 
     public void resetCode() {
-        l1 = l2 = l3 = l4 = l5 = false;
+        l1 = l2 = l3 = l4 = l5 = l6 = false;
     }
 
     public static String getDistance(Node n) {
-        if (dis[n.getNodeNum()] != Integer.MAX_VALUE) {
-            return String.valueOf(dis[n.getNodeNum()]);
-        }
-        return "∞";
+        return String.valueOf(dis[n.getNodeNum()]);
     }
 }
