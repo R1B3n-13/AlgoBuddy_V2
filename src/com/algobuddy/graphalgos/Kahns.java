@@ -39,7 +39,6 @@ public class Kahns extends GraphBoard {
     private int[] inDegree;
     private Queue<Node> zeroInDegreeNodes;
     private List<Node> topologicalOrder;
-    private boolean[] processed;
     private AlgoWorker<Void, Void> kahnsWorker;
     private List<Pair<Node, Node>> processedEdges;
     private Pair<Node, Node> runningEdge;
@@ -154,22 +153,33 @@ public class Kahns extends GraphBoard {
                 } else {
                     new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), 1, new Color(218, 226, 237),
                             new BasicStroke((float) 4), new BasicStroke(), 25);
-                }
 
-                g2d.setColor(new Color(245, 204, 158));
-                g2d.fillOval(n1.getLocation().x - Node.getRadius(), n1.getLocation().y - Node.getRadius(),
-                        2 * Node.getRadius(), 2 * Node.getRadius());
-                if (!p.equals(runningEdge) || progress >= 1) {
-                    g2d.fillOval(n2.getLocation().x - Node.getRadius(), n2.getLocation().y - Node.getRadius(),
+                    int X = (n1.getLocation().x + n2.getLocation().x) / 2;
+                    int Y = (n1.getLocation().y + n2.getLocation().y) / 2;
+                    String str = "X";
+                    int N = str.length();
+                    g2d.setColor(new Color(255, 68, 87));
+                    g2d.fillRect(X - N * 5 - 3, Y - 9, N * 10 + 6, 18);
+                    g2d.setColor(new Color(0, 23, 39));
+                    g2d.setFont(new Font("Casteller", Font.BOLD, 18));
+                    g2d.drawString(str, X - N * 5, Y + 6);
+
+                }
+            }
+
+            // Draw processed nodes
+            if (topologicalOrder != null && !topologicalOrder.isEmpty()) {
+                for (Node node : topologicalOrder) {
+
+                    g2d.setColor(new Color(245, 204, 158));
+                    g2d.fillOval(node.getLocation().x - Node.getRadius(), node.getLocation().y - Node.getRadius(),
                             2 * Node.getRadius(), 2 * Node.getRadius());
-                }
 
-                g2d.setColor(new Color(0, 22, 40));
-                g2d.setFont(new Font("Casteller", Font.BOLD, 18));
-                g2d.drawString(String.valueOf((char) (n1.getNodeNum() + 65)), n1.getLocation().x - 5,
-                        n1.getLocation().y + 5);
-                g2d.drawString(String.valueOf((char) (n2.getNodeNum() + 65)), n2.getLocation().x - 5,
-                        n2.getLocation().y + 5);
+                    g2d.setColor(new Color(0, 22, 40));
+                    g2d.setFont(new Font("Casteller", Font.BOLD, 18));
+                    g2d.drawString(String.valueOf((char) (node.getNodeNum() + 65)), node.getLocation().x - 5,
+                            node.getLocation().y + 5);
+                }
             }
 
             if (!completed && runningNode != null) {
@@ -199,7 +209,7 @@ public class Kahns extends GraphBoard {
 
                 // Word wrap for long topological orders
                 String order = orderStr.toString();
-                int maxWidth = 200;
+                int maxWidth = 230;
                 List<String> lines = new ArrayList<>();
                 String[] words = order.split(" → ");
                 StringBuilder currentLine = new StringBuilder();
@@ -324,7 +334,6 @@ public class Kahns extends GraphBoard {
         inDegree = new int[nodes.size()];
         zeroInDegreeNodes = new LinkedList<>();
         topologicalOrder = new ArrayList<>();
-        processed = new boolean[nodes.size()];
         processedEdges = new ArrayList<>();
         runningNode = null;
         runningEdge = null;
@@ -355,11 +364,8 @@ public class Kahns extends GraphBoard {
                         if (!isPaused()) {
                             Node u = zeroInDegreeNodes.poll();
                             runningNode = u;
-
                             topologicalOrder.add(u);
                             visitedCount++;
-                            processed[u.getNodeNum()] = true;
-
                             l2 = l3 = true;
                             l1 = l4 = l5 = l6 = false;
                             repaint();

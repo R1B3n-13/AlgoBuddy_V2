@@ -10,6 +10,7 @@ import com.algobuddy.gui.Node;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -34,6 +35,7 @@ public class DFS extends GraphBoard {
     private Stack<Node> inDFS;
     private boolean[] vis;
     private static int[] dis;
+    private List<Integer> dfsOrder;
     private boolean l1, l2, l3, l4, l5, l6;
     private AlgoWorker<Void, Void> dfsWorker;
     private List<Pair<Node, Node>> processedEdges;
@@ -231,7 +233,7 @@ public class DFS extends GraphBoard {
                 if (!isBacktracking) {
                     g2d.setColor(new Color(240, 10, 9));
                 } else {
-                    g2d.setColor(new Color(113, 121, 126));
+                    g2d.setColor(new Color(34, 139, 34));
                 }
 
                 g2d.drawOval(runningNode.getLocation().x - Node.getRadius(), runningNode.getLocation().y - Node.getRadius(),
@@ -242,6 +244,62 @@ public class DFS extends GraphBoard {
                 g2d.setFont(new Font("Consolas", Font.BOLD, 18));
                 g2d.drawString(String.valueOf((char) (poppedNode.getNodeNum() + 65)),
                         (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
+            }
+
+            // Display DFS Order
+            if (dfsOrder != null && !dfsOrder.isEmpty()) {
+                g2d.setColor(new Color(177, 191, 222));
+                g2d.setFont(new Font("Consolas", Font.BOLD, 20));
+                g2d.drawString("DFS Traversal Order:", getWidth() - 315, getHeight() - 650);
+
+                StringBuilder orderStr = new StringBuilder();
+                for (i = 0; i < dfsOrder.size(); i++) {
+                    char nodeName = (char) (dfsOrder.get(i) + 65);
+                    orderStr.append(nodeName).append("(").append(i + 1).append(")");
+                    if (i < dfsOrder.size() - 1) {
+                        orderStr.append(", ");
+                    }
+                }
+
+                // Calculate appropriate font size based on string length
+                String order = orderStr.toString();
+                int fontSize = 18;
+                g2d.setFont(new Font("Consolas", Font.BOLD, fontSize));
+                FontMetrics metrics = g2d.getFontMetrics();
+                int maxWidth = 300; // Available width
+
+                // Word wrap for long DFS orders
+                g2d.setColor(new Color(238, 247, 137));
+                List<String> lines = new ArrayList<>();
+
+                // If it doesn't fit, break it into multiple lines
+                if (metrics.stringWidth(order) > maxWidth) {
+                    String[] nodes = order.split(", ");
+                    StringBuilder currentLine = new StringBuilder();
+
+                    for (String node : nodes) {
+                        if (metrics.stringWidth(currentLine.toString() + node) <= maxWidth) {
+                            if (currentLine.length() > 0) {
+                                currentLine.append(", ");
+                            }
+                            currentLine.append(node);
+                        } else {
+                            lines.add(currentLine.toString());
+                            currentLine = new StringBuilder(node);
+                        }
+                    }
+
+                    if (currentLine.length() > 0) {
+                        lines.add(currentLine.toString());
+                    }
+
+                    for (int j = 0; j < lines.size(); j++) {
+                        g2d.drawString(lines.get(j), getWidth() - 315, getHeight() - 620 + j * (fontSize + 2));
+                    }
+                } else {
+                    // Display on a single line if it fits
+                    g2d.drawString(order, getWidth() - 315, getHeight() - 620);
+                }
             }
         }
 
@@ -351,6 +409,7 @@ public class DFS extends GraphBoard {
         g = new Graph(nodes.size());
         vis = new boolean[nodes.size()];
         dis = new int[nodes.size()];
+        dfsOrder = new ArrayList<>();
         runningNode = null;
         poppedNode = null;
 
@@ -379,6 +438,7 @@ public class DFS extends GraphBoard {
                 inDFS.push(u);
                 vis[u.getNodeNum()] = true;
                 dis[u.getNodeNum()] = currentDist;
+                dfsOrder.add(u.getNodeNum());
                 l4 = l3 = true;
                 l1 = l2 = l5 = l6 = false;
                 repaint();

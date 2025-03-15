@@ -193,6 +193,54 @@ public class Dijkstra extends GraphBoard {
                 g2d.drawString(String.valueOf((char) (runningNode.getNodeNum() + 65)),
                         (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 60);
             }
+
+            // Display dijkstra Distances
+            if (dis != null && dis.length > 0) {
+                g2d.setColor(new Color(177, 191, 222));
+                g2d.setFont(new Font("Consolas", Font.BOLD, 20));
+                g2d.drawString("Dijkstra Distances:", getWidth() - 315, getHeight() - 660);
+
+                StringBuilder distanceStr = new StringBuilder();
+                for (i = 0; i < dis.length; i++) {
+                    char nodeName = (char) (i + 65);
+                    if (dis[i] == Integer.MAX_VALUE) {
+                        distanceStr.append(nodeName).append(": ∞").append(", ");
+                    } else {
+                        distanceStr.append(nodeName).append(": ").append(dis[i]).append(", ");
+                    }
+                }
+                if (distanceStr.length() > 2) {
+                    distanceStr.setLength(distanceStr.length() - 2); // Remove last comma and space
+                }
+
+                // Word wrap for long distance arrays
+                String distances = distanceStr.toString();
+                int maxWidth = 240;
+                List<String> lines = new ArrayList<>();
+                String[] pairs = distances.split(", ");
+                StringBuilder currentLine = new StringBuilder();
+
+                for (String pair : pairs) {
+                    if (currentLine.length() + pair.length() + 2 <= maxWidth / 8) {
+                        if (currentLine.length() > 0) {
+                            currentLine.append(", ");
+                        }
+                        currentLine.append(pair);
+                    } else {
+                        lines.add(currentLine.toString());
+                        currentLine = new StringBuilder(pair);
+                    }
+                }
+
+                if (currentLine.length() > 0) {
+                    lines.add(currentLine.toString());
+                }
+
+                g2d.setColor(new Color(238, 247, 137));
+                for (int j = 0; j < lines.size(); j++) {
+                    g2d.drawString(lines.get(j), getWidth() - 315, getHeight() - 630 + j * 25);
+                }
+            }
         }
 
         for (Node n : nodes) {
@@ -248,8 +296,8 @@ public class Dijkstra extends GraphBoard {
             g2d.setColor(new Color(238, 247, 137));
             g2d.drawString("     ii. For all the neighbors v of u", getWidth() - 315, getHeight() - 790);
             g2d.drawString("     if dist[v] > dist[u] + w(u, v)", getWidth() - 315, getHeight() - 770);
-            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 740);
-            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 720);
+            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 750);
+            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 730);
             g2d.setColor(new Color(210, 52, 52));
         }
 
@@ -271,8 +319,8 @@ public class Dijkstra extends GraphBoard {
         if (!l5) {
             g2d.drawString("     ii. For all the neighbors v of u", getWidth() - 315, getHeight() - 790);
             g2d.drawString("     if dist[v] > dist[u] + w(u, v)", getWidth() - 315, getHeight() - 770);
-            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 740);
-            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 720);
+            g2d.drawString("        dist[v] ← dist[u] + w(u, v)", getWidth() - 315, getHeight() - 750);
+            g2d.drawString("        and put v into H", getWidth() - 318, getHeight() - 730);
         }
     }
 

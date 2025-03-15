@@ -10,6 +10,7 @@ import com.algobuddy.gui.Node;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,9 +19,11 @@ import java.awt.RenderingHints;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -232,51 +235,145 @@ public class BFS extends GraphBoard {
                         (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
             }
 
-            // Display BFS Distances
+            // Display BFS Distances Level-wise
             if (dis != null && dis.length > 0) {
                 g2d.setColor(new Color(177, 191, 222));
                 g2d.setFont(new Font("Consolas", Font.BOLD, 20));
-                g2d.drawString("BFS Distances:", getWidth() - 315, getHeight() - 650);
+                g2d.drawString("BFS Levels:", getWidth() - 315, getHeight() - 700);
 
-                StringBuilder distanceStr = new StringBuilder();
+                // Group nodes by level
+                Map<Integer, List<Character>> levelMap = new HashMap<>();
+                int maxLevel = 0;
+
                 for (i = 0; i < dis.length; i++) {
-                    char nodeName = (char) (i + 65);
-                    if (dis[i] == Integer.MAX_VALUE) {
-                        distanceStr.append(nodeName).append(": ∞").append(", ");
-                    } else {
-                        distanceStr.append(nodeName).append(": ").append(dis[i]).append(", ");
-                    }
-                }
-                if (distanceStr.length() > 2) {
-                    distanceStr.setLength(distanceStr.length() - 2); // Remove last comma and space
-                }
+                    if (dis[i] != Integer.MAX_VALUE) {
+                        char nodeName = (char) (i + 65);
+                        int level = dis[i];
+                        maxLevel = Math.max(maxLevel, level);
 
-                // Word wrap for long distance arrays
-                String distances = distanceStr.toString();
-                int maxWidth = 200;
-                List<String> lines = new ArrayList<>();
-                String[] pairs = distances.split(", ");
-                StringBuilder currentLine = new StringBuilder();
-
-                for (String pair : pairs) {
-                    if (currentLine.length() + pair.length() + 2 <= maxWidth / 8) {
-                        if (currentLine.length() > 0) {
-                            currentLine.append(", ");
+                        if (!levelMap.containsKey(level)) {
+                            levelMap.put(level, new ArrayList<>());
                         }
-                        currentLine.append(pair);
-                    } else {
-                        lines.add(currentLine.toString());
-                        currentLine = new StringBuilder(pair);
+                        levelMap.get(level).add(nodeName);
                     }
                 }
 
-                if (currentLine.length() > 0) {
-                    lines.add(currentLine.toString());
+                // Calculate appropriate font size based on number of levels
+                int availableHeight = 650; // Approximate available height
+                int lineHeight = availableHeight / Math.min(26, maxLevel + 5); // Add buffer
+                int fontSize = Math.min(20, Math.max(10, lineHeight - 5)); // Adjust font size
+
+                g2d.setFont(new Font("Consolas", Font.BOLD, fontSize));
+                g2d.setColor(new Color(238, 247, 137));
+
+                int verticalPosition = getHeight() - 670;
+                int maxWidth = 300; // Available width
+
+                // Display all levels from 0 to maxLevel
+                for (int level = 0; level <= Math.min(25, maxLevel); level++) {
+                    StringBuilder levelStr = new StringBuilder("Level " + level + ": ");
+                    List<Character> nodesAtLevel = levelMap.getOrDefault(level, new ArrayList<>());
+
+                    if (nodesAtLevel.isEmpty()) {
+                        levelStr.append("(none)");
+                    } else {
+                        for (Character node : nodesAtLevel) {
+                            levelStr.append(node);
+                            if (nodesAtLevel.indexOf(node) < nodesAtLevel.size() - 1) {
+                                levelStr.append(", ");
+                            }
+                        }
+                    }
+
+                    // Word wrap for long levels
+                    String levelText = levelStr.toString();
+                    FontMetrics metrics = g2d.getFontMetrics();
+
+                    if (metrics.stringWidth(levelText) > maxWidth) {
+                        // Split into multiple lines if too long
+                        List<String> wrappedLines = new ArrayList<>();
+                        String prefix = "Level " + level + ": ";
+                        StringBuilder currentLine = new StringBuilder(prefix);
+
+                        for (Character node : nodesAtLevel) {
+                            String nodeStr = node.toString();
+                            if (nodesAtLevel.indexOf(node) < nodesAtLevel.size() - 1) {
+                                nodeStr += ", ";
+                            }
+
+                            if (metrics.stringWidth(currentLine.toString() + nodeStr) <= maxWidth) {
+                                currentLine.append(nodeStr);
+                            } else {
+                                wrappedLines.add(currentLine.toString());
+                                currentLine = new StringBuilder("  " + nodeStr); // Indent continuation lines
+                            }
+                        }
+
+                        if (currentLine.length() > 0) {
+                            wrappedLines.add(currentLine.toString());
+                        }
+
+                        for (String line : wrappedLines) {
+                            g2d.drawString(line, getWidth() - 315, verticalPosition);
+                            verticalPosition += fontSize + 2;
+                        }
+                    } else {
+                        g2d.drawString(levelText, getWidth() - 315, verticalPosition);
+                        verticalPosition += fontSize + 2;
+                    }
                 }
 
-                g2d.setColor(new Color(238, 247, 137));
-                for (int j = 0; j < lines.size(); j++) {
-                    g2d.drawString(lines.get(j), getWidth() - 315, getHeight() - 620 + j * 25);
+                // If there are unreachable nodes, list them               
+                List<Character> unreachableNodes = new ArrayList<>();
+
+                if (completed) {
+                    for (i = 0; i < dis.length; i++) {
+                        if (dis[i] == Integer.MAX_VALUE) {
+                            unreachableNodes.add((char) (i + 65));
+                        }
+                    }
+                }
+
+                if (!unreachableNodes.isEmpty()) {
+                    StringBuilder unreachableStr = new StringBuilder("Unreachable: ");
+                    for (i = 0; i < unreachableNodes.size(); i++) {
+                        unreachableStr.append(unreachableNodes.get(i));
+                        if (i < unreachableNodes.size() - 1) {
+                            unreachableStr.append(", ");
+                        }
+                    }
+
+                    // Check if we need to word wrap
+                    String unreachableText = unreachableStr.toString();
+                    FontMetrics metrics = g2d.getFontMetrics();
+
+                    if (metrics.stringWidth(unreachableText) > maxWidth) {
+                        String prefix = "Unreachable: ";
+                        g2d.drawString(prefix, getWidth() - 315, verticalPosition);
+                        verticalPosition += fontSize + 2;
+
+                        StringBuilder currentLine = new StringBuilder("  ");
+                        for (Character node : unreachableNodes) {
+                            String nodeStr = node.toString();
+                            if (unreachableNodes.indexOf(node) < unreachableNodes.size() - 1) {
+                                nodeStr += ", ";
+                            }
+
+                            if (metrics.stringWidth(currentLine.toString() + nodeStr) <= maxWidth) {
+                                currentLine.append(nodeStr);
+                            } else {
+                                g2d.drawString(currentLine.toString(), getWidth() - 315, verticalPosition);
+                                verticalPosition += fontSize + 2;
+                                currentLine = new StringBuilder("  " + nodeStr);
+                            }
+                        }
+
+                        if (currentLine.length() > 0) {
+                            g2d.drawString(currentLine.toString(), getWidth() - 315, verticalPosition);
+                        }
+                    } else {
+                        g2d.drawString(unreachableText, getWidth() - 315, verticalPosition);
+                    }
                 }
             }
         }
@@ -303,8 +400,8 @@ public class BFS extends GraphBoard {
             g2d.drawString("1. Create a queue Q", getWidth() - 315, getHeight() - 950);
         }
         if (l2) {
-            g2d.drawString("2. Mark the source as visited", getWidth() - 315, getHeight() - 920);
-            g2d.drawString("and put it into Q", getWidth() - 318, getHeight() - 900);
+            g2d.drawString("2. Mark the source as visited,", getWidth() - 315, getHeight() - 920);
+            g2d.drawString("put it into Q and set dist[source] ← 0", getWidth() - 318, getHeight() - 900);
         }
         if (l3) {
             g2d.drawString("3. While Q is non- empty", getWidth() - 315, getHeight() - 870);
@@ -317,7 +414,8 @@ public class BFS extends GraphBoard {
         if (l5) {
             g2d.setColor(new Color(238, 247, 137));
             g2d.drawString("      ii. Mark and enqueue", getWidth() - 315, getHeight() - 810);
-            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 318, getHeight() - 790);
+            g2d.drawString("      all (unvisited) neighbors v of u", getWidth() - 318, getHeight() - 790);
+            g2d.drawString("      and set dist[v] ← dist[u] + 1", getWidth() - 318, getHeight() - 770);
             g2d.setColor(new Color(210, 52, 52));
         }
 
@@ -326,8 +424,8 @@ public class BFS extends GraphBoard {
             g2d.drawString("1. Create a queue Q", getWidth() - 315, getHeight() - 950);
         }
         if (!l2) {
-            g2d.drawString("2. Mark the source as visited", getWidth() - 315, getHeight() - 920);
-            g2d.drawString("and put it into Q", getWidth() - 315, getHeight() - 900);
+            g2d.drawString("2. Mark the source as visited,", getWidth() - 315, getHeight() - 920);
+            g2d.drawString("put it into Q and set dist[source] ← 0", getWidth() - 318, getHeight() - 900);
         }
         if (!l3) {
             g2d.drawString("3. While Q is non- empty", getWidth() - 315, getHeight() - 870);
@@ -337,7 +435,8 @@ public class BFS extends GraphBoard {
         }
         if (!l5) {
             g2d.drawString("      ii. Mark and enqueue", getWidth() - 315, getHeight() - 810);
-            g2d.drawString("      all (unvisited) neighbors of u", getWidth() - 315, getHeight() - 790);
+            g2d.drawString("      all (unvisited) neighbors v of u", getWidth() - 315, getHeight() - 790);
+            g2d.drawString("      and set dist[v] ← dist[u] + 1", getWidth() - 318, getHeight() - 770);
         }
     }
 

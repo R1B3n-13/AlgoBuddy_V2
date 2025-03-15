@@ -10,6 +10,7 @@ import com.algobuddy.gui.Node;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -33,6 +34,7 @@ public class Tarjans extends GraphBoard {
     private Color[] sccColors;                          // Colors for SCCs
     private Node poppedNode;                            // Node popped
     private List<Pair<Node, Node>> processedEdges;      // Edges that are being processed or have already been processed
+    private List<Node> processedNodes;                  // Nodes that are being processed or have already been processed
     private boolean l1, l2, l3, l4, l5, l6, l7, l8, l9; // Flags to highlight algorithm steps
     private AlgoWorker<Void, Void> tarjansWorker;       // Worker thread for algorithm execution
     private boolean completed = false;                  // Tracks algorithm completion
@@ -95,21 +97,21 @@ public class Tarjans extends GraphBoard {
                     new DrawArrow(g2d, n1.getLocation(), n2.getLocation(), 1, new Color(218, 226, 237),
                             new BasicStroke((float) 4), new BasicStroke(), 25);
                 }
+            }
+        }
+
+        // Draw processed nodes
+        if (isPlaying() && processedNodes != null) {
+            for (Node node : processedNodes) {
 
                 g2d.setColor(new Color(245, 204, 158));
-                g2d.fillOval(n1.getLocation().x - Node.getRadius(), n1.getLocation().y - Node.getRadius(),
+                g2d.fillOval(node.getLocation().x - Node.getRadius(), node.getLocation().y - Node.getRadius(),
                         2 * Node.getRadius(), 2 * Node.getRadius());
-                if ((runningEdge == null || (!n1.equals(runningEdge.getNode1()) || !n2.equals(runningEdge.getNode2()))) || progress >= 1) {
-                    g2d.fillOval(n2.getLocation().x - Node.getRadius(), n2.getLocation().y - Node.getRadius(),
-                            2 * Node.getRadius(), 2 * Node.getRadius());
-                }
 
                 g2d.setColor(new Color(0, 22, 40));
                 g2d.setFont(new Font("Casteller", Font.BOLD, 18));
-                g2d.drawString(String.valueOf((char) (n1.getNodeNum() + 65)), n1.getLocation().x - 5,
-                        n1.getLocation().y + 5);
-                g2d.drawString(String.valueOf((char) (n2.getNodeNum() + 65)), n2.getLocation().x - 5,
-                        n2.getLocation().y + 5);
+                g2d.drawString(String.valueOf((char) (node.getNodeNum() + 65)), node.getLocation().x - 5,
+                        node.getLocation().y + 5);
             }
         }
 
@@ -189,10 +191,91 @@ public class Tarjans extends GraphBoard {
             if (!isBacktracking) {
                 g2d.setColor(new Color(240, 10, 9));
             } else {
-                g2d.setColor(new Color(113, 121, 126));
+                g2d.setColor(new Color(34, 139, 34));
             }
             g2d.drawOval(runningNode.getLocation().x - Node.getRadius(), runningNode.getLocation().y - Node.getRadius(),
                     2 * Node.getRadius(), 2 * Node.getRadius());
+        }
+
+        // Display Tarjan's Strongly Connected Components
+        if (isPlaying() && sccs != null && !sccs.isEmpty()) {
+            g2d.setColor(new Color(177, 191, 222));
+            g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+            g2d.drawString("Strongly Connected Components:", getWidth() - 315, getHeight() - 480);
+
+            // Calculate appropriate font size based on number of SCCs
+            int availableHeight = 430; // Approximate available height
+            int lineHeight = availableHeight / Math.min(26, sccs.size() + 5); // Add buffer
+            int fontSize = Math.min(20, Math.max(10, lineHeight - 5)); // Adjust font size
+
+            g2d.setFont(new Font("Consolas", Font.BOLD, fontSize));
+            g2d.setColor(new Color(238, 247, 137));
+
+            int verticalPosition = getHeight() - 450;
+            int maxWidth = 300; // Available width
+
+            // Display all SCCs
+            for (i = 0; i < sccs.size(); i++) {
+                StringBuilder sccStr = new StringBuilder("SCC " + (i + 1) + ": ");
+                List<Node> component = sccs.get(i);
+
+                if (component.isEmpty()) {
+                    sccStr.append("(empty)");
+                } else {
+                    for (int j = 0; j < component.size(); j++) {
+                        char nodeName = (char) (component.get(j).getNodeNum() + 65);
+                        sccStr.append(nodeName);
+                        if (j < component.size() - 1) {
+                            sccStr.append(", ");
+                        }
+                    }
+                }
+
+                // Word wrap for long SCCs
+                String sccText = sccStr.toString();
+                FontMetrics metrics = g2d.getFontMetrics();
+
+                if (metrics.stringWidth(sccText) > maxWidth) {
+                    // Split into multiple lines if too long
+                    List<String> wrappedLines = new ArrayList<>();
+                    String prefix = "SCC " + (i + 1) + ": ";
+                    StringBuilder currentLine = new StringBuilder(prefix);
+
+                    for (int j = 0; j < component.size(); j++) {
+                        char nodeName = (char) (component.get(j).getNodeNum() + 65);
+                        String nodeStr = String.valueOf(nodeName);
+                        if (j < component.size() - 1) {
+                            nodeStr += ", ";
+                        }
+
+                        if (metrics.stringWidth(currentLine.toString() + nodeStr) <= maxWidth) {
+                            currentLine.append(nodeStr);
+                        } else {
+                            wrappedLines.add(currentLine.toString());
+                            currentLine = new StringBuilder("  " + nodeStr); // Indent continuation lines
+                        }
+                    }
+
+                    if (currentLine.length() > 0) {
+                        wrappedLines.add(currentLine.toString());
+                    }
+
+                    for (String line : wrappedLines) {
+                        g2d.drawString(line, getWidth() - 315, verticalPosition);
+                        verticalPosition += fontSize + 2;
+                    }
+                } else {
+                    g2d.drawString(sccText, getWidth() - 315, verticalPosition);
+                    verticalPosition += fontSize + 2;
+                }
+            }
+
+            // Add a count of total SCCs at the bottom
+            if (verticalPosition + fontSize + 2 < getHeight() - 50) { // Check if there's space
+                g2d.setColor(new Color(177, 191, 222));
+                g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+                g2d.drawString("Total SCCs: " + sccs.size(), getWidth() - 315, verticalPosition + fontSize + 10);
+            }
         }
 
         // Draw algorithm steps
@@ -359,6 +442,7 @@ public class Tarjans extends GraphBoard {
         onStack = new boolean[nodes.size()];
         sccs = new ArrayList<>();
         processedEdges = new ArrayList<>();
+        processedNodes = new ArrayList<>();
         time = 0;
         sccColors = generateColors();
         poppedNode = null;
@@ -400,15 +484,13 @@ public class Tarjans extends GraphBoard {
                 disc[u] = low[u] = ++time;
                 stack.push(nodes.get(u));
                 onStack[u] = true;
+                runningNode = nodes.get(u);
+                processedNodes.add(nodes.get(u));
                 l3 = true;
                 l4 = false;
                 repaint();
                 waitFor(getSpeed() / 2);
                 l3 = false;
-
-                runningNode = nodes.get(u);
-                repaint();
-                waitFor(getSpeed() / 2);
 
                 for (Edge e : edges) {
 

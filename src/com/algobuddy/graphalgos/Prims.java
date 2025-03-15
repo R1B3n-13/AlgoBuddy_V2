@@ -34,12 +34,14 @@ public class Prims extends GraphBoard {
 
     private Graph g;
     private PriorityQueue<Pair<Integer, Pair<Node, Node>>> pq; // (weight, (node1, node2))
-    private HashSet<Node> inMST; // Tracks nodes included in MST
+    private HashSet<Node> inMST;                               // Tracks nodes included in MST
     private boolean l1, l2, l3, l4, l5;
     private AlgoWorker<Void, Void> primsWorker;
-    private List<Pair<Node, Node>> mstEdges; // Edges in the MST
-    private Pair<Node, Node> runningEdge; // Current edge being processed
-    private Node runningNode; // Current node being processed
+    private List<Pair<Node, Node>> mstEdges;                    // Edges in the MST
+    private int cost;                                           // Cost of MST
+    private List<Pair<Node, Node>> processedEdges;              // Edges that are being processed or have already been processed
+    private Pair<Node, Node> runningEdge;                       // Current edge being processed
+    private Node runningNode;                                   // Current node being processed
     private boolean completed = false;
     private int coefficient = 6;
     private Timer animationTimer;
@@ -188,7 +190,7 @@ public class Prims extends GraphBoard {
                 i++;
             }
 
-            for (Pair<Node, Node> p : mstEdges) {
+            for (Pair<Node, Node> p : processedEdges) {
                 Node n1 = p.getValue0();
                 Node n2 = p.getValue1();
 
@@ -225,7 +227,47 @@ public class Prims extends GraphBoard {
                     g2d.drawString(String.valueOf((char) (runningEdge.getValue0().getNodeNum() + 65)) + String.valueOf((char) (runningEdge.getValue1().getNodeNum() + 65)),
                             (coefficient - 1) * ((getWidth() - 700) / 26) + getWidth() / 150, getHeight() - 19);
                 }
+            }
 
+            // Display Prim's MST Edges
+            if (mstEdges != null && !mstEdges.isEmpty()) {
+                g2d.setColor(new Color(177, 191, 222));
+                g2d.setFont(new Font("Consolas", Font.BOLD, 20));
+                g2d.drawString("MST Edges:", getWidth() - 315, getHeight() - 660);
+
+                // Calculate appropriate font size based on number of edges
+                int availableHeight = 610; // Approximate available height
+                int lineHeight = availableHeight / Math.min(26, mstEdges.size() + 5); // Add buffer
+                int fontSize = Math.min(20, Math.max(10, lineHeight - 5)); // Adjust font size
+
+                g2d.setFont(new Font("Consolas", Font.BOLD, fontSize));
+                g2d.setColor(new Color(238, 247, 137));
+
+                int verticalPosition = getHeight() - 630;
+
+                // Display all MST edges
+                for (i = 0; i < mstEdges.size(); i++) {
+                    Pair<Node, Node> edge = mstEdges.get(i);
+                    char fromNode = (char) (edge.getValue0().getNodeNum() + 65);
+                    char toNode = (char) (edge.getValue1().getNodeNum() + 65);
+
+                    StringBuilder edgeStr = new StringBuilder();
+                    edgeStr.append(i + 1).append(". ").append(fromNode).append(" — ").append(toNode);
+
+                    g2d.drawString(edgeStr.toString(), getWidth() - 315, verticalPosition);
+                    verticalPosition += fontSize + 2;
+                }
+
+                // Add a count of total edges and MST cost at the bottom
+                if (verticalPosition + fontSize + 2 < getHeight() - 50) { // Check if there's space
+                    g2d.setColor(new Color(177, 191, 222));
+                    g2d.drawString("Total MST Edges: " + mstEdges.size(), getWidth() - 315, verticalPosition + fontSize + 10);
+
+                    // Calculate and show total MST cost if you have weights
+                    g2d.setFont(new Font("Consolas", Font.BOLD, 18));
+                    g2d.drawString("Total MST Cost: " + cost, getWidth() - 315, verticalPosition + 2 * (fontSize + 10));
+
+                }
             }
         }
 
@@ -329,6 +371,8 @@ public class Prims extends GraphBoard {
         pq = new PriorityQueue<>(30, (a, b) -> a.getValue0() - b.getValue0());
         inMST = new HashSet<>();
         mstEdges = new ArrayList<>();
+        processedEdges = new ArrayList<>();
+        cost = 0;
 
         for (Edge e : edges) {
             g.addEdge(e.getNode1(), e.getNode2(), e.getWeight());
@@ -355,13 +399,16 @@ public class Prims extends GraphBoard {
                         waitFor(getSpeed());
 
                         if (!inMST.contains(v)) {
-                            mstEdges.add(new Pair<>(u, v));
-                            inMST.add(v);
+                            processedEdges.add(new Pair<>(u, v));
                             l5 = true;
                             l1 = l2 = l4 = false;
                             startAnimationTimer();
                             waitFor(getSpeed());
                             stopAnimationTimer();
+
+                            mstEdges.add(new Pair<>(u, v));
+                            inMST.add(v);
+                            cost += p.getValue0();
                             addEdgesToPQ(v);
                             repaint();
                             waitFor(getSpeed());
