@@ -1,11 +1,5 @@
 package com.algobuddy.gui;
 
-import com.algobuddy.graphalgos.BFS;
-import com.algobuddy.graphalgos.DFS;
-import com.algobuddy.graphalgos.Dijkstra;
-import com.algobuddy.graphalgos.Kahns;
-import com.algobuddy.graphalgos.Prims;
-import com.algobuddy.graphalgos.Tarjans;
 import com.algobuddy.videorecorder.ScreenRecorder;
 import java.awt.BorderLayout;
 import java.awt.Component;

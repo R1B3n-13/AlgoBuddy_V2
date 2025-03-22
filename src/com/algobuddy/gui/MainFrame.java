@@ -164,6 +164,7 @@ public class MainFrame extends javax.swing.JFrame {
         lcsResetLabel = new javax.swing.JLabel();
         jSlider4 = new javax.swing.JSlider();
         artPanel = new com.algobuddy.gui.recursionPanel();
+        manualPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -373,6 +374,11 @@ public class MainFrame extends javax.swing.JFrame {
         userManualButton.setMaximumSize(new java.awt.Dimension(244, 72));
         userManualButton.setMinimumSize(new java.awt.Dimension(244, 72));
         userManualButton.setPreferredSize(new java.awt.Dimension(244, 72));
+        userManualButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userManualButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout indexPanelLayout = new javax.swing.GroupLayout(indexPanel);
         indexPanel.setLayout(indexPanelLayout);
@@ -1193,6 +1199,21 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.add(treeSimulationPanel, "treeSimulationPanel");
 
+        manualPanel.setName("manualPanel"); // NOI18N
+
+        javax.swing.GroupLayout manualPanelLayout = new javax.swing.GroupLayout(manualPanel);
+        manualPanel.setLayout(manualPanelLayout);
+        manualPanelLayout.setHorizontalGroup(
+            manualPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1846, Short.MAX_VALUE)
+        );
+        manualPanelLayout.setVerticalGroup(
+            manualPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1032, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(manualPanel, "manualPanel");
+
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -1291,6 +1312,11 @@ public class MainFrame extends javax.swing.JFrame {
                 mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPane.Direction.Right);
                 titleBar.setBackground(new Color(18, 8, 13));
                 titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(18, 8, 13)));
+            }
+            if (getCurrentComponentName(mainPanel).equals("manualPanel")) {
+                mainPanel.nextSlidingPanel(10, indexPanel, JSlidingPane.Direction.Right);
+                titleBar.setBackground(new Color(8, 13, 18));
+                titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(8, 13, 18)));
             }
         }
     }//GEN-LAST:event_backLabelMouseClicked
@@ -1698,6 +1724,13 @@ public class MainFrame extends javax.swing.JFrame {
         GraphBoard.setCurrentAlgo("Kahn's");
     }//GEN-LAST:event_goToKahnsButtonMouseClicked
 
+    private void userManualButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userManualButtonMouseClicked
+        mainPanel.nextSlidingPanel(10, manualPanel, JSlidingPane.Direction.Left);
+        titleBar.setBackground(new Color(102, 102, 102));
+        titleBar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(102, 102, 102)));
+        openManual(manualPanel, "src" + File.separator + "com" + File.separator + "algobuddy" + File.separator + "gui" + File.separator + "manual" + File.separator + "manual.html");
+    }//GEN-LAST:event_userManualButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1748,26 +1781,12 @@ public class MainFrame extends javax.swing.JFrame {
         return compName;
     }
 
-    private void openHtml(final JPanel panel, String filePath) {
-        panel.setLayout(new FlowLayout());
+    private void openManual(final JPanel panel, String filePath) {
+        panel.setLayout(new BorderLayout());
 
         JEditorPane jEditorPane = new JEditorPane();
         jEditorPane.setEditable(false);
-        jEditorPane.setBackground(new Color(57, 55, 55));
-
-        jEditorPane.addHyperlinkListener((HyperlinkEvent e) -> {
-            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                if (Desktop.isDesktopSupported()) {
-                    try {
-                        Desktop.getDesktop().browse(e.getURL().toURI());
-
-                    } catch (URISyntaxException | IOException ex) {
-                        Logger.getLogger(MainFrame.class
-                                .getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        });
+        jEditorPane.setBackground(new Color(102, 102, 102));
 
         try {
             jEditorPane.setPage(new File(filePath).toURI().toURL());
@@ -1780,7 +1799,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane.setViewportBorder(null);
         jScrollPane.setBorder(null);
         jScrollPane.setPreferredSize(new Dimension(780, 595));
-        jScrollPane.getVerticalScrollBar().setBackground(new Color(57, 55, 55));
+        jScrollPane.getVerticalScrollBar().setBackground(new Color(102, 102, 102));
         jScrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
@@ -1818,7 +1837,7 @@ public class MainFrame extends javax.swing.JFrame {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 int x = rctngl.x;
                 int y = rctngl.y;
-                g2.setColor(new Color(38, 36, 36));
+                g2.setColor(Color.WHITE);
                 g2.fillRect(x, y, 9, 30);
 
             }
@@ -1938,6 +1957,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField lcs_i_field;
     private javax.swing.JTextField lcs_j_field;
     private static com.algobuddy.gui.JSlidingPane mainPanel;
+    private javax.swing.JPanel manualPanel;
     private javax.swing.JRadioButton memButton;
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JTextField n_field;

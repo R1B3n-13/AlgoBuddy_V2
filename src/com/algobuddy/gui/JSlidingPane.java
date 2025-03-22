@@ -143,12 +143,15 @@ public class JSlidingPane extends javax.swing.JPanel {
                 timer.stop();
                 visiblePanel.setVisible(false);
                 remove(visiblePanel);
-                if (getCurrentComponentName(MainFrame.getMainPanel()).equals("simulationPanel")) {
-                    MainFrame.getMainFrame().setExtendedState(MAXIMIZED_BOTH);
-                } else if (getCurrentComponentName(MainFrame.getMainPanel()).equals("treeSimulationPanel")) {
-                    MainFrame.getMainFrame().setExtendedState(MAXIMIZED_BOTH);
-                } else {
-                    MainFrame.getMainFrame().setExtendedState(NORMAL);
+                switch (getCurrentComponentName(MainFrame.getMainPanel())) {
+                    case "simulationPanel" ->
+                        MainFrame.getMainFrame().setExtendedState(MAXIMIZED_BOTH);
+                    case "treeSimulationPanel" ->
+                        MainFrame.getMainFrame().setExtendedState(MAXIMIZED_BOTH);
+                    case "manualPanel" ->
+                        MainFrame.getMainFrame().setExtendedState(MAXIMIZED_BOTH);
+                    default ->
+                        MainFrame.getMainFrame().setExtendedState(NORMAL);
                 }
                 enableUserInput();
             }
