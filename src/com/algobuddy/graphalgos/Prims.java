@@ -307,9 +307,9 @@ public class Prims extends GraphBoard {
         if (l5) {
             g2d.setColor(new Color(238, 247, 137));
             g2d.drawString("     ii. If v not in S,", getWidth() - 315, getHeight() - 790);
-            g2d.drawString("         add (u, v) to MST", getWidth() - 315, getHeight() - 770);
-            g2d.drawString("         Add v to S", getWidth() - 315, getHeight() - 750);
-            g2d.drawString("         Add v's edges to H", getWidth() - 315, getHeight() - 730);
+            g2d.drawString("            add (u, v) to MST", getWidth() - 315, getHeight() - 770);
+            g2d.drawString("            Add v to S", getWidth() - 315, getHeight() - 750);
+            g2d.drawString("            Add v's edges to H", getWidth() - 315, getHeight() - 730);
             g2d.setColor(new Color(210, 52, 52));
         }
 
