@@ -55,7 +55,7 @@ ant clean jar && ant run
 
 ## Contributing
 
-This project was my first-ever development project, so the codebase may be a bit messy and not well-documented. However, any contributions, improvements, or suggestions are welcome!
+This project was our first-ever development project, so the codebase may be a bit messy and not well-documented. However, any contributions, improvements, or suggestions are welcome!
 
 ## License
 
