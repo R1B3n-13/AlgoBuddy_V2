@@ -27,7 +27,7 @@ An immersive algorithm simulation tool that visually demonstrates various graph 
   - Play/Pause, Stop simulation  
   - Built-in recording functionality for capturing simulations as videos
 
-## Demo
+## Demo (Click the thumbnail to redirect to YouTube)
 
 [![Watch the demo](https://img.youtube.com/vi/5kDtUV9dWQo/0.jpg)](https://www.youtube.com/watch?v=5kDtUV9dWQo)
 
