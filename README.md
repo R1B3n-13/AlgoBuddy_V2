@@ -29,7 +29,7 @@ An immersive algorithm simulation tool that visually demonstrates various graph 
 
 ## Demo
 
-Coming soon!
+[![Watch the demo](https://img.youtube.com/vi/5kDtUV9dWQo/0.jpg)](https://www.youtube.com/watch?v=5kDtUV9dWQo)
 
 ## Technologies Used  
 
